@@ -79,6 +79,17 @@ db.company.belongsToMany(db.event, {
   foreignKey: "companyId",
   otherKey: "eventId"
 })
+db.comment.belongsToMany(db.event, {
+  through: "event_comments",
+  foreignKey: "commentId",
+  otherKey: "eventId"
+})
+
+db.event.belongsToMany(db.comment, {
+  through: "event_comments",
+  foreignKey: "eventId",
+  otherKey: "commentId"
+})
 //event belong to company
 
 db.ROLES = ["user", "admin", "company"]
