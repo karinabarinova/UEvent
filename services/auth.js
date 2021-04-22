@@ -11,7 +11,9 @@ const sendEmail = require('../helpers/sendMail');
 module.exports = {
     login,
     register,
-    verifyEmail
+    verifyEmail,
+    forgotPassword,
+    resetPassword
 }
 
 //TODO:  add forgotPassword,resetPassword,
@@ -72,10 +74,62 @@ async function verifyEmail({ token }) {
     await user.save();
 }
 
+async function forgotPassword({ email }) {
+    const user = await db.User.findOne({ where: { email } });
+
+    // always return ok response to prevent email enumeration
+    if (!user) return;
+
+    // create reset token that expires after 24 hours
+    user.resetToken = randomTokenString();
+    user.resetTokenExpires = new Date(Date.now() + 24*60*60*1000);
+    await user.save();
+
+    // send email
+    await sendPasswordResetEmail(user);
+}
+
+async function validateResetToken({ token }) {
+    const user = await db.User.findOne({
+        where: {
+            resetToken: token,
+            resetTokenExpires: { [Op.gt]: Date.now() }
+        }
+    });
+
+    if (!user) throw 'Invalid token';
+
+    return user;
+}
+
+async function resetPassword({ password, token }) {
+    const user = await validateResetToken({ token });
+
+    // update password and remove reset token
+    user.hash = await hash(password);
+    user.passwordReset = Date.now();
+    user.resetToken = null;
+    await user.save();
+}
+
+//helpers
+
+async function sendPasswordResetEmail(user) {
+    let message = `<p>Please use the below token to reset your password with the <code>http://localhost:3000/confirm-reset-password</code> route:</p>
+                   <p><code>${user.resetToken}</code></p>`;
+
+    await sendEmail({
+        to: user.email,
+        subject: 'Sign-up USOF API - Reset Password',
+        html: `<h4>Reset Password Email</h4>
+               ${message}`
+    });
+}
+
 async function sendVerificationEmail(user, origin) {
     let message;
     if (origin) {
-        const verifyUrl = `localhost:3000/api/auth/verify-email?token=${user.validation_str}`;
+        const verifyUrl = `http://localhost:3000/api/auth/verify-email?token=${user.validation_str}`;
         message = `<p>Please click the below link to verify your email address:</p>
                    <p><a href="${verifyUrl}">${verifyUrl}</a></p>`;
     } else {
