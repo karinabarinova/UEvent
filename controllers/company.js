@@ -8,6 +8,7 @@ router.get('/', getAll);
 router.get('/:id', getById);
 router.patch('/:id', authJwt.verifyToken, update);
 router.delete('/:id', authJwt.verifyToken, _delete);
+router.get('/:id/event', getEvents);
 
 module.exports = router;
 
@@ -19,6 +20,12 @@ function getAll(req, res, next) {
 
 function getById(req, res, next) {
     service.getById(req.params.id)
+        .then(data => res.status(200).json(data))
+        .catch(next);
+}
+
+function getEvents(req, res, next) {
+    service.getEvents(req.params.id)
         .then(data => res.status(200).json(data))
         .catch(next);
 }

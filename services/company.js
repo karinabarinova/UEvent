@@ -5,6 +5,7 @@ const User = db.user;
 module.exports = {
     getAll,
     getById,
+    getEvents,
     add,
     update,
     delete: _delete
@@ -16,6 +17,11 @@ async function getAll() {
 
 async function getById(id) {
     return await getCompany(id);
+}
+
+async function getEvents(id) {
+    const company = await getCompany(id);
+    return await company.getEvents();
 }
 
 async function add(params, id) {
