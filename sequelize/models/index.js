@@ -96,10 +96,21 @@ db.theme.belongsToMany(db.event, {
   foreignKey: "themeId",
   otherKey: "eventId"
 })
-db.event.belongsTo(db.event, {
+db.event.belongsTo(db.theme, {
   through: "theme_events",
   foreignKey: "eventId",
   otherKey: "themeId"
+})
+
+db.format.belongsToMany(db.event, {
+  through: "theme_events",
+  foreignKey: "formatId",
+  otherKey: "eventId"
+})
+db.event.belongsTo(db.format, {
+  through: "theme_events",
+  foreignKey: "eventId",
+  otherKey: "formatId"
 })
 //event belong to company
 

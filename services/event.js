@@ -4,6 +4,7 @@ const User = db.user;
 const Company = db.company;
 const Comment = db.comment;
 const Theme = db.theme;
+const Format = db.format;
 const Op = db.Sequelize.Op;
 
 module.exports = {
@@ -26,6 +27,9 @@ async function getAll(query) { //currently show only upcoming events
     if (query.theme) {
         options.where.theme = query.theme;
     }
+    if (query.format) {
+        options.where.theme = query.format;
+    }
     if (query.date) //should be anything in the date to show upcoming event
         options.where.startDate = {[Op.gt]: Date.now()}
     return await Event.findAll(options);
@@ -43,7 +47,7 @@ async function getById(id) {
     }
 }
 
-async function add({name, description, startDate, location, price, promoCodes, theme}, id) {
+async function add({name, description, startDate, location, price, promoCodes, theme, format}, id) {
     //startDate time format  "2021-06-11T14:00Z",
     const user = await User.findByPk(id);
     if (!user.hasCompanies) {
@@ -60,6 +64,7 @@ async function add({name, description, startDate, location, price, promoCodes, t
         throw 'Event already exists';
     
     const foundTheme = await findOrCreateTheme(theme);
+    const foundFormat = await findOrCreateFormat(format);
 
     //first latitude, then longitude
     const point = {
@@ -79,6 +84,7 @@ async function add({name, description, startDate, location, price, promoCodes, t
 
     await company.addEvent(event);
     await foundTheme.addEvent(event);
+    await foundFormat.addEvent(event);
     return event; //add organizer info
 }
 
@@ -146,8 +152,17 @@ async function findOrCreateTheme(name) {
     if (!foundTheme) {
         foundTheme = await Theme.create({ name })
     }
-    return foundTheme;//do I need that?
+    return foundTheme;
 }
+
+async function findOrCreateFormat(name) {
+    let foundFormat = await Format.findOne({where: {name}});
+    if (!foundFormat) {
+        foundFormat = await Format.create({ name })
+    }
+    return foundFormat;
+}
+
 
 async function getEvent(id) {
     const event = await Event.findByPk(id);

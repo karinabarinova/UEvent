@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     promoCodes: DataTypes.ARRAY(DataTypes.STRING),
     organizer: DataTypes.INTEGER,
-    theme: DataTypes.STRING
+    theme: DataTypes.STRING,
+    format: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Event',
