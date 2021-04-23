@@ -35,7 +35,7 @@ async function getAll(query) { //currently show only upcoming events
     return await Event.findAll(options);
 }
 
-async function getAllComments(id) {
+async function getAllComments(id) { //may be deleted as comments are returned in the getById function
     return await getEvent(id).getComments();
 }
 
@@ -43,7 +43,8 @@ async function getById(id) {
     const event = await getEvent(id);
     return {
         event,
-        organizer: await event.getCompanies()
+        organizer: await event.getCompanies(),
+        comments: await event.getComments()
     }
 }
 
