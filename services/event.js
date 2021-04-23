@@ -41,14 +41,21 @@ async function getAllComments(id) { //may be deleted as comments are returned in
 
 async function getById(id) {
     const event = await getEvent(id);
+    console.log(Event.prototype)
+    const organizer = await event.getCompanies();
+    console.log("organizer", organizer);
+    const company = await Company.findByPk(organizer[0].dataValues.companyId);
+    const otherEvents = await company.getEvents();
+
     return {
         event,
-        organizer: await event.getCompanies(),
-        comments: await event.getComments()
+        organizer,
+        comments: await event.getComments(),
+        otherEvents
     }
 }
 
-async function add({name, description, startDate, location, price, promoCodes, theme, format}, id) {
+async function add({name, description, startDate, location, price, promoCodes, theme, format}, id) { //format is null??
     //startDate time format  "2021-06-11T14:00Z",
     const user = await User.findByPk(id);
     if (!user.hasCompanies) {
@@ -56,6 +63,7 @@ async function add({name, description, startDate, location, price, promoCodes, t
     }
     // const company = await user.getCompanies();
     const company = await Company.findOne({where: {owner: id}})
+    console.log("============1=============")
     const exists = await Event.findOne({
         where: {
             name
@@ -63,15 +71,19 @@ async function add({name, description, startDate, location, price, promoCodes, t
     })
     if (exists)
         throw 'Event already exists';
-    
+    console.log("============2=============")
+
     const foundTheme = await findOrCreateTheme(theme);
     const foundFormat = await findOrCreateFormat(format);
+    console.log("============3=============")
 
     //first latitude, then longitude
     const point = {
         type: 'Point',
         coordinates: location
     }
+    console.log("============4=============")
+
     const event = await Event.create({
         name,
         description,
@@ -80,8 +92,12 @@ async function add({name, description, startDate, location, price, promoCodes, t
         price,
         promoCodes,
         organizer: company.companyId,
-        theme
+        theme,
+        format
     });
+    console.log("============5=============")
+
+    console.log(event);
 
     await company.addEvent(event);
     await foundTheme.addEvent(event);

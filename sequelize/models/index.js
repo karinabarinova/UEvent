@@ -103,12 +103,12 @@ db.event.belongsTo(db.theme, {
 })
 
 db.format.belongsToMany(db.event, {
-  through: "theme_events",
+  through: "format_events",
   foreignKey: "formatId",
   otherKey: "eventId"
 })
 db.event.belongsTo(db.format, {
-  through: "theme_events",
+  through: "format_events",
   foreignKey: "eventId",
   otherKey: "formatId"
 })
