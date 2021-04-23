@@ -3,6 +3,7 @@ const Event = db.event;
 const User = db.user;
 const Company = db.company;
 const Comment = db.comment;
+const Theme = db.theme;
 
 module.exports = {
     getAll,
@@ -27,10 +28,14 @@ async function getAllComments(id) {
 }
 
 async function getById(id) {
-    return await getEvent(id);
+    const event = await getEvent(id);
+    return {
+        event,
+        organizer: await event.getCompanies()
+    }
 }
 
-async function add({name, description, startDate, location, price, promoCodes}, id) {
+async function add({name, description, startDate, location, price, promoCodes, theme}, id) {
     //startDate time format  "2021-06-11T14:00Z",
     const user = await User.findByPk(id);
     if (!user.hasCompanies) {
@@ -38,8 +43,6 @@ async function add({name, description, startDate, location, price, promoCodes}, 
     }
     // const company = await user.getCompanies();
     const company = await Company.findOne({where: {owner: id}})
-    console.log("company", company);
-
     const exists = await Event.findOne({
         where: {
             name
@@ -47,6 +50,8 @@ async function add({name, description, startDate, location, price, promoCodes}, 
     })
     if (exists)
         throw 'Event already exists';
+    
+    const foundTheme = await findOrCreateTheme(theme);
 
     //first latitude, then longitude
     const point = {
@@ -60,10 +65,13 @@ async function add({name, description, startDate, location, price, promoCodes}, 
         location: point,
         price,
         promoCodes,
-        organizer: company.companyId
+        organizer: company.companyId,
+        theme
     });
+
     await company.addEvent(event);
-    return event;
+    await foundTheme.addEvent(event);
+    return event; //add organizer info
 }
 
 async function addComment({ body }, userId, eventId) {
@@ -123,6 +131,14 @@ async function deleteComment(eventId, commentId) {
         throw 'Event not found';
     const comment = await getComment(commentId);
     await comment.destroy();
+}
+
+async function findOrCreateTheme(name) {
+    let foundTheme = await Theme.findOne({where: {name}});
+    if (!foundTheme) {
+        foundTheme = await Theme.create({ name })
+    }
+    return foundTheme;//do I need that?
 }
 
 async function getEvent(id) {

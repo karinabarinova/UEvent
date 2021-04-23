@@ -25,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     location: DataTypes.GEOMETRY('POINT'),
     price: DataTypes.INTEGER,
     promoCodes: DataTypes.ARRAY(DataTypes.STRING),
-    organizer: DataTypes.INTEGER
+    organizer: DataTypes.INTEGER,
+    theme: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Event',
