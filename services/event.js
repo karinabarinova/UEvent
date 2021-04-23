@@ -61,9 +61,7 @@ async function add({name, description, startDate, location, price, promoCodes, t
     if (!user.hasCompanies) {
         throw 'Create a company to be able to create events';
     }
-    // const company = await user.getCompanies();
     const company = await Company.findOne({where: {owner: id}})
-    console.log("============1=============")
     const exists = await Event.findOne({
         where: {
             name
@@ -71,18 +69,15 @@ async function add({name, description, startDate, location, price, promoCodes, t
     })
     if (exists)
         throw 'Event already exists';
-    console.log("============2=============")
 
     const foundTheme = await findOrCreateTheme(theme);
     const foundFormat = await findOrCreateFormat(format);
-    console.log("============3=============")
 
     //first latitude, then longitude
     const point = {
         type: 'Point',
         coordinates: location
     }
-    console.log("============4=============")
 
     const event = await Event.create({
         name,
@@ -95,9 +90,6 @@ async function add({name, description, startDate, location, price, promoCodes, t
         theme,
         format
     });
-    console.log("============5=============")
-
-    console.log(event);
 
     await company.addEvent(event);
     await foundTheme.addEvent(event);
