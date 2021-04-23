@@ -43,6 +43,8 @@ app.use(express.static(public));
 app.use('/api/auth', require('./controllers/auth'));
 app.use('/api/company', require('./controllers/company'));
 app.use('/api/event', require('./controllers/event'));
+app.use('/api/user', require('./controllers/user'));
+
 
 app.use(errorHandler);
 
