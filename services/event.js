@@ -17,7 +17,9 @@ module.exports = {
 }
 
 async function getAll() {
-    return await Event.findAll();
+    return await Event.findAll({
+        order: [['startDate', 'ASC']]
+    });
 }
 
 async function getAllComments(id) {
