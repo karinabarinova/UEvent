@@ -16,7 +16,7 @@ router.delete('/:id/comment/:commentId/', authJwt.verifyToken, deleteComment);
 module.exports = router;
 
 function getAll(req, res, next) {
-    service.getAll()
+    service.getAll(req.query)
         .then(data => res.status(200).json(data))
         .catch(next);
 }

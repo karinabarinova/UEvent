@@ -4,6 +4,7 @@ const User = db.user;
 const Company = db.company;
 const Comment = db.comment;
 const Theme = db.theme;
+const Op = db.Sequelize.Op;
 
 module.exports = {
     getAll,
@@ -17,10 +18,17 @@ module.exports = {
     deleteComment
 }
 
-async function getAll() {
-    return await Event.findAll({
-        order: [['startDate', 'ASC']]
-    });
+async function getAll(query) { //currently show only upcoming events
+    const options = {
+        order: [['startDate', 'ASC']],
+        where: {}
+    }
+    if (query.theme) {
+        options.where.theme = query.theme;
+    }
+    if (query.date) //should be anything in the date to show upcoming event
+        options.where.startDate = {[Op.gt]: Date.now()}
+    return await Event.findAll(options);
 }
 
 async function getAllComments(id) {
