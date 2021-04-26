@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       models.Event.belongsToMany(models.Theme, { through: 'ThemeEvent' });
       models.Event.belongsToMany(models.Format, { through: 'FormatEvent' });
       models.Event.belongsToMany(models.Company, { through: 'CompanyEvents' });
+      models.Event.belongsToMany(models.Comment, { through: 'EventComments'});
     }
   };
   Event.init({

@@ -38,8 +38,17 @@ async function getAllComments(id) { //may be deleted as comments are returned in
 async function getById(id) {
     const event = await getEvent(id);
     const organizer = await event.getCompanies();
-    const company = await Company.findByPk(organizer[0].dataValues.companyId);
-    const otherEvents = await company.getEvents();
+    console.log("organizer", organizer);
+    const company = await Company.findByPk(organizer[0].dataValues.id);
+    console.log("company", company);
+    console.log("event proto", Event.prototype)
+    const otherEvents = await company.getEvents({
+        where: {
+            name: {
+                [Op.not]: event.name
+            }
+        }
+    });
 
     return {
         event,
@@ -79,7 +88,7 @@ async function add({name, description, startDate, location, price, promoCodes, t
         location: point,
         price,
         promoCodes,
-        organizer: company.companyId,
+        organizer: company.id,
         theme,
         format
     });
