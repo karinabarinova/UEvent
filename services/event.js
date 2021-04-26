@@ -78,6 +78,12 @@ async function add({name, description, startDate, location, price, promoCodes, t
         type: 'Point',
         coordinates: location
     }
+    console.log("THEME prototype", Theme.associations)
+    console.log("FORMAt prototype", Format.associations)
+    console.log("EVENT prototype", Event.associations)
+
+    console.log("theme", foundTheme);
+    console.log("format", foundFormat);
 
     const event = await Event.create({
         name,
@@ -100,7 +106,7 @@ async function add({name, description, startDate, location, price, promoCodes, t
 async function addComment({ body }, userId, eventId) {
     const event = await Event.findOne({
         where: {
-            eventId
+            id: eventId
         }
     })
 

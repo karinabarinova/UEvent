@@ -11,14 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.User.belongsToMany(models.Company, { through: 'UserCompanies' });
+      models.User.belongsToMany(models.Role, { through: 'UserRoles' });
     }
   };
   User.init({
-    userId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false

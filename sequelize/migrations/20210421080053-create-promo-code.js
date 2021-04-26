@@ -2,7 +2,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('PromoCodes', {
-      promoId: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,

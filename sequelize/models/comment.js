@@ -11,14 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Comment.belongsToMany(models.Event, { through: 'EventComments' });
     }
   };
   Comment.init({
-    commentId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
     body: DataTypes.STRING,
     author: DataTypes.INTEGER,
     eventId: DataTypes.INTEGER

@@ -14,11 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   PromoCode.init({
-    promoId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
     body: DataTypes.STRING,
     endDate: DataTypes.DATE,
     eventId: DataTypes.INTEGER,

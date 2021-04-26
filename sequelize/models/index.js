@@ -44,74 +44,74 @@ db.theme = require('../models/theme')(sequelize, Sequelize);
 db.promocode = require('../models/promocode')(sequelize, Sequelize);
 db.subscription = require('../models/subscription')(sequelize, Sequelize);
 
-db.role.belongsToMany(db.user, {
-  through: "user_roles",
-  foreignKey: "roleId",
-  otherKey: "userId"
-})
+// db.role.belongsToMany(db.user, {
+//   through: "user_roles",
+//   foreignKey: "roleId",
+//   otherKey: "userId"
+// })
 
-db.user.belongsTo(db.role, {
-  through: "user_roles",
-  foreignKey: "userId",
-  otherKey: "roleId"
-})
+// db.user.belongsTo(db.role, {
+//   through: "user_roles",
+//   foreignKey: "userId",
+//   otherKey: "roleId"
+// })
 
-db.user.belongsToMany(db.company, {
-  through: "user_companies",
-  foreignKey: "userId",
-  otherKey: "companyId"
-})
+// db.user.belongsToMany(db.company, {
+//   through: "user_companies",
+//   foreignKey: "userId",
+//   otherKey: "companyId"
+// })
 
-db.company.belongsTo(db.user, {
-  through: "user_companies",
-  foreignKey: "companyId",
-  otherKey: "userId"
-})
+// db.company.belongsTo(db.user, {
+//   through: "user_companies",
+//   foreignKey: "companyId",
+//   otherKey: "userId"
+// })
 
-db.event.belongsToMany(db.company, {
-  through: "company_events",
-  foreignKey: "eventId",
-  otherKey: "companyId"
-})
+// db.event.belongsToMany(db.company, {
+//   through: "company_events",
+//   foreignKey: "eventId",
+//   otherKey: "companyId"
+// })
 
-db.company.belongsToMany(db.event, {
-  through: "company_events",
-  foreignKey: "companyId",
-  otherKey: "eventId"
-})
-db.comment.belongsToMany(db.event, {
-  through: "event_comments",
-  foreignKey: "commentId",
-  otherKey: "eventId"
-})
+// db.company.belongsToMany(db.event, {
+//   through: "company_events",
+//   foreignKey: "companyId",
+//   otherKey: "eventId"
+// })
+// db.comment.belongsToMany(db.event, {
+//   through: "event_comments",
+//   foreignKey: "commentId",
+//   otherKey: "eventId"
+// })
 
-db.event.belongsToMany(db.comment, {
-  through: "event_comments",
-  foreignKey: "eventId",
-  otherKey: "commentId"
-})
+// db.event.belongsToMany(db.comment, {
+//   through: "event_comments",
+//   foreignKey: "eventId",
+//   otherKey: "commentId"
+// })
 
-db.theme.belongsToMany(db.event, {
-  through: "theme_events",
-  foreignKey: "themeId",
-  otherKey: "eventId"
-})
-db.event.belongsTo(db.theme, {
-  through: "theme_events",
-  foreignKey: "eventId",
-  otherKey: "themeId"
-})
+// db.theme.belongsToMany(db.event, {
+//   through: "theme_events",
+//   foreignKey: "themeId",
+//   otherKey: "eventId"
+// })
+// db.event.belongsTo(db.theme, {
+//   through: "theme_events",
+//   foreignKey: "eventId",
+//   otherKey: "themeId"
+// })
 
-db.format.belongsToMany(db.event, {
-  through: "format_events",
-  foreignKey: "formatId",
-  otherKey: "eventId"
-})
-db.event.belongsTo(db.format, {
-  through: "format_events",
-  foreignKey: "eventId",
-  otherKey: "formatId"
-})
+// db.format.belongsToMany(db.event, {
+//   through: "format_events",
+//   foreignKey: "formatId",
+//   otherKey: "eventId"
+// })
+// db.event.belongsTo(db.format, {
+//   through: "format_events",
+//   foreignKey: "eventId",
+//   otherKey: "formatId"
+// })
 //event belong to company
 
 db.ROLES = ["user", "admin", "company"]

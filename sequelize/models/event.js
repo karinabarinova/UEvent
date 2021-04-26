@@ -11,14 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Event.belongsToMany(models.Theme, { through: 'ThemeEvent' });
+      models.Event.belongsToMany(models.Format, { through: 'FormatEvent' });
+      models.Event.belongsToMany(models.Company, { through: 'CompanyEvents' });
     }
   };
   Event.init({
-    eventId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     startDate: DataTypes.DATE,

@@ -51,7 +51,7 @@ async function login({email, password}) {
         throw 'Email or password is incorrect'
     }
 
-    const accessToken = jwt.sign({id: user.userId}, config.secret, {
+    const accessToken = jwt.sign({id: user.id}, config.secret, {
         expiresIn: 86400 //24 hours
     });
     return {
