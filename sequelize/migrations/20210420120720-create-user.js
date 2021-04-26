@@ -29,6 +29,9 @@ module.exports = {
       email_validated: { 
         type: Sequelize.BOOLEAN,
       },
+      hasCompany: {
+        type: Sequelize.BOOLEAN,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

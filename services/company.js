@@ -1,6 +1,5 @@
-const db = require('../sequelize/models');
-const Company = db.company;
-const User = db.user;
+// const db = require('../sequelize/models');
+const { User, Company } = require('../sequelize/models');
 
 module.exports = {
     getAll,
@@ -25,7 +24,6 @@ async function getEvents(id) {
 }
 
 async function add(params, id) {
-    console.log(id)
     const exists = await Company.findOne({
         where: {
             name: params.name
@@ -35,14 +33,12 @@ async function add(params, id) {
         throw 'Company already exists';
 
     const user = await User.findByPk(id);
-    console.log("user", user);
     const company =  await Company.create({
         name: params.name,
         location: params.location,
         description: params.description,
         owner: id
     });
-    console.log(company);;
     
     await user.addCompany(company);
 }

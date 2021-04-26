@@ -1,10 +1,6 @@
 const db = require('../sequelize/models');
-const Event = db.event;
-const User = db.user;
-const Company = db.company;
-const Comment = db.comment;
-const Theme = db.theme;
-const Format = db.format;
+const { User, Event, Company,Comment,Theme, Format } = require('../sequelize/models');
+
 const Op = db.Sequelize.Op;
 
 module.exports = {
@@ -41,9 +37,7 @@ async function getAllComments(id) { //may be deleted as comments are returned in
 
 async function getById(id) {
     const event = await getEvent(id);
-    console.log(Event.prototype)
     const organizer = await event.getCompanies();
-    console.log("organizer", organizer);
     const company = await Company.findByPk(organizer[0].dataValues.companyId);
     const otherEvents = await company.getEvents();
 
@@ -78,13 +72,6 @@ async function add({name, description, startDate, location, price, promoCodes, t
         type: 'Point',
         coordinates: location
     }
-    console.log("THEME prototype", Theme.associations)
-    console.log("FORMAt prototype", Format.associations)
-    console.log("EVENT prototype", Event.associations)
-
-    console.log("theme", foundTheme);
-    console.log("format", foundFormat);
-
     const event = await Event.create({
         name,
         description,

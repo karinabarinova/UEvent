@@ -1,6 +1,5 @@
-const db = require('../sequelize/models');
-const Event = db.event;
-const Comment = db.comment;
+// const db = require('../sequelize/models');
+const { Event, Comment } = require('../sequelize/models');
 
 module.exports = {
     hideEvent,

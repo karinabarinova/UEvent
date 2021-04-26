@@ -1,5 +1,4 @@
-const db = require('../sequelize/models');
-const User = db.user;
+const {User} = require('../sequelize/models');
 
 module.exports = {
     getUserInfo

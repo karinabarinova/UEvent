@@ -3,10 +3,11 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const db = require('../sequelize/models');
-const User = db.user;
 const Role = db.ROLES;
 const Op = db.Sequelize.Op;
 const sendEmail = require('../helpers/sendMail');
+const { User } = require('../sequelize/models');
+
 
 module.exports = {
     login,

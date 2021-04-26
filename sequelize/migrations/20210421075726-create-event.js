@@ -29,6 +29,12 @@ module.exports = {
       organizer: {
         type: Sequelize.INTEGER
       },
+      theme: {
+        type: Sequelize.STRING,
+      },
+      format: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

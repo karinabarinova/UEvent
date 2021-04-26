@@ -11,15 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Theme.belongsToMany(models.Event, { through: 'FormatEvent' });
+      models.Format.belongsToMany(models.Event, { through: 'FormatEvent' });
     }
   };
   Format.init({
-    formatId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
     name: DataTypes.STRING
   }, {
     sequelize,
