@@ -38,10 +38,7 @@ async function getAllComments(id) { //may be deleted as comments are returned in
 async function getById(id) {
     const event = await getEvent(id);
     const organizer = await event.getCompanies();
-    console.log("organizer", organizer);
     const company = await Company.findByPk(organizer[0].dataValues.id);
-    console.log("company", company);
-    console.log("event proto", Event.prototype)
     const otherEvents = await company.getEvents({
         where: {
             name: {
