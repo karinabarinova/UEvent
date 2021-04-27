@@ -8,17 +8,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      promoCode: {
+        type: Sequelize.STRING
+      },
+      send_notification: {
+        type: Sequelize.BOOLEAN
+      },
+      email: {
+        type: Sequelize.STRING
+      },
       userId: {
         type: Sequelize.INTEGER
       },
       eventId: {
         type: Sequelize.INTEGER
-      },
-      email: {
-        type: Sequelize.STRING
-      },
-      promoCode: {
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

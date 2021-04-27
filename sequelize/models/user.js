@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       models.User.belongsToMany(models.Company, { through: 'UserCompanies' });
       models.User.belongsToMany(models.Role, { through: 'UserRoles' });
       models.User.belongsToMany(models.Event, { through: 'UserEvents' });
+      models.User.belongsToMany(models.Subscription, { through: 'UserSubscriptions' });
     }
   };
   User.init({

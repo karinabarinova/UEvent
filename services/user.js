@@ -1,4 +1,4 @@
-const {User, Event} = require('../sequelize/models');
+const {User, Event, Subscription} = require('../sequelize/models');
 const sendEmail = require('../helpers/sendMail');
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripe = require('stripe')(stripeSecretKey);
@@ -10,16 +10,33 @@ module.exports = {
 
 async function getUserInfo(userId) {
     const user = await User.findByPk(userId);
-    console.log("proto", User.prototype);
     return {
         user,
         companies: await user.getCompanies(),
         events: await user.getEvents()
-        // events: await user.getEvents()
     };
 }
 
+//TODO: allow company to create promocode with some discount, store the discount in database
+//TODO: add promocode to the req.body
 async function purchase(userId, items, token) {
+    //example of data endpoint awaits
+    // {
+    //     "items": [
+    //         {
+    //             "id": 1,
+    //             "price": 100,
+    //             "quantity": 2
+    //         },
+    //         {
+    //             "id": 3,
+    //             "price": 100,
+    //             "quantity": 1
+    //         }
+    //     ],
+    //     "token": ""
+    // }
+
     let amount = 0;
     const test_token = "tok_visa";
     items.forEach(item => {
@@ -29,7 +46,7 @@ async function purchase(userId, items, token) {
     const paymentDetails = await stripe.charges.create({
         amount: amount * 100,
         source: test_token, //should be token
-        currency: 'usd' //should be changed dynamically or we will accept only USD
+        currency: 'usd'
     })
     if (paymentDetails.status !== 'succeeded') {
         console.log("Payment details", paymentDetails);
@@ -40,13 +57,15 @@ async function purchase(userId, items, token) {
         const event = await Event.findByPk(item.id);
         await event.addUser(user);
         await user.addEvent(event); //maybe this step is not required
-        await Subscription.create({
+        console.log("Subscription prototype", Subscription.prototype)
+        const sub = await Subscription.create({
             eventId: item.id,
             userId: user.id,
             orderId: paymentDetails.metadata.order_id,
             email: user.email
             //send_notifications
         })
+        await user.addSubscription(sub);
     })
     //add events to user
     //add user to events
