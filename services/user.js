@@ -8,12 +8,19 @@ module.exports = {
     purchase
 }
 
+//TODO: edit subscription - change send_notification status
+
 async function getUserInfo(userId) {
     const user = await User.findByPk(userId);
     return {
         user,
         companies: await user.getCompanies(),
-        events: await user.getEvents()
+        events: await user.getEvents(),
+        notifications: await user.getSubscriptions({
+            where: {
+                send_notification: true
+            }
+        })
     };
 }
 
@@ -62,6 +69,7 @@ async function purchase(userId, items, token) {
             eventId: item.id,
             userId: user.id,
             orderId: paymentDetails.metadata.order_id,
+            send_notification: true,
             email: user.email
             //send_notifications
         })

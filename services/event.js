@@ -53,7 +53,8 @@ async function getById(id) {
         event,
         organizer,
         comments: await event.getComments(),
-        otherEvents
+        otherEvents,
+        otherUsers: await event.getUsers() //needs testing
     }
 }
 
