@@ -47,6 +47,8 @@ async function getById(id) {
         }
     });
 
+    console.log(Event.prototype)
+
     return {
         event,
         organizer,

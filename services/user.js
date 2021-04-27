@@ -9,6 +9,7 @@ async function getUserInfo(userId) {
     console.log("proto", User.prototype);
     return {
         user,
-        companies: await user.getCompanies()
+        companies: await user.getCompanies(),
+        // events: await user.getEvents()
     };
 }
