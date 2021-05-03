@@ -46,6 +46,13 @@ async function getById(id) {
             }
         }
     });
+    const similarEvents = await Event.findAll({
+        where: {
+            [Op.or]: [
+              { theme: event.theme },
+              { format: event.format }
+            ]
+    })
 
     console.log(Event.prototype)
 
@@ -54,7 +61,8 @@ async function getById(id) {
         organizer,
         comments: await event.getComments(),
         otherEvents,
-        otherUsers: await event.getUsers() //needs testing
+        otherUsers: await event.getUsers(), //needs testing
+        similarEvents //needs testing
     }
 }
 
