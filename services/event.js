@@ -52,6 +52,7 @@ async function getById(id) {
               { theme: event.theme },
               { format: event.format }
             ]
+        }
     })
 
     console.log(Event.prototype)
