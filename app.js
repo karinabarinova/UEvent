@@ -8,7 +8,7 @@ const errorHandler = require('./middleware/errorHandler');
 const public = require('path').join(__dirname, 'resources');
 
 const corsOptions = {
-    origin: "http://localhost:8080"
+    origin: "http://localhost:3006"
 };
 
 app.use(cors(corsOptions));

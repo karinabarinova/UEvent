@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import Product from './Product';
-
+import axios from 'axios'
+import {useSelector, useDispatch } from 'react-redux'
+import { getAllProducts } from '../store/products/productSlice'
+import { useEffect, useState } from 'react';
 //query server
 
 const ProductListStyles = styled.div`
@@ -10,15 +13,17 @@ const ProductListStyles = styled.div`
 `;
 
 export default function Products() {
-    // const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY)
+    const data = useSelector(({product}) => product)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getAllProducts())
+    }, []);
     // if (loading) return <p>Loading...</p>
     // if (error) return <p>Error: {error.message}</p>
-    // console.log(data, error, loading);
-    const product = [{id: 1}]
     return (
         <div>
             <ProductListStyles>
-                {product.map(product => (
+                {data.products.map(product => (
                     <Product key={product.id} product={product} />
                 ))}
             </ProductListStyles>
