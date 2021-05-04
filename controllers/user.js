@@ -4,15 +4,10 @@ const service = require('../services/user');
 const authJwt = require('../middleware/authJwt');
 const stripePublicKey = process.env.STRIPE_PUBLISHABLE_KEY;
 
-// router.post('/add', authJwt.verifyToken, add);
 router.get('/',  authJwt.verifyToken, getUserInfo);
 router.get('/cart', authJwt.verifyToken, getCart);
 router.post('/purchase', authJwt.verifyToken, purchase);
-
-// router.get('/:id', getById);
-// router.patch('/:id', authJwt.verifyToken, update);
-// router.delete('/:id', authJwt.verifyToken, _delete);
-// router.get('/:id/event', getEvents);
+//TODO: edit/getByID subscriptions
 
 module.exports = router;
 
