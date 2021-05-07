@@ -8,6 +8,7 @@ import './App.css';
 import routes from './routes';
 import Page from './components/Page';
 import Products from "./components/Products";
+import SingleProduct from "./components/SingleProduct";
 
 class App extends Component {
 
@@ -15,6 +16,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path='/' exact component={Products}/>
+        <Route path='/event/:id' exact component={SingleProduct} />
       </Switch>
     )
     return (

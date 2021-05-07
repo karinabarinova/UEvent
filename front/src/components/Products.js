@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import Product from './Product';
-import axios from 'axios'
 import {useSelector, useDispatch } from 'react-redux'
 import { getAllProducts } from '../store/products/productSlice'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 //query server
 
 const ProductListStyles = styled.div`
@@ -15,6 +15,8 @@ const ProductListStyles = styled.div`
 export default function Products() {
     const data = useSelector(({product}) => product)
     const dispatch = useDispatch();
+    const history = useHistory();
+
     useEffect(() => {
         dispatch(getAllProducts())
     }, []);
