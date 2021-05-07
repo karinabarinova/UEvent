@@ -3,14 +3,13 @@ import Form from './styles/Form';
 import { useHistory } from "react-router-dom";
 import {useSelector, useDispatch } from 'react-redux'
 
-export default function CreateProduct() {
+export default function CreateCompany() {
     const history = useHistory();
     const dispatch = useDispatch();
     
     const { inputs, handleChange, clearForm, resetForm } = useForm({
         image: '',
-        name: 'Python Meetup',
-        price: 120,
+        name: 'Google',
         description: 'Best'
     });
 
@@ -20,10 +19,10 @@ export default function CreateProduct() {
             //Submit the input fields to the backend
             // const res = await createProduct();
             clearForm();
-            history.push('/event/' + 3) //TODO: add id of the newly created event
+            history.push('/company/' + 3) //TODO: add id of the newly created event
 
         }}>
-            <h1>New Event</h1>
+            <h1>New Company</h1>
             {/* <DisplayError error={error} /> */}
             <fieldset>
                 <label htmlFor="image">
@@ -47,17 +46,6 @@ export default function CreateProduct() {
                         value={inputs.name}
                     />
                 </label>
-                <label htmlFor="price">
-                    Price
-                    <input
-                        type="number"
-                        id="price"
-                        name="price"
-                        placeholder="Price"
-                        onChange={handleChange}
-                        value={inputs.price}
-                    />
-                </label>
                 <label htmlFor="description">
                     Description
                     <textarea
@@ -68,7 +56,7 @@ export default function CreateProduct() {
                         value={inputs.description}
                     />
                 </label>
-                <button type="submit">+ Add Event</button>
+                <button type="submit">+ Add Company</button>
             </fieldset>
         </Form>
     )
