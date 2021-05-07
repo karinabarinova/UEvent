@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import Product from './Product';
+import Pagination from './Pagination';
 import {useSelector, useDispatch } from 'react-redux'
 import { getAllProducts } from '../store/products/productSlice'
 import { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
 //query server
 
 const ProductListStyles = styled.div`
@@ -15,7 +15,6 @@ const ProductListStyles = styled.div`
 export default function Products() {
     const data = useSelector(({product}) => product)
     const dispatch = useDispatch();
-    const history = useHistory();
 
     useEffect(() => {
         dispatch(getAllProducts())
@@ -24,11 +23,13 @@ export default function Products() {
     // if (error) return <p>Error: {error.message}</p>
     return (
         <div>
+            <Pagination page={1} />
             <ProductListStyles>
                 {data.products.map(product => (
-                    <Product key={product.id} product={product} />
+                    <Product key={product.id} product={product}/>
                 ))}
             </ProductListStyles>
+            <Pagination page={1} />
         </div>
     )
 }
