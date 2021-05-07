@@ -12,9 +12,9 @@ export default function Product({product}) {
 
     return (
         <ItemStyles onClick={() => history.push('/event/' + product.id)}>
-            <img src={product?.image ? product.image : 'defaultEventPage.jfif'} alt={product.name}/>
+            <img src={product?.image ? product.image : '/defaultEventPage.jfif'} alt={product.name}/>
             <Title>
-                <Link href="">{product.name}</Link>
+                <Link to={'/event/' + product.id}>{product.name}</Link>
             </Title>
             <PriceTag>{product.price}$</PriceTag>
             <p>{product.description}</p>
