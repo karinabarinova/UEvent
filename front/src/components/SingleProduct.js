@@ -24,6 +24,13 @@ const ImageContainer = styled.div`
     position: relative;
 `
 
+const FloatContainer = styled.div`
+    float: left;
+    margin-top: 2rem;
+    font-size: 16px;
+    width: 60%;
+`
+
 export default function SingleProduct(props) {
     const data = useSelector(({product}) => product)
     const dispatch = useDispatch();
@@ -37,6 +44,16 @@ export default function SingleProduct(props) {
     let product = <h2>Oops... Event not found</h2>;
 
     if (event) {
+        let arr = new Date(event.startDate).toString().split(' ')
+        const remove = [6, 7, 8, 9];
+
+        for (let i = remove.length - 1; i >= 0; i--)
+            arr.splice(remove[i], 1);
+
+        let time = arr[4].split(':');
+        time.splice(2, 1);
+        arr[4] = time.join(':');
+        arr[5] = arr[5].replace(new RegExp("0", "g"), '')
         product = (
             <ProductStyles>
                 <title>Uevent | {event.name}</title>
@@ -49,8 +66,11 @@ export default function SingleProduct(props) {
                     <h2>{event.name}</h2>
                     <p>{event.description}</p>
                     <Tags><b>{event.theme} / {event.format}</b></Tags>
-                    <EventIcon /> {new Date(event.startDate).toString()}
+                    <FloatContainer>
+                        <EventIcon style={{fontSize: 20}}/> {arr.join(' ')}
+                    </FloatContainer>
                 </div>
+                
             </ProductStyles>
         )
     }

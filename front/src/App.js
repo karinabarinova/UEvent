@@ -16,6 +16,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path='/' exact component={Products}/>
+        <Route path='/events/:page' exact component={Products}/>
         <Route path='/event/:id' exact component={SingleProduct} />
       </Switch>
     )
