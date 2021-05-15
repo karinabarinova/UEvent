@@ -15,6 +15,9 @@ import CreateProduct from "./components/CreateProduct";
 import CreateCompany from "./components/CreateCompany";
 import UpdateEvent from './components/UpdateEvent';
 import UpdateCompany from './components/UpdateCompany';
+import SingIn from './pages/signin';
+import SingUp from './pages/signup';
+
 
 
 class App extends Component {
@@ -31,7 +34,8 @@ class App extends Component {
         <Route path='/new-company' exact component={CreateCompany}/>
         <Route path='/update-event/:id' exact component={UpdateEvent}/>
         <Route path='/update-company/:id' exact component={UpdateCompany}/>
-
+        <Route path='/signin' exact component={SingIn}/>
+        <Route path='/signup' exact component={SingUp}/>
 
       </Switch>
     )
