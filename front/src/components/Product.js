@@ -5,13 +5,13 @@ import Title from './styles/Title'
 import PriceTag from './styles/PriceTag'
 import { useHistory } from "react-router-dom";
 
-// import DeleteProduct from './DeleteProduct'
+import DeleteEvent from './DeleteEvent'
 
 export default function Product({product}) {
     const history = useHistory();
 
     return (
-        <ItemStyles onClick={() => history.push('/event/' + product.id)}>
+        <ItemStyles>
             <img src={product?.image ? product.image : '/defaultEventPage.jfif'} alt={product.name}/>
             <Title>
                 <Link to={'/event/' + product.id}>{product.name}</Link>
@@ -20,8 +20,10 @@ export default function Product({product}) {
             <p>{product.description}</p>
             <Tags><b>{product.theme} / {product.format}</b></Tags>
             <div className="buttonList">
-                <Link>Edit</Link>
-                {/* <DeleteProduct id={product.id}>Delete</DeleteProduct> */}
+                <Link to={{
+                    pathname: "/update-event/" + product.id,
+                }}>Edit</Link>
+                <DeleteEvent id={product.id}>Delete</DeleteEvent>
             </div>
         </ItemStyles>
     )

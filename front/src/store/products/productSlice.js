@@ -21,11 +21,32 @@ export const getProductById = id => async (dispatch, getState) => {
         })
 }
 
+export const deleteEvent = id => async (dispatch, getState) => {
+    return axios.delete(`/event/${id}`)
+        .then(({data}) => {
+            return dispatch(getById(data))
+        })
+        .catch(error => {
+            console.log("error", error.message)
+        })
+}
+
+export const updateEvent = event => async (dispatch, getState) => {
+    return axios.patch(`/event/${event.id}`)
+        .then(({data}) => {
+            return dispatch(setUpdatedEvent(data))
+        })
+        .catch(error => {
+            console.log("error", error.message)
+        })
+}
+
 export const productSlice = createSlice({
     name: "products",
     initialState: {
         products: [],
-        product: {}
+        product: {},
+        message: ''
     },
     reducers: {
         getAll: (state, action) => {
@@ -33,11 +54,17 @@ export const productSlice = createSlice({
         },
         getById: (state, action) => {
             state.product = action.payload
+        },
+        setUpdatedEvent: (state, action) => {
+            state.product = action.payload
+        },
+        setDeletedEvent: (state, action) => {
+            state.product.message = action.payload
         }
     },
     extraReducers: {}
 })
 
-export const { getAll, getById } = productSlice.actions
+export const { getAll, getById, setUpdatedEvent } = productSlice.actions
 
 export default productSlice.reducer

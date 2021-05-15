@@ -13,6 +13,7 @@ import SingleProduct from "./components/SingleProduct";
 import SingleCompany from './components/SingleCompany';
 import CreateProduct from "./components/CreateProduct";
 import CreateCompany from "./components/CreateCompany";
+import UpdateEvent from './components/UpdateEvent';
 
 class App extends Component {
 
@@ -26,6 +27,8 @@ class App extends Component {
         <Route path='/company/:id' exact component={SingleCompany} />
         <Route path='/new-event' exact component={CreateProduct}/>
         <Route path='/new-company' exact component={CreateCompany}/>
+        <Route path='/update-event/:id' exact component={UpdateEvent}/>
+
       </Switch>
     )
     return (
