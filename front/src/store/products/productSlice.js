@@ -24,7 +24,7 @@ export const getProductById = id => async (dispatch, getState) => {
 export const deleteEvent = id => async (dispatch, getState) => {
     return axios.delete(`/event/${id}`)
         .then(({data}) => {
-            return dispatch(getById(data))
+            return dispatch(setDeletedEvent(data))
         })
         .catch(error => {
             console.log("error", error.message)
@@ -65,6 +65,6 @@ export const productSlice = createSlice({
     extraReducers: {}
 })
 
-export const { getAll, getById, setUpdatedEvent } = productSlice.actions
+export const { getAll, getById, setUpdatedEvent, setDeletedEvent } = productSlice.actions
 
 export default productSlice.reducer
