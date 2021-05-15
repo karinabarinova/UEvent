@@ -20,11 +20,11 @@ export const authSlice = createSlice({
     },
     reducers: {
         setLogIn: (state, action) => {
-            state.user = action.payload
-            state.message = action.payload
+            state.user = action.payload.data
+            state.message = action.payload.message
         },
         setMessage: (state, action) => {
-            state.message = action.payload
+            state.message = action.payload.message
         }
     },
     extraReducers: {}
