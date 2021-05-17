@@ -22,7 +22,6 @@ export default function Nav() {
             { !user.id && (
                 <>
                     <Link to='/signin'>Sign In</Link>
-                    <Link to='/signup'>Sign Up</Link>
                 </>
             )}
            

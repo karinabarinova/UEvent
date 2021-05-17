@@ -8,7 +8,6 @@ import { useUser } from "./User";
 
 export default function SignIn() {
     const data = useSelector(({auth}) => auth)
-    console.log("auth data", data)
     const history = useHistory();
     const dispatch = useDispatch()
     const user = useUser();

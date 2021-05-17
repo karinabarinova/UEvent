@@ -7,8 +7,6 @@ import Form from "./styles/Form";
 
 export default function SignIn() {
     const data = useSelector(({register}) => register)
-    // console.log("auth data", data)
-    // const history = useHistory();
     const dispatch = useDispatch()
     const { inputs, handleChange, resetForm } = useForm({
         email: '',
@@ -22,7 +20,7 @@ export default function SignIn() {
         dispatch(register(inputs));
         resetForm();
     }
-    console.log("data register", data)
+    
     return (
         <Form method="POST" onSubmit={handleSubmit}>
             <h2>Sign Up for An Account</h2>
