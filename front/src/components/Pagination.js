@@ -8,12 +8,12 @@ export default function Pagination({ page }) {
     const pageCount = Math.ceil(count / 1);
     return (
         <PaginationStyles>
-            <Link to={`/events/${page - 1}`}>
+            <Link to={`/${page - 1}`}>
                 <a aria-disabled={page <= 1}>← Prev</a>
             </Link>
             <p>Page {page} of {pageCount}</p>
             <p>{count} Items Total</p>
-            <Link to={`/events/${page + 1}`}>
+            <Link to={`/${page + 1}`}>
                 <a aria-disabled={page >= pageCount}>Next →</a>
             </Link>
         </PaginationStyles>

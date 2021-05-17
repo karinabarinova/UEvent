@@ -26,7 +26,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path='/' exact component={Products}/>
-        <Route path='/events/:page' exact component={Products}/>
+        <Route path='/:page' exact component={Products}/>
         <Route path='/companies/:page' exact component={Companies}/>
         <Route path='/event/:id' exact component={SingleProduct} />
         <Route path='/company/:id' exact component={SingleCompany} />

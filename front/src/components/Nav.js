@@ -8,7 +8,7 @@ export default function Nav() {
     console.log("user", user)
     return (
         <NavStyles>
-            <Link to='/events/1'>Events</Link>
+            <Link to='/1'>Events</Link>
             <Link to='/companies/1'>Companies</Link>
             { user?.id && (
                 <>
