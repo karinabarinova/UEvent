@@ -1,35 +1,48 @@
-import { createSlice } from "@reduxjs/toolkit"
-import axios from 'axios';
+import { createSlice } from "@reduxjs/toolkit";
+import jwt from './index';
 
 export const login = (data) => async (dispatch, getState) => {
-    return axios.post('/auth/login', data)
-        .then(({data}) => {
+    return jwt
+        .login(data)
+        .then(data => {
             return dispatch(setLogIn(data))
         })
         .catch(error => {
-            return dispatch(setMessage(error.message))
+            return dispatch(setMessage("Error"))
         })
 }
 
+export const logout = () => async (dispatch, getState) => {
+    const {user} = getState().auth;
+    if (!user.role || !user.role.length)
+        return null;
+
+    jwt.logout();
+    dispatch(setLogout());
+}
+
+const initialState = {
+    user: {},
+    message: ''
+}
 
 export const authSlice = createSlice({
     name: "auth",
-    initialState: {
-        user: {},
-        message: ''
-    },
+    initialState,
     reducers: {
         setLogIn: (state, action) => {
+            console.log("login", action.payload)
             state.user = action.payload.data
             state.message = action.payload.message
         },
+        setLogout: (state, action) => initialState,
         setMessage: (state, action) => {
-            state.message = action.payload.message
+            state.message = action.payload
         }
     },
     extraReducers: {}
 })
 
-export const { setLogIn, setMessage } = authSlice.actions
+export const { setLogIn, setMessage, setLogout } = authSlice.actions
 
 export default authSlice.reducer

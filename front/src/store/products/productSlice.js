@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from 'axios';
+import jwt from '../auth/index';
 
 export const getAllProducts = () => async (dispatch, getState) => {
     return axios.get('/event')
@@ -22,7 +23,9 @@ export const getProductById = id => async (dispatch, getState) => {
 }
 
 export const deleteEvent = id => async (dispatch, getState) => {
-    return axios.delete(`/event/${id}`)
+    console.log(jwt)
+    return jwt
+        .removeEvent(id)
         .then(({data}) => {
             return dispatch(setDeletedEvent(data))
         })

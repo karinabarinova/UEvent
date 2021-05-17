@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
 } from "react-router-dom";
@@ -17,6 +17,7 @@ import UpdateEvent from './components/UpdateEvent';
 import UpdateCompany from './components/UpdateCompany';
 import SingIn from './pages/signin';
 import SingUp from './pages/signup';
+import Auth from './store/auth/auth';
 
 
 
@@ -41,9 +42,13 @@ class App extends Component {
     )
     return (
       <>
-        <Page>
-          {routes}
-        </Page>
+        <Auth>
+          <Page>
+            {/* <Router history={history}> */}
+              {routes}
+            {/* </Router> */}
+          </Page>                     
+        </Auth>
       </>
     );
   }

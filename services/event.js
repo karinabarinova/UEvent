@@ -1,5 +1,5 @@
 const db = require('../sequelize/models');
-const { User, Event, Company,Comment,Theme, Format } = require('../sequelize/models');
+const { User, Event, Company,Comment,Theme, Format, ThemeEvents } = require('../sequelize/models');
 
 const Op = db.Sequelize.Op;
 
@@ -155,7 +155,14 @@ async function updateComment(params, eventId, commentId) {
 
 async function _delete(id) {
     const event = await getEvent(id);
-    await event.destroy();
+    console.log(event);
+    const foundTheme = await findOrCreateTheme(event.dataValues.theme);
+    const foundFormat = await findOrCreateFormat(event.dataValues.format);
+    const foundCompany = await findCompany(event.dataValues.organizer);
+    await foundTheme.removeEvent(event);
+    await foundFormat.removeEvent(event);
+    await foundCompany.removeEvent(event);
+    await event.destroy()
 }
 
 async function deleteComment(eventId, commentId) {
@@ -181,6 +188,11 @@ async function findOrCreateFormat(name) {
         foundFormat = await Format.create({ name })
     }
     return foundFormat;
+}
+
+async function findCompany(id) {
+    let foundCompany = await Company.findOne({where: {id}});
+    return foundCompany;
 }
 
 

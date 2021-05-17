@@ -1,4 +1,5 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import useForm from "../lib/useForm";
 import {login} from '../store/auth/authSlice'
 
@@ -6,6 +7,9 @@ import Form from "./styles/Form";
 import { useUser } from "./User";
 
 export default function SignIn() {
+    const data = useSelector(({auth}) => auth)
+    console.log("auth data", data)
+    const history = useHistory();
     const dispatch = useDispatch()
     const user = useUser();
     const { inputs, handleChange, resetForm } = useForm({
