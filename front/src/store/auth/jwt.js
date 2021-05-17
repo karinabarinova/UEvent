@@ -108,6 +108,19 @@ class JwtService extends Emitter {
 		});
 	}
 
+	verifyToken = data => {
+		return new Promise((resolve, reject) => {
+			axios
+				.post('/auth/verify-email', data)
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				});
+		});
+	}
+
 	removeEvent = id => {
 		return axios.delete(`/event/${id}`);
 	};

@@ -4,21 +4,18 @@ import useForm from "../lib/useForm";
 import {register} from '../store/auth/registerSlice'
 
 import Form from "./styles/Form";
-import { useUser } from "./User";
 
 export default function SignIn() {
     const data = useSelector(({register}) => register)
     // console.log("auth data", data)
     // const history = useHistory();
     const dispatch = useDispatch()
-    // const user = useUser();
     const { inputs, handleChange, resetForm } = useForm({
         email: '',
         password: '',
         firstName: '', //TODO: change this to just name field on server
         lastName: ''
     })
-    // console.log("user2", user)
     
     function handleSubmit(e) {
         e.preventDefault();
@@ -33,7 +30,7 @@ export default function SignIn() {
                 {data.message && (
                     <p>{data.message}</p>
                 )}
-                <label htmlFor="email">
+                <label htmlFor="firstName">
                     Your First Name
                     <input 
                         type="text" 
@@ -44,7 +41,7 @@ export default function SignIn() {
                         onChange={handleChange}
                     />
                 </label>
-                <label htmlFor="email">
+                <label htmlFor="lastName">
                     Your Last Name
                     <input 
                         type="text" 
@@ -77,7 +74,7 @@ export default function SignIn() {
                         onChange={handleChange}
                     />
                 </label>
-                <button type="submit">Sign in!</button>
+                <button type="submit">Sign up!</button>
             </fieldset>
         </Form>
     )
