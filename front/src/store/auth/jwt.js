@@ -84,17 +84,29 @@ class JwtService extends Emitter {
 			axios
 				.post('/auth/login', data)
 				.then(response => {
-					console.log('response', response)
 					if (response.data.data.accessToken) {
 						this.setSession(response.data.data.accessToken);
 						resolve(response.data);
 					}
 				})
 				.catch(error => {
-					reject(error.response.data);
+					reject(error.response.data.data);
 				});
 		});
 	};
+
+	register = data => {
+		return new Promise((resolve, reject) => {
+			axios
+				.post('/auth/register', data)
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				});
+		});
+	}
 
 	removeEvent = id => {
 		return axios.delete(`/event/${id}`);

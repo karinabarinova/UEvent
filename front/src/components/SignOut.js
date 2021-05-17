@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {logout} from '../store/auth/authSlice'
 
-export default function SingOut() {
+export default function SignOut() {
     const history = useHistory();
     const dispatch = useDispatch();
     
