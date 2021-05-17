@@ -1,13 +1,13 @@
 import {Link} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import ItemStyles from './styles/ItemStyles'
 import Tags from './styles/Tags'
 import Title from './styles/Title'
 import PriceTag from './styles/PriceTag'
-import { useHistory } from "react-router-dom";
 import DeleteCompany from './DeleteCompany';
 
 export default function Company({company}) {
-    const history = useHistory();
+    const authUser = useSelector(({auth}) => auth.user)
 
     return (
         <ItemStyles>
@@ -16,12 +16,14 @@ export default function Company({company}) {
                 <Link to={'/company/' + company.id}>{company.name}</Link>
             </Title>
             <p>{company.description}</p>
-            <div className="buttonList">
-                <Link to={{
-                    pathname: "/update-company/" + company.id,
-                }}>Edit</Link>
-                <DeleteCompany id={company.id}>Delete</DeleteCompany>
-            </div>
+            {Object.keys(authUser).length !== 0  && (
+                <div className="buttonList">
+                    <Link to={{
+                        pathname: "/update-company/" + company.id,
+                    }}>Edit</Link>
+                    <DeleteCompany id={company.id}>Delete</DeleteCompany>
+                </div>
+            )}
         </ItemStyles>
     )
 }
