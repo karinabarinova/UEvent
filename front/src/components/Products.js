@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Product from './Product';
-import Pagination from './Pagination';
+import PaginationProducts from './PaginationProducts';
 import {useSelector, useDispatch } from 'react-redux'
 import { getAllProducts } from '../store/products/productSlice'
 import { useEffect } from 'react';
@@ -23,13 +23,13 @@ export default function Products() {
     // if (error) return <p>Error: {error.message}</p>
     return (
         <div>
-            <Pagination page={1} />
+            <PaginationProducts page={1} />
             <ProductListStyles>
                 {data.products.map(product => (
                     <Product key={product.id} product={product}/>
                 ))}
             </ProductListStyles>
-            <Pagination page={1} />
+            <PaginationProducts page={1} />
         </div>
     )
 }

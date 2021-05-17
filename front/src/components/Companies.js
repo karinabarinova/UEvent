@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Company from './Company';
-import Pagination from './Pagination';
+import PaginationCompanies from './PaginationCompanies';
 import {useSelector, useDispatch } from 'react-redux'
 import { getAllCompanies } from '../store/company/companySlice'
 import { useEffect } from 'react';
@@ -24,13 +24,13 @@ export default function Companies() {
     // if (error) return <p>Error: {error.message}</p>
     return (
         <div>
-            <Pagination page={1} />
+            <PaginationCompanies page={1} />
             <ProductListStyles>
                 {data.map(company => (
                     <Company key={company.id} company={company}/>
                 ))}
             </ProductListStyles>
-            <Pagination page={1} />
+            <PaginationCompanies page={1} />
         </div>
     )
 }

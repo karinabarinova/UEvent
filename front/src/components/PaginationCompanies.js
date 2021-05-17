@@ -2,9 +2,9 @@ import {useSelector, useDispatch } from 'react-redux'
 import PaginationStyles from './styles/PaginationStyles';
 import {Link} from 'react-router-dom';
 
-export default function Pagination({ page }) {
-    const data = useSelector(({product}) => product)
-    const count = data.products.length;
+export default function PaginationCompanies({ page }) {
+    const companies = useSelector(({company}) => company.companies)
+    const count = companies.length;
     const pageCount = Math.ceil(count / 1);
     return (
         <PaginationStyles>
