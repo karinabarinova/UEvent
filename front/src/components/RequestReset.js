@@ -24,7 +24,7 @@ export default function RequestReset() {
                 {data.requestMessage && (
                     <p>{data.requestMessage}</p>
                 )}
-                <label htmlFor="token">
+                <label htmlFor="email">
                     Your Email Address
                     <input 
                         type="email" 

@@ -23,6 +23,15 @@ module.exports = {
       validation_str: {
         type: Sequelize.STRING,
       },
+      resetToken: {
+        type: Sequelize.STRING,
+      },
+      resetTokenExpires: {
+        type: Sequelize.DATE
+      },
+      passwordReset: {
+        type: Sequelize.DATE
+      },
       role: {
         type: Sequelize.STRING,
       },

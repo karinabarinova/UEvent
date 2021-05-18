@@ -38,6 +38,15 @@ module.exports = (sequelize, DataTypes) => {
     validation_str: {
       type: DataTypes.STRING,
     },
+    resetToken: {
+      type: DataTypes.STRING,
+    },
+    resetTokenExpires: {
+      type: DataTypes.DATE
+    },
+    passwordReset: {
+      type: DataTypes.DATE
+    },
     email_validated: { 
       type: DataTypes.BOOLEAN,
       defaultValue: false,

@@ -16,6 +16,7 @@ import UpdateCompany from './components/UpdateCompany';
 import SingIn from './pages/signin';
 import ProductsPage from './pages/products';
 import CompaniesPage from './pages/companies';
+import ResetPage from './pages/reset';
 import Auth from './store/auth/auth';
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path='/signin' exact component={SingIn}/>
+        <Route path='/reset' exact component={ResetPage} />
         <Route path='/' exact component={ProductsPage}/>
         <Route path='/:page' exact component={ProductsPage}/>
         <Route path='/companies/:page' exact component={CompaniesPage}/>

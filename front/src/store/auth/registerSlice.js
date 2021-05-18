@@ -34,13 +34,26 @@ export const requestReset = (data) => async dispatch => {
 		});
 };
 
+export const resetPassword = (data) => async dispatch => {
+	return jwt
+		.resetPassword(data)
+		.then((data) => {
+			return dispatch(resetSuccess(data));
+		})
+		.catch(error => {
+			return dispatch(resetError(error));
+		});
+};
+
 const initialState = {
 	success: false,
 	message: '',
 	verificationMessage: '',
 	verificationError: '',
 	requestMessage: '',
-	requestError: ''
+	requestError: '',
+	resetMessage: '',
+	resetError: ''
 };
 
 const registerSlice = createSlice({
@@ -75,13 +88,22 @@ const registerSlice = createSlice({
 			state.success = false;
 			state.requestError = action.payload.message;
 		},
+		resetSuccess: (state, action) => {
+			state.success = false;
+			state.resetMessage = action.payload.message;
+		},
+		resetError: (state, action) => {
+			state.success = false;
+			state.resetError = action.payload.message;
+		},
 	},
 	extraReducers: {}
 });
 
 export const { registerSuccess, registerError, resetState, 
 	verifySuccess, verifyError, 
-	requestSuccess, requestError 
+	requestSuccess, requestError,
+	resetSuccess, resetError 
 } = registerSlice.actions;
 
 export default registerSlice.reducer;

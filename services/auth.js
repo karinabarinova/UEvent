@@ -116,12 +116,11 @@ async function resetPassword({ password, token }) {
 //helpers
 
 async function sendPasswordResetEmail(user) {
-    let message = `<p>Please use the below token to reset your password with the <code>http://localhost:3000/confirm-reset-password</code> route:</p>
-                   <p><code>${user.resetToken}</code></p>`;
+    let message = `<p>Please use the below token to reset your password with the <code>http://localhost:3006/reset?token=${user.resetToken}</code> route:</p>`;
 
     await sendEmail({
         to: user.email,
-        subject: 'Sign-up USOF API - Reset Password',
+        subject: 'UEvent - Reset Password',
         html: `<h4>Reset Password Email</h4>
                ${message}`
     });
@@ -140,7 +139,7 @@ async function sendVerificationEmail(user, origin) {
 
     await sendEmail({
         to: user.email,
-        subject: 'Sign-up USOF API - Verify Email',
+        subject: 'UEvent - Verify Email',
         html: `<h4>Verify Email</h4>
                <p>Thanks for registering!</p>
                ${message}`
@@ -154,4 +153,8 @@ function randomTokenString() {
 function basicDetails(user) {
     const { id, email, role, createdAt, updatedAt, firstName, lastName } = user;
     return { id, email, role, createdAt, updatedAt, firstName, lastName };
+}
+
+async function hash(password) {
+    return await bcrypt.hash(password, 10);
 }
