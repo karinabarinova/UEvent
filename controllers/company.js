@@ -13,7 +13,7 @@ router.get('/:id/event', getEvents);
 module.exports = router;
 
 function getAll(req, res, next) {
-    service.getAll()
+    service.getAll(req.query)
         .then(data => res.status(200).json(data))
         .catch(next);
 }

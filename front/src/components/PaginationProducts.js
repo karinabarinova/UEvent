@@ -5,15 +5,11 @@ import PaginationStyles from './styles/PaginationStyles';
 import {Link} from 'react-router-dom';
 
 export default function PaginationProducts({ page }) {
-    const dispatch = useDispatch();
     const products = useSelector(({product}) => product.products)
     const count = products.count;
     const pageCount = Math.ceil(count / 4);
     const showPage = page > pageCount || page <= 0 ? 1 : page;
 
-    // useEffect(() => {
-    //     // dispatch(paginateEvents(showPage));
-    // }, [page]);
     return (
         <PaginationStyles>
             <Link to={`/${showPage - 1 >= 1 ? showPage - 1 : 1 }`}>

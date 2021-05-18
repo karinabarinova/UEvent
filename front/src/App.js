@@ -7,7 +7,6 @@ import {
 import './App.css';
 import routes from './routes';
 import Page from './components/Page';
-import Companies from "./components/Companies";
 import SingleProduct from "./components/SingleProduct";
 import SingleCompany from './components/SingleCompany';
 import CreateProduct from "./components/CreateProduct";
@@ -16,9 +15,8 @@ import UpdateEvent from './components/UpdateEvent';
 import UpdateCompany from './components/UpdateCompany';
 import SingIn from './pages/signin';
 import ProductsPage from './pages/products';
+import CompaniesPage from './pages/companies';
 import Auth from './store/auth/auth';
-
-
 
 class App extends Component {
 
@@ -27,7 +25,7 @@ class App extends Component {
       <Switch>
         <Route path='/' exact component={ProductsPage}/>
         <Route path='/:page' exact component={ProductsPage}/>
-        <Route path='/companies/:page' exact component={Companies}/>
+        <Route path='/companies/:page' exact component={CompaniesPage}/>
         <Route path='/event/:id' exact component={SingleProduct} />
         <Route path='/company/:id' exact component={SingleCompany} />
         <Route path='/new-event' exact component={CreateProduct}/>

@@ -10,8 +10,13 @@ module.exports = {
     delete: _delete
 }
 
-async function getAll() {
-    return await Company.findAll();
+async function getAll(query) {
+    const limit = 4;
+    const options = {
+        limit,
+        offset: query.page == 1 ? 0 : limit * query.page - limit
+    }
+    return await Company.findAndCountAll(options);
 }
 
 async function getById(id) {
