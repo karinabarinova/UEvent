@@ -1,5 +1,6 @@
 const {User, Event, Subscription} = require('../sequelize/models');
 const sendEmail = require('../helpers/sendMail');
+const makeANiceEmail = require('../helpers/makeANiceEmail');
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripe = require('stripe')(stripeSecretKey);
 
@@ -91,8 +92,8 @@ async function sendSubscriptionEmail(user) {
     await sendEmail({
         to: user.email,
         subject: 'Successful Payment for =event=',
-        html: `<h4>Successful Payment for =event=</h4>
-               ${message}`
+        html: makeANiceEmail(`<h4>Successful Payment for =event=</h4>
+        ${message}`)
     });
 }
 

@@ -6,6 +6,7 @@ const db = require('../sequelize/models');
 const Role = db.ROLES;
 const Op = db.Sequelize.Op;
 const sendEmail = require('../helpers/sendMail');
+const makeANiceEmail = require('../helpers/makeANiceEmail');
 const { User } = require('../sequelize/models');
 
 
@@ -121,8 +122,7 @@ async function sendPasswordResetEmail(user) {
     await sendEmail({
         to: user.email,
         subject: 'UEvent - Reset Password',
-        html: `<h4>Reset Password Email</h4>
-               ${message}`
+        html: makeANiceEmail(`${message}`)
     });
 }
 
@@ -140,9 +140,7 @@ async function sendVerificationEmail(user, origin) {
     await sendEmail({
         to: user.email,
         subject: 'UEvent - Verify Email',
-        html: `<h4>Verify Email</h4>
-               <p>Thanks for registering!</p>
-               ${message}`
+        html: makeANiceEmail(`${message}`)
     });
 }
 
