@@ -4,7 +4,6 @@ import PaginationCompanies from './PaginationCompanies';
 import {useSelector, useDispatch } from 'react-redux'
 import { getAllCompanies } from '../store/company/companySlice'
 import { useEffect } from 'react';
-//query server
 
 const ProductListStyles = styled.div`
     display: grid;
@@ -14,14 +13,12 @@ const ProductListStyles = styled.div`
 
 export default function Companies() {
     const data = useSelector(({company}) => company.companies)
-    console.log("data", data)
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getAllCompanies())
     }, []);
-    // if (loading) return <p>Loading...</p>
-    // if (error) return <p>Error: {error.message}</p>
+
     return (
         <div>
             <PaginationCompanies page={1} />

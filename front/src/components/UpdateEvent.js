@@ -11,7 +11,6 @@ export default function UpdateEvent(props) {
     const dispatch = useDispatch();
 
     const { inputs, handleChange, clearForm, resetForm } = useForm(data?.event);
-    // console.log(inputs)
 
     useEffect(() => {
         dispatch(getProductById(props.match.params.id))
@@ -22,10 +21,8 @@ export default function UpdateEvent(props) {
             e.preventDefault();
             console.log("inputs", inputs)
             dispatch(updateEvent(inputs))
-            //Submit the input fields to the backend
-            // const res = await createProduct();
             // clearForm();
-            // history.push('/event/' + 3) //TODO: add id of the newly created event
+            // history.push('/event/' + 3) //TODO: redirect to the event page
 
         }}>
             <h1>Update Event</h1>

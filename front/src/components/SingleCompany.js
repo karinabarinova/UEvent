@@ -43,7 +43,7 @@ export default function SingleCompany(props) {
     useEffect(() => {
         dispatch(getCompanyById(props.match.params.id))
     }, [false]);
-    console.log("company",data)
+
     let company = <h2>Oops... Company not found</h2>;
 
     if (data.id) {

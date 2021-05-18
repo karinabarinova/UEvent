@@ -1,9 +1,7 @@
 import {Link} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ItemStyles from './styles/ItemStyles'
-import Tags from './styles/Tags'
 import Title from './styles/Title'
-import PriceTag from './styles/PriceTag'
 import DeleteCompany from './DeleteCompany';
 
 export default function Company({company}) {

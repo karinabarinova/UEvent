@@ -38,8 +38,7 @@ export default function SingleProduct(props) {
     useEffect(() => {
         dispatch(getProductById(props.match.params.id))
     }, []);
-    // if (loading) return <p>Loading...</p>
-    // if (error) return <DisplayError error={error} />
+
     const { event } = data.product;
     let product = <h2>Oops... Event not found</h2>;
 

@@ -13,7 +13,6 @@ export default function VerifyToken() {
     })
     
     function handleSubmit(e) {
-        console.log('in verify token')
         e.preventDefault();
         dispatch(verifyToken(inputs));
         resetForm();

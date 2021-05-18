@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Product from './Product';
-import {useSelector, useDispatch } from 'react-redux'
+import {useSelector } from 'react-redux'
 
 const ProductListStyles = styled.div`
     display: grid;
@@ -8,7 +8,7 @@ const ProductListStyles = styled.div`
     grid-gap: 60px;
 `;
 
-export default function Products(props) {
+export default function Products() {
     const data = useSelector(({product}) => product.products)
 
     return (

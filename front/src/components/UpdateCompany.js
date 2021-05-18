@@ -8,7 +8,6 @@ import useForm from '../lib/useForm';
 export default function UpdateCompany(props) {
     const history = useHistory();
     const data = useSelector(({company}) => company.company)
-    console.log("data1", data);
     const dispatch = useDispatch();
 
     const { inputs, handleChange, clearForm, resetForm } = useForm(data);

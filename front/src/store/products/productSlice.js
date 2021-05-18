@@ -23,7 +23,6 @@ export const getProductById = id => async (dispatch, getState) => {
 }
 
 export const deleteEvent = id => async (dispatch, getState) => {
-    console.log(jwt)
     return jwt
         .removeEvent(id)
         .then(({data}) => {
