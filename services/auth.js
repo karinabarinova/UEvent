@@ -117,7 +117,8 @@ async function resetPassword({ password, token }) {
 //helpers
 
 async function sendPasswordResetEmail(user) {
-    let message = `<p>Please use the below token to reset your password with the <code>http://localhost:3006/reset?token=${user.resetToken}</code> route:</p>`;
+    let message = `Your password Reset Token is here!
+    <a href="http://localhost:3006/reset?token=${user.resetToken}">Click Here to reset</a>`;
 
     await sendEmail({
         to: user.email,
