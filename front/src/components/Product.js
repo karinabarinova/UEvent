@@ -5,6 +5,7 @@ import Tags from './styles/Tags'
 import Title from './styles/Title'
 import PriceTag from './styles/PriceTag'
 import DeleteEvent from './DeleteEvent'
+import AddToCart from './AddToCart';
 
 export default function Product({product}) {
     const authUser = useSelector(({auth}) => auth.user)
@@ -24,6 +25,7 @@ export default function Product({product}) {
                     <Link to={{
                         pathname: "/update-event/" + product.id,
                     }}>Edit</Link>
+                    <AddToCart id={product.id}/>
                     <DeleteEvent id={product.id}>Delete</DeleteEvent>
                 </div>
             )}
