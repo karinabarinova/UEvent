@@ -121,6 +121,19 @@ class JwtService extends Emitter {
 		});
 	}
 
+	requestReset = data => {
+		return new Promise((resolve, reject) => {
+			axios
+				.post('/auth/password-reset', data)
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				});
+		});
+	}
+
 	removeEvent = id => {
 		return axios.delete(`/event/${id}`);
 	};

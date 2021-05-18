@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import RequestReset from "../components/RequestReset";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import VerifyToken from "../components/VerifyToken";
@@ -16,10 +17,11 @@ export default function SingInPage() {
             <GridStyles>
                 <SignIn />
                 <SignUp />
-            </GridStyles>
-            <GridStyles>
                 <VerifyToken />
+                <RequestReset />
             </GridStyles>
+            {/* <GridStyles>
+            </GridStyles> */}
         </div>
         
     )

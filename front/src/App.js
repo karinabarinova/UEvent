@@ -23,6 +23,7 @@ class App extends Component {
   render() {
     let routes = (
       <Switch>
+        <Route path='/signin' exact component={SingIn}/>
         <Route path='/' exact component={ProductsPage}/>
         <Route path='/:page' exact component={ProductsPage}/>
         <Route path='/companies/:page' exact component={CompaniesPage}/>
@@ -32,7 +33,6 @@ class App extends Component {
         <Route path='/new-company' exact component={CreateCompany}/>
         <Route path='/update-event/:id' exact component={UpdateEvent}/>
         <Route path='/update-company/:id' exact component={UpdateCompany}/>
-        <Route path='/signin' exact component={SingIn}/>
 
       </Switch>
     )

@@ -13,7 +13,6 @@ export const register = (data) => async dispatch => {
 };
 
 export const verifyToken = (data) => async dispatch => {
-	console.log(data)
 	return jwt
 		.verifyToken(data)
 		.then((data) => {
@@ -24,11 +23,24 @@ export const verifyToken = (data) => async dispatch => {
 		});
 };
 
+export const requestReset = (data) => async dispatch => {
+	return jwt
+		.requestReset(data)
+		.then((data) => {
+			return dispatch(requestSuccess(data));
+		})
+		.catch(error => {
+			return dispatch(requestError(error));
+		});
+};
+
 const initialState = {
 	success: false,
 	message: '',
 	verificationMessage: '',
-	verificationError: ''
+	verificationError: '',
+	requestMessage: '',
+	requestError: ''
 };
 
 const registerSlice = createSlice({
@@ -55,10 +67,21 @@ const registerSlice = createSlice({
 			state.success = false;
 			state.verificationError = action.payload.message;
 		},
+		requestSuccess: (state, action) => {
+			state.success = false;
+			state.requestMessage = action.payload.message;
+		},
+		requestError: (state, action) => {
+			state.success = false;
+			state.requestError = action.payload.message;
+		},
 	},
 	extraReducers: {}
 });
 
-export const { registerSuccess, registerError, resetState, verifySuccess, verifyError } = registerSlice.actions;
+export const { registerSuccess, registerError, resetState, 
+	verifySuccess, verifyError, 
+	requestSuccess, requestError 
+} = registerSlice.actions;
 
 export default registerSlice.reducer;
