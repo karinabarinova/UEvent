@@ -16,9 +16,12 @@ module.exports = {
 }
 
 async function getAll(query) { //currently show only upcoming events
+    const limit = 4;
     const options = {
         order: [['startDate', 'ASC']],
-        where: {}
+        where: {},
+        limit,
+        offset: query.page == 1 ? 0 : limit * query.page - limit
     }
     if (query.theme) {
         options.where.theme = query.theme;
@@ -28,7 +31,7 @@ async function getAll(query) { //currently show only upcoming events
     }
     if (query.date) //should be anything in the date to show upcoming event
         options.where.startDate = {[Op.gt]: Date.now()}
-    return await Event.findAll(options);
+    return await Event.findAndCountAll(options);
 }
 
 async function getAllComments(id) { //may be deleted as comments are returned in the getById function

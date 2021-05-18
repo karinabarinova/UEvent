@@ -7,7 +7,6 @@ import {
 import './App.css';
 import routes from './routes';
 import Page from './components/Page';
-import Products from "./components/Products";
 import Companies from "./components/Companies";
 import SingleProduct from "./components/SingleProduct";
 import SingleCompany from './components/SingleCompany';
@@ -16,6 +15,7 @@ import CreateCompany from "./components/CreateCompany";
 import UpdateEvent from './components/UpdateEvent';
 import UpdateCompany from './components/UpdateCompany';
 import SingIn from './pages/signin';
+import ProductsPage from './pages/products';
 import Auth from './store/auth/auth';
 
 
@@ -25,8 +25,8 @@ class App extends Component {
   render() {
     let routes = (
       <Switch>
-        <Route path='/' exact component={Products}/>
-        <Route path='/:page' exact component={Products}/>
+        <Route path='/' exact component={ProductsPage}/>
+        <Route path='/:page' exact component={ProductsPage}/>
         <Route path='/companies/:page' exact component={Companies}/>
         <Route path='/event/:id' exact component={SingleProduct} />
         <Route path='/company/:id' exact component={SingleCompany} />
