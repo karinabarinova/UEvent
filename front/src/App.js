@@ -18,6 +18,7 @@ import ProductsPage from './pages/products';
 import CompaniesPage from './pages/companies';
 import ResetPage from './pages/reset';
 import Auth from './store/auth/auth';
+import { CartStateProvider } from "./lib/cartState";
 
 class App extends Component {
 
@@ -41,11 +42,13 @@ class App extends Component {
     return (
       <>
         <Auth>
-          <Page>
-            {/* <Router history={history}> */}
-              {routes}
-            {/* </Router> */}
-          </Page>                     
+          <CartStateProvider>
+            <Page>
+              {/* <Router history={history}> */}
+                {routes}
+              {/* </Router> */}
+            </Page>  
+          </CartStateProvider>                   
         </Auth>
       </>
     );
