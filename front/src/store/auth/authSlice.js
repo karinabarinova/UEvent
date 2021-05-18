@@ -23,6 +23,7 @@ export const logout = () => async (dispatch, getState) => {
 
 const initialState = {
     user: {},
+    cart: {},
     message: ''
 }
 

@@ -105,10 +105,11 @@ async function validateResetToken({ token }) {
 }
 
 async function resetPassword({ password, token }) {
+    console.log(password, token);
     const user = await validateResetToken({ token });
 
     // update password and remove reset token
-    user.hash = await hash(password);
+    user.password = await hash(password);
     user.passwordReset = Date.now();
     user.resetToken = null;
     await user.save();

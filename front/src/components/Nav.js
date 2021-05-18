@@ -4,13 +4,13 @@ import NavStyles from './styles/NavStyles';
 import { useUser } from './User';
 
 export default function Nav() {
-    const user = useUser();
-    console.log("user", user)
+    const userData = useUser();
+    console.log("user", userData)
     return (
         <NavStyles>
             <Link to='/1'>Events</Link>
             <Link to='/companies/1'>Companies</Link>
-            { user?.id && (
+            { userData?.user?.id && (
                 <>
                     <Link to='/new-company'>Create a company</Link>
                     <Link to='/new-event'>Create an event</Link>
@@ -19,7 +19,7 @@ export default function Nav() {
                     <SignOut />
                 </>
             )}
-            { !user.id && (
+            { !userData.user.id && (
                 <>
                     <Link to='/signin'>Sign In</Link>
                 </>

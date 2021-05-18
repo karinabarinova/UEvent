@@ -10,12 +10,12 @@ export default function SignIn() {
     const data = useSelector(({auth}) => auth)
     const history = useHistory();
     const dispatch = useDispatch()
-    const user = useUser();
+    const userData = useUser();
     const { inputs, handleChange, resetForm } = useForm({
         email: '',
         password: ''
     })
-    console.log("user2", user)
+    console.log("user2", userData)
     
     function handleSubmit(e) {
         e.preventDefault();
