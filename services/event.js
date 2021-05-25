@@ -6,6 +6,7 @@ const Op = db.Sequelize.Op;
 module.exports = {
     getAll,
     getById,
+    search,
     add,
     update,
     delete: _delete,
@@ -32,6 +33,22 @@ async function getAll(query) { //currently show only upcoming events
     if (query.date) //should be anything in the date to show upcoming event
         options.where.startDate = {[Op.gt]: Date.now()}
     return await Event.findAndCountAll(options);
+}
+
+async function search(query) { //TODO: fix invalid return result
+    if (query?.name.length) {
+        const options = {
+            where: {
+                name: {
+                    [Op.iLike]: '%' + query.name + '%'
+                }
+            }
+        }
+        return await Event.findAll({
+            options
+        })
+    }
+    return null;
 }
 
 async function getAllComments(id) { //may be deleted as comments are returned in the getById function

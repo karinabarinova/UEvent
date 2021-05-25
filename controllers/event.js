@@ -3,6 +3,7 @@ const router = express.Router();
 const service = require('../services/event');
 const authJwt = require('../middleware/authJwt');
 
+router.get('/search', search);
 router.post('/add', authJwt.verifyToken, add);
 router.get('/', getAll);
 router.get('/:id', getById);
@@ -29,6 +30,12 @@ function getAllComments(req, res, next) {
 
 function getById(req, res, next) {
     service.getById(req.params.id)
+        .then(data => res.status(200).json(data))
+        .catch(next);
+}
+
+function search(req, res, next) {
+    service.search(req.query)
         .then(data => res.status(200).json(data))
         .catch(next);
 }
