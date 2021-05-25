@@ -24,11 +24,11 @@ class Auth extends Component {
 				resolve()
 			});
 
-			jwtService.on('onAutoLogout', () => {
-				this.props.logout();
+			// jwtService.on('onAutoLogout', () => {
+			// 	this.props.logout();
 
-				resolve();
-			});
+			// 	resolve();
+			// });
 
 			jwtService.on('onNoAccessToken', () => {
 				resolve();

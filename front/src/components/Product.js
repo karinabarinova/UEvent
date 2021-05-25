@@ -25,7 +25,7 @@ export default function Product({product}) {
                     <Link to={{
                         pathname: "/update-event/" + product.id,
                     }}>Edit</Link>
-                    <AddToCart id={product.id}/>
+                    <AddToCart product={product}/>
                     <DeleteEvent id={product.id}>Delete</DeleteEvent>
                 </div>
             )}

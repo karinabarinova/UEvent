@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import { useCart } from '../lib/cartState';
@@ -29,13 +30,7 @@ function CartItem({cartItem}) {
         />
         <div>
             <h3>{cartItem.name}</h3>
-            <p>{cartItem.price * cartItem.quantity}
-            -
-            {/* <em>{cartItem.quantity} &times; {product.price}
-            each
-            </em> */}
-            <em>{cartItem.quantity} &times; 
-            each
+            <p>${cartItem.price * cartItem.quantity}-<em>{cartItem.quantity} &times; ${cartItem.price} each
             </em>
             </p>
         </div>
@@ -44,6 +39,7 @@ function CartItem({cartItem}) {
 
 export default function Cart() {
     const me = useUser();
+    const {cart} = useSelector(({cart}) => cart)
     const {cartOpen, closeCart } = useCart();
     if (!me.user.email) return null;
     return <CartStyles open={cartOpen}>
@@ -52,10 +48,10 @@ export default function Cart() {
             <CloseButton onClick={closeCart}>&times;</CloseButton>
         </header>
         <ul>
-            {/* {me.cart.map(cartItem => <CartItem key={cartItem.id} cartItem={cartItem}/>)} */}
+            {cart.map(cartItem => <CartItem key={cartItem.id} cartItem={cartItem}/>)}
         </ul>
         <footer>
-            <p>{calcTotalPrice(me.cart)}</p>
+            <p>${calcTotalPrice(cart)}</p>
         </footer>
     </CartStyles>
 }
