@@ -11,7 +11,6 @@ export const cartSlice = createSlice({
     },
     reducers: {
         addItemToCartState: (state, action) => {
-            console.log("cart", action.payload)
             if (Object.keys(state.cart).length === 0) {
                 const product = action.payload
                 product.quantity = 1;

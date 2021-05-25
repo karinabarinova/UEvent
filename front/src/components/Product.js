@@ -6,10 +6,11 @@ import Title from './styles/Title'
 import PriceTag from './styles/PriceTag'
 import DeleteEvent from './DeleteEvent'
 import AddToCart from './AddToCart';
+import { useCart } from '../lib/cartState';
 
 export default function Product({product}) {
     const authUser = useSelector(({auth}) => auth.user)
-
+    const {openCart } = useCart();
     return (
         <ItemStyles>
             <img src={product?.image ? product.image : '/defaultEventPage.jfif'} alt={product.name}/>
@@ -25,7 +26,7 @@ export default function Product({product}) {
                     <Link to={{
                         pathname: "/update-event/" + product.id,
                     }}>Edit</Link>
-                    <AddToCart product={product}/>
+                    <AddToCart product={product} openCart={openCart}/>
                     <DeleteEvent id={product.id}>Delete</DeleteEvent>
                 </div>
             )}
