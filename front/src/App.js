@@ -27,13 +27,13 @@ class App extends Component {
       <Switch>
         <Route path='/signin' exact component={SingIn}/>
         <Route path='/reset' exact component={ResetPage} />
+        <Route path='/new-event' exact component={CreateProduct}/>
+        <Route path='/new-company' exact component={CreateCompany}/>
         <Route path='/' exact component={ProductsPage}/>
         <Route path='/:page' exact component={ProductsPage}/>
         <Route path='/companies/:page' exact component={CompaniesPage}/>
         <Route path='/event/:id' exact component={SingleProduct} />
         <Route path='/company/:id' exact component={SingleCompany} />
-        <Route path='/new-event' exact component={CreateProduct}/>
-        <Route path='/new-company' exact component={CreateCompany}/>
         <Route path='/update-event/:id' exact component={UpdateEvent}/>
         <Route path='/update-company/:id' exact component={UpdateCompany}/>
 
