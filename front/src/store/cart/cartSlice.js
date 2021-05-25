@@ -4,6 +4,10 @@ export const addItemToCart = product => (dispatch, getState) => {
     return dispatch(addItemToCartState(product))
 }
 
+export const removeFromCartItem = id => (dispatch, getState) => {
+    return dispatch(removeFromCartState(id))
+}
+
 export const cartSlice = createSlice({
     name: "cart",
     initialState: {
@@ -29,10 +33,18 @@ export const cartSlice = createSlice({
                 state.cart = copy;
             }
         },
+        removeFromCartState: (state, action) => {
+            const copy = state.cart.slice();
+            const index = copy.findIndex((item) => item.id === action.payload)
+            if (index !== -1)
+                copy.splice(index, 1);
+            state.cart = copy;
+
+        }
     },
     extraReducers: {}
 })
 
-export const { addItemToCartState } = cartSlice.actions
+export const { addItemToCartState, removeFromCartState } = cartSlice.actions
 
 export default cartSlice.reducer
