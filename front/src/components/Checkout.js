@@ -1,7 +1,11 @@
 import styled from "styled-components"
 import { loadStripe } from '@stripe/stripe-js'
-import { CardElement, Elements } from '@stripe/react-stripe-js'
+import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js'
 import AwesomeButton from './styles/AwesomeButton'
+import { useState } from "react";
+import nProgress from "nprogress";
+import './styles/nprogress.css';
+
 
 
 const CheckoutFormStyles = styled.form`
@@ -15,19 +19,50 @@ const CheckoutFormStyles = styled.form`
 
 const stripeLib = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
-function Checkout() {
+function CheckoutForm() {
+    const [error, setError] = useState();
+    const [loading, setLoading] = useState(false);
+    const stripe = useStripe();
+    const elements = useElements();
+    
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        console.log('we gotta do some work')
+        setLoading(true);
+        //start the page transition
+        nProgress.start();
+        //create the payment method via stripe (token comes back here if successfull)
+        const { error, paymentMethod} = await stripe.createPaymentMethod({
+            type: 'card',
+            card: elements.getElement(CardElement)
+        });
+        console.log(paymentMethod)
+        //handler errors from stripe
+        if (error) {
+            setError(error)
+        }
+        //send the token to server
+        //change the page to view the order
+        //close the cart
+
+        //turn the loader off
+        setLoading(false);
+        nProgress.done();
     }
 
     return (
+        <CheckoutFormStyles onSubmit={handleSubmit}>
+            {error && <p style={{fontSize: 12}}>{error.message}</p>}
+            <CardElement />
+            <AwesomeButton>Check Out Now</AwesomeButton>
+        </CheckoutFormStyles>
+    )
+}
+
+function Checkout() {
+    return (
         <Elements stripe={stripeLib}>
-            <CheckoutFormStyles onSubmit={handleSubmit}>
-                <CardElement />
-                <AwesomeButton>Check Out Now</AwesomeButton>
-            </CheckoutFormStyles>
+            <CheckoutForm />
         </Elements>
     )
 }
