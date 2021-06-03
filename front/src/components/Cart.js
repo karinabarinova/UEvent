@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import { useCart } from '../lib/cartState';
+import { Checkout } from './Checkout';
 import RemoveFromCart from './RemoveFromCart';
 import CartStyles from './styles/CartStyles'
 import CloseButton from './styles/CloseButton';
@@ -50,10 +51,11 @@ export default function Cart() {
             <CloseButton onClick={closeCart}>&times;</CloseButton>
         </header>
         <ul>
-            {cart.map(cartItem => <CartItem key={cartItem.id} cartItem={cartItem}/>)}
+            {cart.map((cartItem, index) => <CartItem key={index} cartItem={cartItem}/>)}
         </ul>
         <footer>
             <p>${calcTotalPrice(cart)}</p>
+            <Checkout />
         </footer>
     </CartStyles>
 }
