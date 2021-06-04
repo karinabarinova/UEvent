@@ -5,6 +5,7 @@ import { getProductById } from '../store/products/productSlice';
 import PriceTag from './styles/PriceTag'
 import Tags from './styles/Tags'
 import EventIcon from '@material-ui/icons/Event';
+import Map from './MapComponent'
 
 const ProductStyles = styled.div`
     display: grid;  
@@ -69,13 +70,13 @@ export default function SingleProduct(props) {
                         <EventIcon style={{fontSize: 20}}/> {arr.join(' ')}
                     </FloatContainer>
                 </div>
-                
             </ProductStyles>
         )
     }
     return (
         <>
             {product}
+            <Map />
         </>
     )
 }
