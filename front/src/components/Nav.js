@@ -5,6 +5,7 @@ import CartCount from './CartCount';
 import SignOut from './SignOut';
 import NavStyles from './styles/NavStyles';
 import { useUser } from './User';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 export default function Nav() {
     const userData = useUser();
@@ -23,7 +24,7 @@ export default function Nav() {
                     <Link to='/account'>Account</Link>
                     <SignOut />
                     <button type="button" onClick={openCart}>
-                        My Cart
+                        <ShoppingCartIcon style={{fontSize: 32, color: "red"}}/>
                         { cart.length > 0 && <CartCount count={cart.reduce((tally, item) => tally + item.quantity, 0)}/> }
                     </button>
                 </>

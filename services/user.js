@@ -64,7 +64,8 @@ async function purchase(userId, items, token) {
         console.log("Payment details", paymentDetails);
         throw 'Failed payment';
     }
-    items.forEach(async item => {
+
+    await items.forEach(async item => {
         const event = await Event.findByPk(item.id);
         await event.addUser(user);
         await user.addEvent(event); //maybe this step is not required
@@ -90,8 +91,8 @@ async function sendSubscriptionEmail(user) {
 
     await sendEmail({
         to: user.email,
-        subject: 'Successful Payment for =event=',
-        html: makeANiceEmail(`<h4>Successful Payment for =event=</h4>
+        subject: `Successful Payment for an event`,
+        html: makeANiceEmail(`<h4>Successful Payment for events: ==events==</h4>
         ${message}`)
     });
 }
