@@ -150,6 +150,19 @@ class JwtService extends Emitter {
 	removeEvent = id => {
 		return axios.delete(`/event/${id}`);
 	};
+
+	checkout = data => {
+		return new Promise((resolve, reject) => {
+			axios
+				.post('/user/purchase', data)
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				});
+		});
+	}
 }
 
 const instance = new JwtService();

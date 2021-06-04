@@ -1,4 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit"
+import jwt from '../auth/index';
+
+export const checkout = (data) => (dispatch, getState) => {
+    return jwt
+        .checkout(data)
+        .then((data) => {
+            return dispatch(setMessage(data.message))
+        })
+        .catch(error => {
+            return dispatch(setError(error.message))
+        })
+}
 
 export const addItemToCart = product => (dispatch, getState) => {
     return dispatch(addItemToCartState(product))
@@ -11,7 +23,9 @@ export const removeFromCartItem = id => (dispatch, getState) => {
 export const cartSlice = createSlice({
     name: "cart",
     initialState: {
-        cart: []
+        cart: [],
+        error: '',
+        message: ''
     },
     reducers: {
         addItemToCartState: (state, action) => {
@@ -40,11 +54,20 @@ export const cartSlice = createSlice({
                 copy.splice(index, 1);
             state.cart = copy;
 
+        },
+        setMessage: (state, action) => {
+            state.message = action.payload
+        },
+        setError: (state, action) => {
+            state.error = action.payload
+        },
+        clearCart: (state, action) => {
+            state.cart = []
         }
     },
     extraReducers: {}
 })
 
-export const { addItemToCartState, removeFromCartState } = cartSlice.actions
+export const { addItemToCartState, removeFromCartState, setError, setMessage, clearCart } = cartSlice.actions
 
 export default cartSlice.reducer

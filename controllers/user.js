@@ -26,8 +26,9 @@ function getCart(req, res, next) {
 function purchase(req, res, next) {
     //we should get an array of objects to be purchased 
     //{id, price, quantity}
-    const {items, stripeTokenId} = req.body;
-    service.purchase(req.userId, items, stripeTokenId)
+    const {items, token, userId} = req.body;
+    // service.purchase(req.userId, items, token)
+    service.purchase(userId, items, token)
         .then(() => res.json({message: 'Successfully purchased event(s)'}))
         .catch(next);
 }

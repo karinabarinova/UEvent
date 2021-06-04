@@ -5,8 +5,8 @@ export default function AddToCart({product, openCart}) {
     const dispatch = useDispatch();
     //TODO: Add onClick to add item to state and accept not only id, but the whole product
     function addToCart() {
-        const { name, price, image } = product
-        dispatch(addItemToCart({name, price, image}))
+        const { name, price, image, id } = product
+        dispatch(addItemToCart({name, price, image, id}))
         openCart()
     }
 

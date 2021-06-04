@@ -5,8 +5,10 @@ import AwesomeButton from './styles/AwesomeButton'
 import { useState } from "react";
 import nProgress from "nprogress";
 import './styles/nprogress.css';
-
-
+import { useUser } from './User'
+import { useDispatch, useSelector } from "react-redux";
+import { checkout, clearCart } from '../store/cart/cartSlice'
+import { useCart } from "../lib/cartState";
 
 const CheckoutFormStyles = styled.form`
     box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
@@ -20,11 +22,14 @@ const CheckoutFormStyles = styled.form`
 const stripeLib = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 function CheckoutForm() {
+    const { closeCart } = useCart();
+    const dispatch = useDispatch();
+    const {cart} = useSelector(({cart}) => cart)
     const [error, setError] = useState();
     const [loading, setLoading] = useState(false);
     const stripe = useStripe();
     const elements = useElements();
-    
+    const userData = useUser();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -36,18 +41,22 @@ function CheckoutForm() {
             type: 'card',
             card: elements.getElement(CardElement)
         });
-        console.log(paymentMethod)
         //handler errors from stripe
         if (error) {
-            setError(error)
+            setError(error);
+            nProgress.done();
+            return;
         }
-        //send the token to server
+        //send the token to server (pass userId)
+        dispatch(checkout({userId: userData.user.id, token: paymentMethod.id, items: cart}))
         //change the page to view the order
         //close the cart
 
         //turn the loader off
         setLoading(false);
         nProgress.done();
+        dispatch(clearCart())
+        closeCart();
     }
 
     return (
