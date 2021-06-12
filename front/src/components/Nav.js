@@ -6,22 +6,25 @@ import SignOut from './SignOut';
 import NavStyles from './styles/NavStyles';
 import { useUser } from './User';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Nav() {
+    const { t } = useTranslation('common');
     const userData = useUser();
     const {cart} = useSelector(({cart}) => cart)
     const {openCart} = useCart()
     console.log("user", userData)
     return (
         <NavStyles>
-            <Link to='/1'>Events</Link>
-            <Link to='/companies/1'>Companies</Link>
+            <Link to='/1'>{t("EVENTS")}</Link>
+            <Link to='/companies/1'>{t("COMPANIES")}</Link>
             { userData?.user?.id && (
                 <>
-                    <Link to='/new-company'>New company</Link>
-                    <Link to='/new-event'>New event</Link>
-                    <Link to='/orders'>Orders</Link>
-                    <Link to='/account'>Account</Link>
+                    <Link to='/new-company'>{t("NEW_COMPANY")}</Link>
+                    <Link to='/new-event'>{t("NEW_EVENT")}</Link>
+                    <Link to='/orders'>{t("ORDERS")}</Link>
+                    <Link to='/account'>{t("ACCOUNT")}</Link>
                     <SignOut />
                     <button type="button" onClick={openCart}>
                         <ShoppingCartIcon style={{fontSize: 32, color: "red"}}/>
@@ -31,10 +34,10 @@ export default function Nav() {
             )}
             { !userData.user.id && (
                 <>
-                    <Link to='/signin'>Sign In</Link>
+                    <Link to='/signin'>{t('SIGNIN')}</Link>
                 </>
             )}
-           
+            <LanguageSwitcher />
         </NavStyles>
     )
 }

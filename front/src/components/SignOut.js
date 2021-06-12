@@ -1,8 +1,10 @@
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {logout} from '../store/auth/authSlice'
 
 export default function SignOut() {
+    const { t } = useTranslation('common');
     const history = useHistory();
     const dispatch = useDispatch();
     
@@ -11,7 +13,7 @@ export default function SignOut() {
             dispatch(logout());
             history.push("/")
         }}>
-            Sign Out
+            {t("SIGNOUT")}
         </button>
     )
 }

@@ -7,16 +7,24 @@ import store from './store';
 import { Provider } from 'react-redux';
 import {BrowserRouter} from 'react-router-dom'
 import axios from 'axios';
+import i18next from "i18next";
+import './i18n';
+import {I18nextProvider} from "react-i18next";
+
 
 axios.defaults.baseURL = 'http://localhost:3000/api'
 
 ReactDOM.render(
   <React.StrictMode>
+            <I18nextProvider i18n={i18next}>
+
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+          <App />
       </BrowserRouter>
     </Provider>
+    </I18nextProvider>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

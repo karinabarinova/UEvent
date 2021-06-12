@@ -1,0 +1,10 @@
+{
+    "EVENTS": "Events",
+    "COMPANIES": "Companies",
+    "SIGNIN": "Sign In",
+    "NEW_COMPANY": "New company",
+    "NEW_EVENT": "New event",
+    "ORDERS": "Orders",
+    "ACCOUNT": "Account",
+    "SIGNOUT": "Sign out"
+}
