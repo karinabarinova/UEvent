@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import useForm from "../lib/useForm";
@@ -6,6 +7,7 @@ import {verifyToken} from '../store/auth/registerSlice'
 import Form from "./styles/Form";
 
 export default function VerifyToken() {
+    const { t } = useTranslation('common');
     const data = useSelector(({register}) => register)
     const dispatch = useDispatch()
     const { inputs, handleChange, resetForm } = useForm({
@@ -20,13 +22,13 @@ export default function VerifyToken() {
 
     return (
         <Form method="POST" onSubmit={handleSubmit}>
-            <h2>Verify Your Email</h2>
+            <h2>{t("VERIFY_EMAIL")}</h2>
             <fieldset>
                 {data.verificationMessage && (
                     <p>{data.verificationMessage}</p>
                 )}
                 <label htmlFor="token">
-                    Verification Token
+                    {t("VERIFICATION_TOKEN")}
                     <input 
                         type="text" 
                         name="token" 
@@ -34,7 +36,7 @@ export default function VerifyToken() {
                         onChange={handleChange}
                     />
                 </label>
-                <button type="submit">Verify Me!</button>
+                <button type="submit">{t("VERIFY!")}</button>
             </fieldset>
         </Form>
     )

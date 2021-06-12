@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
 import { useHistory } from "react-router-dom";
 import {useSelector, useDispatch } from 'react-redux'
 
 export default function CreateProduct() {
+    const { t } = useTranslation('common');
     const history = useHistory();
     const dispatch = useDispatch();
     
@@ -23,11 +25,11 @@ export default function CreateProduct() {
             history.push('/event/' + 3) //TODO: add id of the newly created event
 
         }}>
-            <h1>New Event</h1>
+            <h1>{t("NEW_EVENT")}</h1>
             {/* <DisplayError error={error} /> */}
             <fieldset>
                 <label htmlFor="image">
-                    Image
+                    {t("IMAGE")}
                     <input
                         required
                         type="file"
@@ -37,38 +39,38 @@ export default function CreateProduct() {
                     />
                 </label>
                 <label htmlFor="name">
-                    Name
+                    {t("NAME")}
                     <input
                         type="text"
                         id="name"
                         name="name"
-                        placeholder="Name"
+                        placeholder={t("NAME")}
                         onChange={handleChange}
                         value={inputs.name}
                     />
                 </label>
                 <label htmlFor="price">
-                    Price
+                    {t("PRICE")}
                     <input
                         type="number"
                         id="price"
                         name="price"
-                        placeholder="Price"
+                        placeholder={t("PRICE")}
                         onChange={handleChange}
                         value={inputs.price}
                     />
                 </label>
                 <label htmlFor="description">
-                    Description
+                    {t("DESCRIPTION")}
                     <textarea
                         id="description"
                         name="description"
-                        placeholder="Description"
+                        placeholder={t("DESCRIPTION")}
                         onChange={handleChange}
                         value={inputs.description}
                     />
                 </label>
-                <button type="submit">+ Add Event</button>
+                <button type="submit">+ {t("ADD_EVENT")}</button>
             </fieldset>
         </Form>
     )

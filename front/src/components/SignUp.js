@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import useForm from "../lib/useForm";
@@ -5,7 +6,8 @@ import {register} from '../store/auth/registerSlice'
 
 import Form from "./styles/Form";
 
-export default function SignIn() {
+export default function SignUp() {
+    const { t } = useTranslation('common');
     const data = useSelector(({register}) => register)
     const dispatch = useDispatch()
     const { inputs, handleChange, resetForm } = useForm({
@@ -23,13 +25,13 @@ export default function SignIn() {
     
     return (
         <Form method="POST" onSubmit={handleSubmit}>
-            <h2>Sign Up for An Account</h2>
+            <h2>{t("SIGNUPINTO")}</h2>
             <fieldset>
                 {data.message && (
                     <p>{data.message}</p>
                 )}
                 <label htmlFor="firstName">
-                    Your First Name
+                    {t("FIRST_NAME")}
                     <input 
                         type="text" 
                         name="firstName" 
@@ -40,7 +42,7 @@ export default function SignIn() {
                     />
                 </label>
                 <label htmlFor="lastName">
-                    Your Last Name
+                    {t("LAST_NAME")}
                     <input 
                         type="text" 
                         name="lastName" 
@@ -51,28 +53,28 @@ export default function SignIn() {
                     />
                 </label>
                 <label htmlFor="email">
-                    Email
+                    {t("EMAIL")}
                     <input 
                         type="email" 
                         name="email" 
-                        placeholder="Your email address" 
+                        placeholder={t("YOUR_EMAIL")}
                         autoComplete="email"
                         value={inputs.email}
                         onChange={handleChange}
                     />
                 </label>
                 <label htmlFor="password">
-                    Password
+                    {t("PASSWORD")}
                     <input 
                         type="password" 
                         name="password" 
-                        placeholder="Password" 
+                        placeholder={t("YOUR_PASSWORD")} 
                         autoComplete="password"
                         value={inputs.password}
                         onChange={handleChange}
                     />
                 </label>
-                <button type="submit">Sign up!</button>
+                <button type="submit">{t("SIGNUP!")}</button>
             </fieldset>
         </Form>
     )

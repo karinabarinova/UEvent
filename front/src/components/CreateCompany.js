@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
 import { useHistory } from "react-router-dom";
 import {useSelector, useDispatch } from 'react-redux'
 
 export default function CreateCompany() {
+    const { t } = useTranslation('common');
     const history = useHistory();
     const dispatch = useDispatch();
     
@@ -22,11 +24,11 @@ export default function CreateCompany() {
             history.push('/company/' + 3) //TODO: add id of the newly created event
 
         }}>
-            <h1>New Company</h1>
+            <h1>{t("NEW_COMPANY")}</h1>
             {/* <DisplayError error={error} /> */}
             <fieldset>
                 <label htmlFor="image">
-                    Image
+                    {t("IMAGE")}
                     <input
                         required
                         type="file"
@@ -36,27 +38,27 @@ export default function CreateCompany() {
                     />
                 </label>
                 <label htmlFor="name">
-                    Name
+                    {t("NAME")}
                     <input
                         type="text"
                         id="name"
                         name="name"
-                        placeholder="Name"
+                        placeholder={t("NAME")}
                         onChange={handleChange}
                         value={inputs.name}
                     />
                 </label>
                 <label htmlFor="description">
-                    Description
+                    {t("DESCRIPTION")}
                     <textarea
                         id="description"
                         name="description"
-                        placeholder="Description"
+                        placeholder={t("DESCRIPTION")}
                         onChange={handleChange}
                         value={inputs.description}
                     />
                 </label>
-                <button type="submit">+ Add Company</button>
+                <button type="submit">+ {t("ADD_COMPANY")}</button>
             </fieldset>
         </Form>
     )

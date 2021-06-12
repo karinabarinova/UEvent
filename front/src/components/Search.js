@@ -4,8 +4,10 @@ import debounce from 'lodash.debounce'
 import { useDispatch, useSelector } from "react-redux";
 import {searchEvents} from '../store/search/searchSlice'
 import { useHistory } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export default function Search() {
+    const { t } = useTranslation('common');
     const history = useHistory();
     const dispatch = useDispatch()
     const data = useSelector(({search}) => search);
@@ -43,7 +45,7 @@ export default function Search() {
             <div {...getComboboxProps()}>
                 <input {...getInputProps({
                     type: 'search',
-                    placeholder: 'Search for an event',
+                    placeholder: t('SEARCH'),
                     id: 'search',
                     className: events.length === 0 ? 'loading' : ''
                 })} />
