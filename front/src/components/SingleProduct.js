@@ -8,6 +8,7 @@ import EventIcon from '@material-ui/icons/Event';
 import Map from './MapComponent'
 import OtherEvents from './OtherEvents'
 import Comments from './Comments';
+import NewComment from './NewComment'
 
 const ProductStyles = styled.div`
     display: grid;  
@@ -81,7 +82,7 @@ export default function SingleProduct(props) {
             <div style={{ position: 'relative', width: '100vw', height: '95vh' }}>
                 <Map />
             </div>
-            {/* <Map /> */}
+            <NewComment />
             <Comments />
             <OtherEvents otherEvents={data.product.otherEvents}/>
         </>

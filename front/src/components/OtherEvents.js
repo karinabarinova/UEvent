@@ -32,9 +32,9 @@ export default function OtherEvents({otherEvents}) {
                                     <PriceTag>{el.price}$</PriceTag>
                                 </ImageContainer>
                             </Grid>
-                            <Grid justifyContent="center" item xs zeroMinWidth>
+                            <Grid justifycontent="center" item xs zeroMinWidth>
                                 <Tags><b>{el.theme} / {el.format}</b></Tags>
-                                <Grid justifyContent="center" item xs zeroMinWidth>
+                                <Grid justifycontent="center" item xs zeroMinWidth>
                                     <Link to={`/event/${el.id}`}>{el.name}</Link>
                                     <p>{el.description}</p>
                                 </Grid>
