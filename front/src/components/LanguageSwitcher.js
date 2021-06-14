@@ -89,7 +89,7 @@ function LanguageSwitcher(props) {
 		<DropDown>
 			<Button onClick={langMenuClick}>
 				<img
-					src={`assets/${currentLanguage.flag}.png`}
+					src={`/assets/${currentLanguage.flag}.png`}
 					width='25'
 					height='20'
 					style={{margin: '5px 10px', verticalAlign: 'middle'}}
@@ -108,7 +108,7 @@ function LanguageSwitcher(props) {
 							<img 
 								style={{margin: '5px 10px', verticalAlign: 'middle'}}
 								width='20' 
-								src={`assets/${lng.flag}.png`} 
+								src={`/assets/${lng.flag}.png`} 
 								alt={lng.title} 
 							/>
 							{lng.title}
