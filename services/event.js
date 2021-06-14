@@ -89,11 +89,18 @@ async function getById(id) {
 
 async function add({name, description, startDate, location, price, promoCodes, theme, format}, id) { //format is null??
     //startDate time format  "2021-06-11T14:00Z",
+    console.log(name, description, startDate, location, price, promoCodes, theme, format)
+    console.log(id)
     const user = await User.findByPk(id);
-    if (!user.hasCompanies) {
+    console.log("user", user)
+    if (user.hasCompanies === false) {
         throw 'Create a company to be able to create events';
     }
     const company = await Company.findOne({where: {owner: id}})
+    console.log("company", company)
+    if (!company)
+        throw 'Create a company to be able to create events';
+
     const exists = await Event.findOne({
         where: {
             name
@@ -103,7 +110,9 @@ async function add({name, description, startDate, location, price, promoCodes, t
         throw 'Event already exists';
 
     const foundTheme = await findOrCreateTheme(theme);
+    console.log("foundTheme", foundTheme)
     const foundFormat = await findOrCreateFormat(format);
+    console.log("foundFormat", foundFormat)
 
     //first latitude, then longitude
     const point = {
@@ -121,10 +130,15 @@ async function add({name, description, startDate, location, price, promoCodes, t
         theme,
         format
     });
+    console.log("event", event)
+
 
     await company.addEvent(event);
+    console.log("addEvent")
     await foundTheme.addEvent(event);
+    console.log("addEvent")
     await foundFormat.addEvent(event);
+    console.log("addEvent")
     return event; //add organizer info
 }
 

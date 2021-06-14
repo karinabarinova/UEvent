@@ -33,5 +33,9 @@
     "DESCRIPTION": "Description",
     "PRICE": "Price",
     "ADD_COMPANY": "Add Company",
-    "ADD_EVENT": "Add Event"
+    "ADD_EVENT": "Add Event",
+    "START_DATE": "Event date",
+    "THEME": "Theme",
+    "FORMAT": "Format",
+    "LOCATION": "Location"
 }

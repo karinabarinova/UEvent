@@ -6,6 +6,7 @@ import PriceTag from './styles/PriceTag'
 import Tags from './styles/Tags'
 import EventIcon from '@material-ui/icons/Event';
 import Map from './MapComponent'
+import OtherEvents from './OtherEvents'
 
 const ProductStyles = styled.div`
     display: grid;  
@@ -77,6 +78,7 @@ export default function SingleProduct(props) {
         <>
             {product}
             <Map />
+            <OtherEvents otherEvents={data.product.otherEvents}/>
         </>
     )
 }

@@ -2,6 +2,17 @@ import { createSlice } from "@reduxjs/toolkit"
 import axios from 'axios';
 import jwt from '../auth/index';
 
+export const createEvent = data => async (dispatch, getState) => {
+    return jwt
+        .createEvent(data)
+        .then(({data}) => {
+            return dispatch(newEvent(data))
+        })
+        .catch(error => {
+            console.log("error", error.message)
+        })
+}
+
 export const getAllProducts = (page) => async (dispatch, getState) => {
     return axios.get(`/event?page=${page}`)
         .then(({data}) => {
@@ -48,7 +59,8 @@ export const productSlice = createSlice({
     initialState: {
         products: [],
         product: {},
-        message: ''
+        message: '',
+        newEvent: {}
     },
     reducers: {
         getAll: (state, action) => {
@@ -62,11 +74,17 @@ export const productSlice = createSlice({
         },
         setDeletedEvent: (state, action) => {
             state.product.message = action.payload
+        },
+        newEvent: (state, action) => {
+            state.newEvent = action.payload
+        },
+        clearNewEvent: (state, action) => {
+            state.newEvent = {}
         }
     },
     extraReducers: {}
 })
 
-export const { getAll, getById, setUpdatedEvent, setDeletedEvent } = productSlice.actions
+export const { getAll, getById, setUpdatedEvent, setDeletedEvent, newEvent, clearNewEvent } = productSlice.actions
 
 export default productSlice.reducer
