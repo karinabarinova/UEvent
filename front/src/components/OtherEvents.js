@@ -49,7 +49,7 @@ export default function OtherEvents({otherEvents}) {
     }
     return (
         <div>
-            <h2>Other events</h2>
+            <h1>Other Events</h1>
             <div>
                 {events}
             </div>
