@@ -1,23 +1,8 @@
-// import {GridContainer} from './styles/Grid';
 import styled from 'styled-components';
-import Divider from '@material-ui/core/Divider';
 import PriceTag from './styles/PriceTag'
 import Tags from './styles/Tags'
 import {Link} from 'react-router-dom';
-
-const GridContainer = styled.div`
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2vw;
-    background: lightgrey;
-    
-    div {
-        font-size: 2vw;
-        padding: .2em;
-        text-align: center;
-    }
-`;
+import { Divider, Grid, Paper } from "@material-ui/core";
 
 const ImageContainer = styled.div`
     position: relative;
@@ -38,27 +23,36 @@ export default function OtherEvents({otherEvents}) {
             arr[4] = time.join(':');
             arr[5] = arr[5].replace(new RegExp("0", "g"), '')
             return (
-                <GridContainer style={{margin: '2rem 0'}} key={i}>
-                    <ImageContainer>
-                        <img width="100%" src={el?.image ? el.image : '/defaultEventPage.jfif'} alt={el.name} />
-                        <PriceTag>{el.price}$</PriceTag>
-
-                        </ImageContainer>
-                    <GridContainer>
-                        <Tags><b>{el.theme} / {el.format}</b></Tags>
-                        <Link to={`/event/${el.id}`}>{el.name}</Link>
-                    </GridContainer>
-                </GridContainer>
+                <div key={i}>
+                    <Paper style={{ padding: "40px 20px" }}>
+                        <Grid container wrap="nowrap" spacing={10}>
+                            <Grid item>
+                                <ImageContainer>
+                                    <img width="300px" src={el?.image ? el.image : '/defaultEventPage.jfif'} alt={el.name} />
+                                    <PriceTag>{el.price}$</PriceTag>
+                                </ImageContainer>
+                            </Grid>
+                            <Grid justifyContent="center" item xs zeroMinWidth>
+                                <Tags><b>{el.theme} / {el.format}</b></Tags>
+                                <Grid justifyContent="center" item xs zeroMinWidth>
+                                    <Link to={`/event/${el.id}`}>{el.name}</Link>
+                                    <p>{el.description}</p>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+                    <Divider />
+                </div>
+                
             )
         })
     }
     return (
         <div>
             <h2>Other events</h2>
-            <div style={{border: '3px dashed red', padding: '2rem'}}>
+            <div>
                 {events}
             </div>
-            <Divider style={{color: 'black', fontWeight: 'bold'}} component='hr' />
         </div>
     )
 }
