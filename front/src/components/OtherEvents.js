@@ -3,12 +3,16 @@ import PriceTag from './styles/PriceTag'
 import Tags from './styles/Tags'
 import {Link} from 'react-router-dom';
 import { Divider, Grid, Paper } from "@material-ui/core";
+import { useTranslation } from "react-i18next";
+
 
 const ImageContainer = styled.div`
     position: relative;
 `
 
 export default function OtherEvents({otherEvents}) {
+    const { t } = useTranslation('common')
+
     let events = null;
     if (otherEvents?.length) {
         events = otherEvents.map((el, i) => {
@@ -49,7 +53,7 @@ export default function OtherEvents({otherEvents}) {
     }
     return (
         <div>
-            <h1>Other Events</h1>
+            <h1>{t("OTHER_EVENTS")}</h1>
             <div>
                 {events}
             </div>

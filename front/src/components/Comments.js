@@ -1,12 +1,16 @@
 import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
+import { useTranslation } from "react-i18next";
+
 
 const imgLink =
   "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
 
 export default function Comments() {
+    const { t } = useTranslation('common')
+    
     return (
       <div style={{ padding: 14 }}>
-        <h1>Comments</h1>
+        <h1>{t('COMMENTS')}</h1>
         <Paper style={{ padding: "40px 20px" }}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item>

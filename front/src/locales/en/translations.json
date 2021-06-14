@@ -37,5 +37,8 @@
     "START_DATE": "Event date",
     "THEME": "Theme",
     "FORMAT": "Format",
-    "LOCATION": "Location"
+    "LOCATION": "Location",
+    "COMMENTS": "Comments",
+    "ADD_COMMENT": "Add a comment",
+    "OTHER_EVENTS": "Other events"
 }
