@@ -9,7 +9,7 @@ export default function Company({company}) {
 
     return (
         <ItemStyles>
-            <img src={company?.image ? company.image : '/defaultEventPage.jfif'} alt={company.name}/>
+            <img src={company?.image ? company.image : '/defaultCompanyPhoto.jpg'} alt={company.name}/>
             <Title>
                 <Link to={'/company/' + company.id}>{company.name}</Link>
             </Title>

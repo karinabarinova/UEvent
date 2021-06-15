@@ -51,7 +51,7 @@ export default function SingleCompany(props) {
             <ProductStyles>
                 <title>Uevent | {data.name}</title>
                 <ImageContainer>
-                    <img src={data?.image ? data.image : '/defaultEventPage.jfif'} alt={data.name} />
+                    <img src={data?.image ? data.image : '/defaultCompanyPhoto.jpg'} alt={data.name} />
                 </ImageContainer>
                 <div className="details">
                     <h2>{data.name}</h2>

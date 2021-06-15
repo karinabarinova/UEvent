@@ -13,6 +13,7 @@ import CreateProduct from "./components/CreateProduct";
 import CreateCompany from "./components/CreateCompany";
 import UpdateEvent from './components/UpdateEvent';
 import UpdateCompany from './components/UpdateCompany';
+import Account from './components/Account';
 import SingIn from './pages/signin';
 import ProductsPage from './pages/products';
 import CompaniesPage from './pages/companies';
@@ -29,6 +30,7 @@ class App extends Component {
         <Route path='/reset' exact component={ResetPage} />
         <Route path='/new-event' exact component={CreateProduct}/>
         <Route path='/new-company' exact component={CreateCompany}/>
+        <Route path='/account' exact component={Account} />
         <Route path='/' exact component={ProductsPage}/>
         <Route path='/:page' exact component={ProductsPage}/>
         <Route path='/companies/:page' exact component={CompaniesPage}/>
