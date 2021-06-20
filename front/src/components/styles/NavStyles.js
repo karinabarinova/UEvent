@@ -5,10 +5,11 @@ const NavStyles = styled.ul`
   padding: 0;
   display: flex;
   justify-self: end;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  white-space: nowrap;
   a,
   button {
-    padding: 1rem 3rem;
+    padding: 1rem 2.5rem;
     display: flex;
     align-items: center;
     position: relative;
