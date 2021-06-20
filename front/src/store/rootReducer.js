@@ -7,6 +7,7 @@ import search from './search/searchSlice'
 import register from './auth/registerSlice'
 import cart from './cart/cartSlice'
 import i18n from './i18n/i18nSlice'
+import user from './user/userSlice'
 
 const createReducer = asyncReducers => 
     combineReducers({
@@ -16,7 +17,8 @@ const createReducer = asyncReducers =>
         company,
         cart,
         search,
-        i18n
+        i18n,
+        user
     })
 
 export default createReducer;

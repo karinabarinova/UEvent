@@ -15,7 +15,7 @@ module.exports = {
 async function getUserInfo(userId) {
     const user = await User.findByPk(userId);
     return {
-        user,
+        user: basicDetails(user),
         companies: await user.getCompanies(),
         events: await user.getEvents(),
         notifications: await user.getSubscriptions({
@@ -99,4 +99,10 @@ async function sendSubscriptionEmail(user) {
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+}
+
+function basicDetails(user) {
+    const { id, email, role, createdAt, updatedAt, firstName, lastName } = user;
+    const name = `${capitalizeFirstLetter(firstName)} ${capitalizeFirstLetter(lastName)}`
+    return { id, email, role, createdAt, updatedAt, name };
+}

@@ -56,8 +56,11 @@ async function login({email, password}) {
     const accessToken = jwt.sign({id: user.id}, config.secret, {
         expiresIn: 86400 //24 hours
     });
+
+    // await user.getSubscription();
     return {
         ...basicDetails(user),
+        subscriptions: await user.getSubscriptions(),
         accessToken,
         expiresIn: 86400
     }

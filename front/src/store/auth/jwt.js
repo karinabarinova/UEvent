@@ -175,6 +175,19 @@ class JwtService extends Emitter {
 				});
 		});
 	}
+
+	getUserInfo = () => {
+		return new Promise((resolve, reject) => {
+			axios
+				.get('/user/')
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				});
+		});
+	}
 }
 
 const instance = new JwtService();
