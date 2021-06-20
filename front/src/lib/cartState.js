@@ -20,7 +20,7 @@ function CartStateProvider({children}) {
 
     return (
         <LocalStateProvider value={{
-            cartOpen, setCartOpen, toggleCart, toggleCart, closeCart,openCart
+            cartOpen, setCartOpen, toggleCart, closeCart,openCart
         }}>{children}</LocalStateProvider>
     );
 }

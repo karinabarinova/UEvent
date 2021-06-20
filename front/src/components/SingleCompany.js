@@ -21,21 +21,6 @@ const ImageContainer = styled.div`
     position: relative;
 `
 
-const FloatContainer = styled.div`
-    float: left;
-    margin-top: 2rem;
-    font-size: 16px;
-    width: 60%;
-`
-
-// createdAt: "2021-04-27T15:39:43.748Z"
-// description: "You know us"
-// id: 1
-// location: null
-// name: "Trello"
-// owner: 1
-// updatedAt: "2021-04-27T15:39:43.748Z"
-
 export default function SingleCompany(props) {
     const data = useSelector(({company}) => company.company)
     const dispatch = useDispatch();

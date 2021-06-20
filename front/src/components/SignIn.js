@@ -17,7 +17,6 @@ export default function SignIn() {
         email: '',
         password: ''
     })
-    console.log("user2", userData)
     
     function handleSubmit(e) {
         e.preventDefault();
