@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react';
+
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -7,26 +6,18 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { getUserInfo } from '../store/user/userSlice';
 
-function AboutTab() {
-	const {user, message} = useSelector(({user}) => user);
-	const dispatch = useDispatch();
-	console.log("user in about tab", user);
-
-	useEffect(() => {
-		dispatch(getUserInfo());
-	}, [])
+function AboutTab({user}) {
 
 	let data = <h1>Page not found</h1>
-	if (user.user) {
+	if (user) {
 		data = (
 <div style={{width: '70%', maxWidth: 700, margin: 'auto' }}>
 			<div className="md:flex max-w-2xl">
 				<div className="flex flex-col flex-1 md:ltr:pr-32 md:rtl:pl-32">
 					<Card className="w-full mb-32 rounded-16 shadow">
                         <div style={{ padding: '1rem'}}>
-                            <Avatar alt={user.user.name} src={user.user?.photo ? user.user.photo : "/1.jpg"} style={{width: 150, height: 150, margin: 'auto'}} />
+                            <Avatar alt={user.name} src={user?.photo ? user.photo : "/1.jpg"} style={{width: 150, height: 150, margin: 'auto'}} />
                         </div>
 						<AppBar position="static" elevation={1} style={{backgroundColor: 'red'}}>
 							<Toolbar className="px-8">
@@ -39,12 +30,12 @@ function AboutTab() {
 						<CardContent>
 							<div className="mb-24">
 								<Typography className="font-semibold mb-4 text-15" style={{fontSize: 18, textDecoration: 'underline'}}>Full Name</Typography>
-								<Typography style={{fontSize: 18}}>{user.user.name}</Typography>
+								<Typography style={{fontSize: 18}}>{user.name}</Typography>
 							</div>
 
 							<div className="mb-24">
 								<Typography className="font-semibold mb-4 text-15" style={{fontSize: 18, textDecoration: 'underline'}}>Email</Typography>
-                                <Typography style={{fontSize: 18}}>{user.user.email}</Typography>
+                                <Typography style={{fontSize: 18}}>{user.email}</Typography>
 							</div>
 
 							<div className="mb-24">
