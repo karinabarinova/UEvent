@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react';
 import { getUserInfo } from '../store/user/userSlice';
-// import FusePageSimple from '@fuse/core/FusePageSimple';
-import Avatar from '@material-ui/core/Avatar';
 import AboutTab from './AboutTab';
 import EventsList from './EventsList';
+import EditInfoTab from './EditInfoTab';
 
 export default function Account() {
     const {user, message} = useSelector(({user}) => user);
@@ -16,6 +15,7 @@ export default function Account() {
     return (
         <>
             <AboutTab user={user.user}/>
+            <EditInfoTab user={user.user} />
             <EventsList events={user.events}/>
         </>
     )
