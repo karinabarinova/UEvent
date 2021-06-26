@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import { useUser } from './User'
 import useForm from '../lib/useForm';
 import { useDispatch } from 'react-redux';
-import Button from '@material-ui/core/Button';
 import { addComment } from '../store/products/productSlice';
 
 export default function NewComment({id}) {
@@ -49,7 +48,20 @@ justifyContent: "space-between"}}>
             	  	multiline
             	  	rowsMax={3}
             	/>
-				<Button variant="contained" color="secondary" type="submit" onClick={submitComment}>+</Button>
+				<button 
+					type="submit" 
+					onClick={submitComment} 
+					style={{
+						width: 'auto',
+    					background: 'red',
+    					color: 'white',
+    					border: 0,
+    					fontSize: '2rem',
+    					fontWeight: 600,
+    					padding: "0.5rem 1.8rem",
+						borderRadius: '5px'
+					}}
+				>+</button>
             </FormControl>
           </div>
         )}
