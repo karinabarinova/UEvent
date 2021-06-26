@@ -2,6 +2,17 @@ import { createSlice } from "@reduxjs/toolkit"
 import axios from 'axios';
 import jwt from '../auth/index';
 
+export const addComment = data => async (dispatch, getState) => {
+    return jwt
+        .addComment(data)
+        .then(({data}) => {
+            return dispatch(getById(data))
+        })
+        .catch(error => {
+            console.log("error", error.message)
+        })
+}
+
 export const createEvent = data => async (dispatch, getState) => {
     return jwt
         .createEvent(data)

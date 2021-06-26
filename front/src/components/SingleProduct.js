@@ -82,7 +82,7 @@ export default function SingleProduct(props) {
             <div style={{ position: 'relative', width: '100vw', height: '95vh' }}>
                 <Map />
             </div>
-            <NewComment />
+            <NewComment id={props.match.params.id}/>
             <Comments comments={comments}/>
             <OtherEvents otherEvents={otherEvents}/>
         </>

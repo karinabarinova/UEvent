@@ -148,8 +148,7 @@ async function addComment({ body }, userId, eventId) {
         eventId
     })
     await event.addComment(comment);
-    console.log(event.get());
-    return event; // what should be really returned?
+    return await getById(eventId);
 }
 
 async function update(params, id) {

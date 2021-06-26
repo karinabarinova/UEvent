@@ -188,6 +188,19 @@ class JwtService extends Emitter {
 				});
 		});
 	}
+
+	addComment = (data) => {
+		return new Promise((resolve, reject) => {
+			axios
+				.post(`/event/${data.id}/comment/add`, {body: data.comment})
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				});
+		});
+	}
 }
 
 const instance = new JwtService();
