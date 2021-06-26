@@ -43,7 +43,7 @@ export default function SingleProduct(props) {
         dispatch(getProductById(props.match.params.id))
     }, []);
 
-    const { event } = data.product;
+    const { event, comments, otherEvents } = data.product;
     let product = <h2>Oops... Event not found</h2>;
 
     if (event) {
@@ -83,8 +83,8 @@ export default function SingleProduct(props) {
                 <Map />
             </div>
             <NewComment />
-            <Comments />
-            <OtherEvents otherEvents={data.product.otherEvents}/>
+            <Comments comments={comments}/>
+            <OtherEvents otherEvents={otherEvents}/>
         </>
     )
 }

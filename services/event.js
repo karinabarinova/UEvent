@@ -12,7 +12,6 @@ module.exports = {
     delete: _delete,
     addComment,
     updateComment,
-    getAllComments,
     deleteComment
 }
 
@@ -51,9 +50,6 @@ async function search(query) { //TODO: fix invalid return result
     return null;
 }
 
-async function getAllComments(id) { //may be deleted as comments are returned in the getById function
-    return await getEvent(id).getComments();
-}
 
 async function getById(id) {
     const event = await getEvent(id);

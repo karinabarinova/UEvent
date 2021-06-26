@@ -10,7 +10,6 @@ router.get('/:id', getById);
 router.patch('/:id', authJwt.verifyToken, update);
 router.delete('/:id', authJwt.verifyToken, _delete);
 router.post('/:id/comment/add', authJwt.verifyToken, addComment);
-router.get('/:id/comment/', authJwt.verifyToken, getAllComments);
 router.patch('/:id/comment/:commentId/', authJwt.verifyToken, updateComment);
 router.delete('/:id/comment/:commentId/', authJwt.verifyToken, deleteComment);
 
@@ -22,11 +21,6 @@ function getAll(req, res, next) {
         .catch(next);
 }
 
-function getAllComments(req, res, next) {
-    service.getAllComments()
-        .then(data => res.status(200).json(data))
-        .catch(next);
-}
 
 function getById(req, res, next) {
     service.getById(req.params.id)
