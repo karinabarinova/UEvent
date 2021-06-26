@@ -1,16 +1,14 @@
 import { useTranslation } from "react-i18next";
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
-import { useHistory } from "react-router-dom";
-import {useSelector, useDispatch } from 'react-redux'
+import {useDispatch } from 'react-redux'
 import { createCompany } from "../store/company/companySlice";
 
 export default function CreateCompany() {
     const { t } = useTranslation('common');
-    const history = useHistory();
     const dispatch = useDispatch();
     
-    const { inputs, handleChange, clearForm, resetForm } = useForm({
+    const { inputs, handleChange, clearForm } = useForm({
         image: '',
         name: 'Google',
         description: 'Best',

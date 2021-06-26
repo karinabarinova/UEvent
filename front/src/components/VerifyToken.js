@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import useForm from "../lib/useForm";
 import {verifyToken} from '../store/auth/registerSlice'
 

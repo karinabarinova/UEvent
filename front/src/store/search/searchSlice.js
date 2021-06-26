@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from 'axios';
-import jwt from '../auth/index';
 
 export const searchEvents = (name) => async (dispatch, getState) => {
     return axios.get(`/event/search?name=${name}`)

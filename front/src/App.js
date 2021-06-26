@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import {
-  Router,
   Switch,
   Route,
 } from "react-router-dom";
 import './App.css';
-import routes from './routes';
 import Page from './components/Page';
 import SingleProduct from "./components/SingleProduct";
 import SingleCompany from './components/SingleCompany';
@@ -14,7 +12,6 @@ import CreateCompany from "./components/CreateCompany";
 import UpdateEvent from './components/UpdateEvent';
 import UpdateCompany from './components/UpdateCompany';
 import Account from './components/Account';
-import NotFound from './components/NotFound';
 import SingIn from './pages/signin';
 import ProductsPage from './pages/products';
 import CompaniesPage from './pages/companies';
@@ -39,8 +36,6 @@ class App extends Component {
     		<Route path='/company/:id' exact component={SingleCompany} />
     		<Route path='/update-event/:id' exact component={UpdateEvent}/>
     		<Route path='/update-company/:id' exact component={UpdateCompany}/>
-			  <Route component={NotFound} />
-
     	</Switch>
     )
     return (

@@ -1,10 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { useEffect } from 'react';
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
 import { useHistory } from "react-router-dom";
 import {useSelector, useDispatch, shallowEqual } from 'react-redux'
-import { createEvent, clearNewEvent } from "../store/products/productSlice";
+import { createEvent } from "../store/products/productSlice";
 
 
 export default function CreateProduct() {
@@ -14,7 +13,7 @@ export default function CreateProduct() {
     const event = useSelector(({product}) => product.newEvent, shallowEqual);
 
     
-    const { inputs, handleChange, clearForm, resetForm } = useForm({
+    const { inputs, handleChange, clearForm } = useForm({
         image: '',
         name: 'Python Meetup',
         price: 120,

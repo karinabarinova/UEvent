@@ -7,7 +7,7 @@ import EditInfoTab from './EditInfoTab';
 import CompaniesList from './CompaniesList';
 
 export default function Account() {
-    const {user, message} = useSelector(({user}) => user);
+    const {user} = useSelector(({user}) => user);
 	const dispatch = useDispatch();
 
 	useEffect(() => {

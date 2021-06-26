@@ -37,7 +37,7 @@ export const cartSlice = createSlice({
             else {
                 const copy = state.cart.slice();
                 const index = copy.findIndex((item) => item.id === action.payload.id)
-                if (index != -1) {
+                if (index !== -1) {
                     copy[index].quantity++
                 } else {
                     const product = action.payload

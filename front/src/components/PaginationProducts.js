@@ -1,6 +1,4 @@
-import {useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react';
-
+import {useSelector } from 'react-redux'
 import PaginationStyles from './styles/PaginationStyles';
 import {Link} from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -15,12 +13,12 @@ export default function PaginationProducts({ page }) {
     return (
         <PaginationStyles>
             <Link to={`/${showPage - 1 >= 1 ? showPage - 1 : 1 }`}>
-                <a aria-disabled={showPage <= 1}>← {t('PREV')}</a>
+                <a href={`/${showPage - 1 >= 1 ? showPage - 1 : 1 }`} aria-disabled={showPage <= 1}>← {t('PREV')}</a>
             </Link>
             <p>{t('PAGE')} {showPage} {t('OF')} {pageCount}</p>
             <p>{count} {t('ITEMS_TOTAL')}</p>
             <Link to={`/${showPage + 1 <= pageCount ? showPage + 1 : pageCount}`}>
-                <a aria-disabled={showPage >= pageCount}>{t('NEXT')} →</a>
+                <a href={`/${showPage + 1 <= pageCount ? showPage + 1 : pageCount}`} aria-disabled={showPage >= pageCount}>{t('NEXT')} →</a>
             </Link>
         </PaginationStyles>
     );

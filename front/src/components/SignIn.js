@@ -1,18 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import useForm from "../lib/useForm";
 import {login} from '../store/auth/authSlice'
-
 import Form from "./styles/Form";
-import { useUser } from "./User";
 
 export default function SignIn() {
     const { t } = useTranslation('common');
-    const data = useSelector(({auth}) => auth)
-    const history = useHistory();
     const dispatch = useDispatch()
-    const userData = useUser();
     const { inputs, handleChange, resetForm } = useForm({
         email: '',
         password: ''
