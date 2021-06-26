@@ -10,12 +10,12 @@ const ImageContainer = styled.div`
     position: relative;
 `
 
-export default function OtherEvents({otherEvents}) {
+export default function SimilarEvents({similarEvents}) {
     const { t } = useTranslation('common')
 
     let events = null;
-    if (otherEvents?.length) {
-        events = otherEvents.map((el, i) => {
+    if (similarEvents?.length) {
+        events = similarEvents.map((el, i) => {
             let arr = new Date(el.startDate).toString().split(' ')
             const remove = [6, 7, 8, 9];
     
@@ -53,7 +53,7 @@ export default function OtherEvents({otherEvents}) {
     }
     return (
         <div>
-            <h1>{t("OTHER_EVENTS")}</h1>
+            <h1>{t("SIMILAR_EVENTS")}</h1>
             <div>
                 {events}
             </div>

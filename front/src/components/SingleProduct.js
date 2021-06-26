@@ -6,7 +6,7 @@ import PriceTag from './styles/PriceTag'
 import Tags from './styles/Tags'
 import EventIcon from '@material-ui/icons/Event';
 import Map from './MapComponent'
-import OtherEvents from './OtherEvents'
+import SimilarEvents from './SimilarEvents'
 import Comments from './Comments';
 import NewComment from './NewComment'
 
@@ -43,7 +43,7 @@ export default function SingleProduct(props) {
         dispatch(getProductById(props.match.params.id))
     }, []);
 
-    const { event, comments, otherEvents } = data.product;
+    const { event, comments, similarEvents } = data.product;
     let product = <h2>Oops... Event not found</h2>;
 
     if (event) {
@@ -84,7 +84,7 @@ export default function SingleProduct(props) {
             </div>
             <NewComment id={props.match.params.id}/>
             <Comments comments={comments}/>
-            <OtherEvents otherEvents={otherEvents}/>
+            <SimilarEvents similarEvents={similarEvents}/>
         </>
     )
 }
