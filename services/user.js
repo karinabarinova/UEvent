@@ -86,7 +86,7 @@ async function purchase(userId, items, token) {
 //helpers
 
 async function sendSubscriptionEmail(user) {
-    let message = `<p>Hey ${capitalizeFirstLetter(user.firstName)}, you've subscribed to a new event(s)</p>
+    let message = `<p>Hey ${capitalizeFirstLetter(user.fullName)}, you've subscribed to a new event(s)</p>
                    <p></p>`;
 
     await sendEmail({
@@ -102,7 +102,8 @@ function capitalizeFirstLetter(string) {
 }
 
 function basicDetails(user) {
-    const { id, email, role, createdAt, updatedAt, firstName, lastName } = user;
-    const name = `${capitalizeFirstLetter(firstName)} ${capitalizeFirstLetter(lastName)}`
+    const { id, email, role, createdAt, updatedAt, fullName } = user;
+    const fullNameArr = fullName.slit(' ');
+    const name = `${capitalizeFirstLetter(fullNameArr[0])} ${capitalizeFirstLetter(fullNameArr[1])}`
     return { id, email, role, createdAt, updatedAt, name };
 }

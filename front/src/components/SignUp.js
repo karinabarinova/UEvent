@@ -12,7 +12,7 @@ export default function SignUp() {
     const { inputs, handleChange, resetForm } = useForm({
         email: '',
         password: '',
-        firstName: '', //TODO: change this to just name field on server
+        firstName: '',
         lastName: ''
     })
     

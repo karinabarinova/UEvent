@@ -47,7 +47,7 @@ export default function Cart() {
     if (!me.user.email) return null;
     return <CartStyles open={cartOpen}>
         <header>
-            <Supreme>{me.user.firstName}'s Cart</Supreme>
+            <Supreme>{me.user.fullName.split(' ')[0]}'s Cart</Supreme>
             <CloseButton onClick={closeCart}>&times;</CloseButton>
         </header>
         <ul>

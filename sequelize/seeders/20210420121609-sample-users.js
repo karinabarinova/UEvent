@@ -15,22 +15,19 @@ module.exports = {
 		 "Users", 
 		 [
 			 {
-				firstName: "Kobe",
-				lastName: "Bryant",
+				fullName: "Kobe Bryant",
 				email: "kobr@blackmamba.com",
 				createdAt: new Date(),
 				updatedAt: new Date()
 			 },
 			 {
-				firstName: "Karina",
-				lastName: "Barinova",
+				fullName: "Karina Barinova",
 				email: "kbarinova11@gmail.com",
 				createdAt: new Date(),
 				updatedAt: new Date()
 				},
 			{
-				firstName: "Anna",
-				lastName: "Hannelson",
+				fullName: "Anna Hannelson",
 				email: "anna@ann.com",
 				createdAt: new Date(),
 				updatedAt: new Date()

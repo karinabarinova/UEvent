@@ -33,8 +33,7 @@ async function register(params) {
     const user = await User.create({
             email: params.email,
             password: bcrypt.hashSync(params.password, 8),
-            firstName: params.firstName,
-            lastName: params.lastName,
+            fullName: `${params.firstName} ${params.lastName}`,
             role,
             validation_str: randomTokenString()
         })
@@ -154,8 +153,8 @@ function randomTokenString() {
 }
 
 function basicDetails(user) {
-    const { id, email, role, createdAt, updatedAt, firstName, lastName } = user;
-    return { id, email, role, createdAt, updatedAt, firstName, lastName };
+    const { id, email, role, createdAt, updatedAt, name } = user;
+    return { id, email, role, createdAt, updatedAt, name };
 }
 
 async function hash(password) {
