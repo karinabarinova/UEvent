@@ -71,8 +71,6 @@ async function getById(id) {
         }
     })
 
-    console.log(Event.prototype)
-
     return {
         event,
         organizer,
@@ -120,15 +118,11 @@ async function add({name, description, startDate, location, price, promoCodes, t
         theme,
         format
     });
-    console.log("event", event)
 
 
     await company.addEvent(event);
-    console.log("addEvent")
     await foundTheme.addEvent(event);
-    console.log("addEvent")
     await foundFormat.addEvent(event);
-    console.log("addEvent")
     return event; //add organizer info
 }
 
@@ -178,7 +172,6 @@ async function updateComment(params, eventId, commentId) {
 
 async function _delete(id) {
     const event = await getEvent(id);
-    console.log(event);
     const foundTheme = await findOrCreateTheme(event.dataValues.theme);
     const foundFormat = await findOrCreateFormat(event.dataValues.format);
     const foundCompany = await findCompany(event.dataValues.organizer);

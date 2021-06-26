@@ -1,5 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from 'axios';
+import jwt from '../auth/index';
+
+export const createCompany = data => async (dispatch, getState) => {
+    return jwt
+        .createCompany(data)
+        .then((data) => {
+            return dispatch(setMessage(data.message))
+        })
+        .catch(error => {
+            console.log("error", error.message)
+        })
+}
 
 export const getAllCompanies = (page) => async (dispatch, getState) => {
     return axios.get(`/company?page=${page}`)
@@ -56,15 +68,18 @@ export const companySlice = createSlice({
             state.company = action.payload
         },
         setUpdatedCompany: (state, action) => {
-            state.product = action.payload
+            state.company = action.payload
         },
         setDeletedCompany: (state, action) => {
-            state.product.message = action.payload
+            state.company.message = action.payload
+        },
+        setMessage: (state, action) => {
+            state.message = action.payload
         }
     },
     extraReducers: {}
 })
 
-export const { getAll, getById, setUpdatedCompany, setDeletedCompany } = companySlice.actions
+export const { getAll, getById, setUpdatedCompany, setDeletedCompany, setMessage } = companySlice.actions
 
 export default companySlice.reducer

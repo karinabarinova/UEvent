@@ -38,6 +38,7 @@
     "THEME": "Тема події",
     "FORMAT": "Формат",
     "LOCATION": "Де буде відбуватися подія",
+    "COMPANY_LOCATION": "Де розташована компанія",
     "COMMENTS": "Коментарі",
     "ADD_COMMENT": "Додати коментар",
     "SIMILAR_EVENTS": "Схожі події"

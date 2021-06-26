@@ -38,6 +38,7 @@
     "THEME": "Theme",
     "FORMAT": "Format",
     "LOCATION": "Location",
+    "COMPANY_LOCATION": "Company location",
     "COMMENTS": "Comments",
     "ADD_COMMENT": "Add a comment",
     "SIMILAR_EVENTS": "Similar events"

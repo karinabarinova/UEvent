@@ -38,9 +38,13 @@ async function add(params, id) {
         throw 'Company already exists';
 
     const user = await User.findByPk(id);
+    const point = {
+        type: 'Point',
+        coordinates: params.location
+    }
     const company =  await Company.create({
         name: params.name,
-        location: params.location,
+        location: point,
         description: params.description,
         owner: id
     });

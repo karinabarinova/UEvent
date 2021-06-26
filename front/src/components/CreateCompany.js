@@ -3,6 +3,7 @@ import useForm from '../lib/useForm';
 import Form from './styles/Form';
 import { useHistory } from "react-router-dom";
 import {useSelector, useDispatch } from 'react-redux'
+import { createCompany } from "../store/company/companySlice";
 
 export default function CreateCompany() {
     const { t } = useTranslation('common');
@@ -12,16 +13,21 @@ export default function CreateCompany() {
     const { inputs, handleChange, clearForm, resetForm } = useForm({
         image: '',
         name: 'Google',
-        description: 'Best'
+        description: 'Best',
+        location: [67, -118]
     });
 
     return (
         <Form onSubmit={async (e) => {
             e.preventDefault();
-            //Submit the input fields to the backend
-            // const res = await createProduct();
+            dispatch(createCompany({
+                image: inputs.image,
+                name: inputs.name,
+                description: inputs.description,
+                location: inputs.location,
+            }))
             clearForm();
-            history.push('/company/' + 3) //TODO: add id of the newly created event
+            // history.push('/company/' + 3) //TODO: add id of the newly created event
 
         }}>
             <h1>{t("NEW_COMPANY")}</h1>
@@ -30,7 +36,6 @@ export default function CreateCompany() {
                 <label htmlFor="image">
                     {t("IMAGE")}
                     <input
-                        required
                         type="file"
                         id="image"
                         name="image"
@@ -56,6 +61,17 @@ export default function CreateCompany() {
                         placeholder={t("DESCRIPTION")}
                         onChange={handleChange}
                         value={inputs.description}
+                    />
+                </label>
+                <label htmlFor="location">
+                    {t("COMPANY_LOCATION")}
+                    <textarea
+                        required
+                        id="location"
+                        name="location"
+                        placeholder={t("COMPANY_LOCATION")}
+                        value={inputs.location}
+                        onChange={handleChange}
                     />
                 </label>
                 <button type="submit">+ {t("ADD_COMPANY")}</button>

@@ -62,14 +62,12 @@ class JwtService extends Emitter {
 		return window.localStorage.getItem('jwt_access_token');
 	};
 
-	setSession = (access_token, refresh_token) => {
+	setSession = (access_token) => {
 		if (access_token) {
 			localStorage.setItem('jwt_access_token', access_token);
-			localStorage.setItem('jwt_refresh_token', refresh_token);
 			axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
 		} else {
 			localStorage.removeItem('jwt_access_token');
-			localStorage.removeItem('jwt_refresh_token');
 
 			delete axios.defaults.headers.common.Authorization;
 		}
@@ -167,6 +165,20 @@ class JwtService extends Emitter {
 		return new Promise((resolve, reject) => {
 			axios
 				.post('/event/add', data)
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				});
+		});
+	}
+
+	createCompany = data => {
+		console.log("data2", data)
+		return new Promise((resolve, reject) => {
+			axios
+				.post('/company/add', data)
 				.then(response => {
 					resolve(response.data);
 				})
