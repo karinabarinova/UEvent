@@ -103,7 +103,7 @@ function capitalizeFirstLetter(string) {
 
 function basicDetails(user) {
     const { id, email, role, createdAt, updatedAt, fullName } = user;
-    const fullNameArr = fullName.slit(' ');
+    const fullNameArr = fullName.split(' ');
     const name = `${capitalizeFirstLetter(fullNameArr[0])} ${capitalizeFirstLetter(fullNameArr[1])}`
     return { id, email, role, createdAt, updatedAt, name };
 }
