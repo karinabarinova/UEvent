@@ -48,34 +48,37 @@ export default function SingleProduct(props) {
     let product = <h2>Oops... Event not found</h2>;
 
     if (event) {
+        console.log('event is ', event)
         product = (
-            <ProductStyles>
-                <title>Uevent | {event.name}</title>
-                <ImageContainer>
-                    <img src={event?.image ? event.image : '/defaultEventPage.jfif'} alt={event.name} />
-                    <PriceTag>{event.price}$</PriceTag>
+            <>
+                <ProductStyles>
+                    <title>Uevent | {event.name}</title>
+                    <ImageContainer>
+                        <img src={event?.image ? event.image : '/defaultEventPage.jfif'} alt={event.name} />
+                        <PriceTag>{event.price}$</PriceTag>
 
-                </ImageContainer>
-                <div className="details">
-                    <h2>{event.name}</h2>
-                    <p>{event.description}</p>
-                    <Tags><b>{event.theme} / {event.format}</b></Tags>
-                    <FloatContainer>
-                        <EventIcon style={{fontSize: 20}}/> {moment(event.startDate).format('MMMM Do YYYY, h:mm a')}
-                    </FloatContainer>
+                    </ImageContainer>
+                    <div className="details">
+                        <h2>{event.name}</h2>
+                        <p>{event.description}</p>
+                        <Tags><b>{event.theme} / {event.format}</b></Tags>
+                        <FloatContainer>
+                            <EventIcon style={{fontSize: 20}}/> {moment(event.startDate).format('MMMM Do YYYY, h:mm a')}
+                        </FloatContainer>
+                    </div>
+                </ProductStyles>
+                <div style={{ position: 'relative', width: '100vw', height: '95vh' }}>
+                    <Map location={event.location.coordinates}/>
                 </div>
-            </ProductStyles>
+                <NewComment id={props.match.params.id}/>
+                <Comments comments={comments}/>
+                <SimilarEvents similarEvents={similarEvents}/>
+            </>
         )
     }
     return (
         <>
             {product}
-            <div style={{ position: 'relative', width: '100vw', height: '95vh' }}>
-                <Map />
-            </div>
-            <NewComment id={props.match.params.id}/>
-            <Comments comments={comments}/>
-            <SimilarEvents similarEvents={similarEvents}/>
         </>
     )
 }
