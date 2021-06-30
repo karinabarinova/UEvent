@@ -9,6 +9,7 @@ import Map from './MapComponent'
 import SimilarEvents from './SimilarEvents'
 import Comments from './Comments';
 import NewComment from './NewComment'
+import moment from 'moment';
 
 const ProductStyles = styled.div`
     display: grid;  
@@ -70,7 +71,7 @@ export default function SingleProduct(props) {
                     <p>{event.description}</p>
                     <Tags><b>{event.theme} / {event.format}</b></Tags>
                     <FloatContainer>
-                        <EventIcon style={{fontSize: 20}}/> {arr.join(' ')}
+                        <EventIcon style={{fontSize: 20}}/> {moment(event.startDate).format('MMMM Do YYYY, h:mm a')}
                     </FloatContainer>
                 </div>
             </ProductStyles>
