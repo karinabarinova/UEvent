@@ -1,4 +1,4 @@
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 
 const mapStyles = {
     width: '50%',
@@ -9,10 +9,14 @@ function MapComponent() {
     return (
         <Map 
             google={window.google}
-            zoom={8}
+            zoom={11}
             style={mapStyles}
             initialCenter={{ lat: 47.444, lng: -122.176}}
-        />
+        >
+            <Marker
+                position={{lat: 47.444, lng: -122.176}}
+            />
+        </Map>
     )
 }
 
