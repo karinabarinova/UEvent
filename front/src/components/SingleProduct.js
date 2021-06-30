@@ -48,16 +48,6 @@ export default function SingleProduct(props) {
     let product = <h2>Oops... Event not found</h2>;
 
     if (event) {
-        let arr = new Date(event.startDate).toString().split(' ')
-        const remove = [6, 7, 8, 9];
-
-        for (let i = remove.length - 1; i >= 0; i--)
-            arr.splice(remove[i], 1);
-
-        let time = arr[4].split(':');
-        time.splice(2, 1);
-        arr[4] = time.join(':');
-        arr[5] = arr[5].replace(new RegExp("0", "g"), '')
         product = (
             <ProductStyles>
                 <title>Uevent | {event.name}</title>
