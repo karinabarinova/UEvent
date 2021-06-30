@@ -13,7 +13,7 @@ function EventsList({events}) {
 	let data = null;
 	if (events && events.length) {
 		data =  events.map((event, i) => {
-            return <Product key={event.id} product={event}/>
+            return <Product key={event.id} product={event} account={true}/>
         }) 
 	}
 

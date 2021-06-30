@@ -13,7 +13,7 @@ function CompaniesList({companies}) {
 	let data = null;
 	if (companies && companies.length) {
 		data = companies.map((company, i) => {
-            return <Company key={company.id} company={company}/>
+            return <Company key={company.id} company={company} account={true}/>
         }) 
 	}
 

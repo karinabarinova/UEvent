@@ -4,7 +4,7 @@ import ItemStyles from './styles/ItemStyles'
 import Title from './styles/Title'
 import DeleteCompany from './DeleteCompany';
 
-export default function Company({company}) {
+export default function Company({account, company}) {
     const authUser = useSelector(({auth}) => auth.user)
 
     return (
@@ -16,10 +16,14 @@ export default function Company({company}) {
             <p>{company.description}</p>
             {Object.keys(authUser).length !== 0  && (
                 <div className="buttonList">
-                    <Link to={{
-                        pathname: "/update-company/" + company.id,
-                    }}>Edit</Link>
-                    <DeleteCompany id={company.id}>Delete</DeleteCompany>
+                    {!account && (
+                    <>
+                        <Link to={{
+                            pathname: "/update-company/" + company.id,
+                        }}>Edit</Link>
+                        <DeleteCompany id={company.id}>Delete</DeleteCompany>
+                    </>
+                    )}
                 </div>
             )}
         </ItemStyles>

@@ -8,7 +8,7 @@ import DeleteEvent from './DeleteEvent'
 import AddToCart from './AddToCart';
 import { useCart } from '../lib/cartState';
 
-export default function Product({product}) {
+export default function Product({account, product}) {
     const authUser = useSelector(({auth}) => auth.user)
     const {openCart } = useCart();
     return (
@@ -23,11 +23,11 @@ export default function Product({product}) {
             {/* TODO: add check if owner of event is the authUser.id */}
             {Object.keys(authUser).length !== 0  && (
                 <div className="buttonList"> 
-                    <Link to={{
+                    {!account && <Link to={{
                         pathname: "/update-event/" + product.id,
-                    }}>Edit</Link>
-                    <AddToCart product={product} openCart={openCart}/>
-                    <DeleteEvent id={product.id}>Delete</DeleteEvent>
+                    }}>Edit</Link>}
+                    {!account && <AddToCart product={product} openCart={openCart}/>}
+                    {!account && <DeleteEvent id={product.id}>Delete</DeleteEvent>}
                 </div>
             )}
         </ItemStyles>
