@@ -10,7 +10,7 @@ const ProductListStyles = styled.div`
 
 function EventsList({events}) {
 
-	let data = <h1>No events found</h1>
+	let data = null;
 	if (events && events.length) {
 		data =  events.map((event, i) => {
             return <Product key={event.id} product={event}/>
@@ -19,10 +19,15 @@ function EventsList({events}) {
 
 	return (
         <div style={{textAlign: 'center'}}>
-            <h1>List of subscribed events</h1>
-            <ProductListStyles>
-                {data}
-            </ProductListStyles>
+            {data && (
+                <>
+                <h1>List of subscribed events</h1>
+                <ProductListStyles>
+                    {data}
+                </ProductListStyles>
+                </>
+            )}
+            
         </div>
     )
 }
