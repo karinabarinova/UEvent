@@ -14,6 +14,9 @@ module.exports = {
       author: {
         type: Sequelize.INTEGER
       },
+      name: {
+        type: Sequelize.STRING
+      },
       eventId: {
         type: Sequelize.INTEGER
       },

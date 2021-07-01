@@ -135,10 +135,13 @@ async function addComment({ body }, userId, eventId) {
 
     if (!event)
         throw 'Event not found';
+
+    const user = await User.findOne({ where: {id: userId}})
     
     const comment = await Comment.create({
         body,
         author: userId,
+        name: user.fullName,
         eventId
     })
     await event.addComment(comment);
