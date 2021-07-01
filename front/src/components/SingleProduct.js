@@ -9,6 +9,7 @@ import Map from './MapComponent'
 import SimilarEvents from './SimilarEvents'
 import Comments from './Comments';
 import NewComment from './NewComment'
+import moment from 'moment';
 
 const ProductStyles = styled.div`
     display: grid;  
@@ -47,44 +48,37 @@ export default function SingleProduct(props) {
     let product = <h2>Oops... Event not found</h2>;
 
     if (event) {
-        let arr = new Date(event.startDate).toString().split(' ')
-        const remove = [6, 7, 8, 9];
-
-        for (let i = remove.length - 1; i >= 0; i--)
-            arr.splice(remove[i], 1);
-
-        let time = arr[4].split(':');
-        time.splice(2, 1);
-        arr[4] = time.join(':');
-        arr[5] = arr[5].replace(new RegExp("0", "g"), '')
+        console.log('event is ', event)
         product = (
-            <ProductStyles>
-                <title>Uevent | {event.name}</title>
-                <ImageContainer>
-                    <img src={event?.image ? event.image : '/defaultEventPage.jfif'} alt={event.name} />
-                    <PriceTag>{event.price}$</PriceTag>
+            <>
+                <ProductStyles>
+                    <title>Uevent | {event.name}</title>
+                    <ImageContainer>
+                        <img src={event?.image ? event.image : '/defaultEventPage.jfif'} alt={event.name} />
+                        <PriceTag>{event.price}$</PriceTag>
 
-                </ImageContainer>
-                <div className="details">
-                    <h2>{event.name}</h2>
-                    <p>{event.description}</p>
-                    <Tags><b>{event.theme} / {event.format}</b></Tags>
-                    <FloatContainer>
-                        <EventIcon style={{fontSize: 20}}/> {arr.join(' ')}
-                    </FloatContainer>
+                    </ImageContainer>
+                    <div className="details">
+                        <h2>{event.name}</h2>
+                        <p>{event.description}</p>
+                        <Tags><b>{event.theme} / {event.format}</b></Tags>
+                        <FloatContainer>
+                            <EventIcon style={{fontSize: 20}}/> {moment(event.startDate).format('MMMM Do YYYY, h:mm a')}
+                        </FloatContainer>
+                    </div>
+                </ProductStyles>
+                <div style={{ position: 'relative', width: '100vw', height: '95vh' }}>
+                    <Map location={event.location.coordinates}/>
                 </div>
-            </ProductStyles>
+                <NewComment id={props.match.params.id}/>
+                <Comments comments={comments}/>
+                <SimilarEvents similarEvents={similarEvents}/>
+            </>
         )
     }
     return (
         <>
             {product}
-            <div style={{ position: 'relative', width: '100vw', height: '95vh' }}>
-                <Map />
-            </div>
-            <NewComment id={props.match.params.id}/>
-            <Comments comments={comments}/>
-            <SimilarEvents similarEvents={similarEvents}/>
         </>
     )
 }

@@ -53,15 +53,15 @@ justifyContent: "space-between"}}>
 					onClick={submitComment} 
 					style={{
 						width: 'auto',
-    					background: 'red',
+    					background: 'rgba(255, 0, 0, 0.6)',
     					color: 'white',
     					border: 0,
     					fontSize: '2rem',
     					fontWeight: 600,
     					padding: "0.5rem 1.8rem",
-						borderRadius: '5px'
+						borderRadius: '5px',
 					}}
-				>+</button>
+				>🖊️</button>
             </FormControl>
           </div>
         )}

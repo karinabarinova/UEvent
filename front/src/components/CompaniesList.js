@@ -10,21 +10,23 @@ const ProductListStyles = styled.div`
 `;
 
 function CompaniesList({companies}) {
-    console.log('companies list', companies)
-
-	let data = <h1>No companies found</h1>
+	let data = null;
 	if (companies && companies.length) {
 		data = companies.map((company, i) => {
-            return <Company key={company.id} company={company}/>
+            return <Company key={company.id} company={company} account={true}/>
         }) 
 	}
 
 	return (
         <div style={{textAlign: 'center'}}>
-            <h1>Your companies</h1>
-            <ProductListStyles>
-                {data}
-            </ProductListStyles>
+            {data && (
+                <>
+                    <h1>My companies</h1>
+                    <ProductListStyles>
+                        {data}
+                    </ProductListStyles>
+                </>
+            )}
         </div>
     )
 }

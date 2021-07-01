@@ -13,7 +13,7 @@ export default function Comments(props) {
     if (props?.comments?.length)
       comments = props.comments.map((comment, i) => {
         return (
-          <>
+          // <>
             <Grid container wrap="nowrap" spacing={2} key={`comment-id-${i}`}>
               <Grid item>
                 <Avatar alt="Remy Sharp" src={imgLink} />
@@ -28,8 +28,8 @@ export default function Comments(props) {
                 </p>
               </Grid>
             </Grid>
-            <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
-          </>
+            // <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
+          // </>
         )
       })
     return (

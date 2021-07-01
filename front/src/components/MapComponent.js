@@ -1,18 +1,26 @@
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+
 
 const mapStyles = {
     width: '50%',
     height: '60%',
 };
 
-function MapComponent() {
+function MapComponent({location}) {
+    console.log('location', location)
     return (
-        <Map 
+        <>
+        {location && <Map 
             google={window.google}
-            zoom={8}
+            zoom={11}
             style={mapStyles}
-            initialCenter={{ lat: 47.444, lng: -122.176}}
-        />
+            initialCenter={{ lat: location[0], lng: location[1]}}
+        >
+            <Marker
+                position={{lat: location[0], lng: location[1]}}
+            />
+        </Map>}
+        </>
     )
 }
 

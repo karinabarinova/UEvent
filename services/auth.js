@@ -153,8 +153,8 @@ function randomTokenString() {
 }
 
 function basicDetails(user) {
-    const { id, email, role, createdAt, updatedAt, name } = user;
-    return { id, email, role, createdAt, updatedAt, name };
+    const { id, email, role, createdAt, updatedAt, fullName } = user;
+    return { id, email, role, createdAt, updatedAt, fullName };
 }
 
 async function hash(password) {
