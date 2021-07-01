@@ -1,4 +1,4 @@
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Circle, Marker } from 'google-maps-react';
 
 
 const mapStyles = {
@@ -7,17 +7,27 @@ const mapStyles = {
 };
 
 function MapComponent({location}) {
+    const coordinates = { lat: location[0], lng: location[1]}
     return (
         <>
         {location && <Map 
             google={window.google}
-            zoom={11}
+            zoom={15}
             style={mapStyles}
-            initialCenter={{ lat: location[0], lng: location[1]}}
-            center={{ lat: location[0], lng: location[1]}}
+            initialCenter={coordinates}
+            center={coordinates}
         >
+            <Circle 
+                radius={400}
+                center={coordinates}
+                strokeColor='transparent'
+                strokeOpacity={0}
+                strokeWeight={5}
+                fillColor='#FF0000'
+                fillOpacity={0.2}
+            />
             <Marker
-                position={{lat: location[0], lng: location[1]}}
+                position={coordinates}
             />
         </Map>}
         </>
