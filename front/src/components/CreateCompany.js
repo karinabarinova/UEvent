@@ -3,16 +3,18 @@ import useForm from '../lib/useForm';
 import Form from './styles/Form';
 import {useDispatch } from 'react-redux'
 import { createCompany } from "../store/company/companySlice";
+import LocationSearch from './LocationSearch';
+import { useState } from "react";
 
 export default function CreateCompany() {
     const { t } = useTranslation('common');
     const dispatch = useDispatch();
+    const [location, setLocation] = useState([[67, -118]])
     
     const { inputs, handleChange, clearForm } = useForm({
         image: '',
         name: 'Google',
-        description: 'Best',
-        location: [67, -118]
+        description: 'Best'
     });
 
     return (
@@ -22,7 +24,7 @@ export default function CreateCompany() {
                 image: inputs.image,
                 name: inputs.name,
                 description: inputs.description,
-                location: inputs.location,
+                location
             }))
             clearForm();
             // history.push('/company/' + 3) //TODO: add id of the newly created event
@@ -61,16 +63,9 @@ export default function CreateCompany() {
                         value={inputs.description}
                     />
                 </label>
-                <label htmlFor="location">
+                 <label htmlFor="location">
                     {t("COMPANY_LOCATION")}
-                    <textarea
-                        required
-                        id="location"
-                        name="location"
-                        placeholder={t("COMPANY_LOCATION")}
-                        value={inputs.location}
-                        onChange={handleChange}
-                    />
+                    <LocationSearch setLocation={setLocation}/>
                 </label>
                 <button type="submit">+ {t("ADD_COMPANY")}</button>
             </fieldset>

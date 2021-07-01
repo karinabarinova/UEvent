@@ -7,7 +7,6 @@ const mapStyles = {
 };
 
 function MapComponent({location}) {
-    console.log('location', location)
     return (
         <>
         {location && <Map 
@@ -15,6 +14,7 @@ function MapComponent({location}) {
             zoom={11}
             style={mapStyles}
             initialCenter={{ lat: location[0], lng: location[1]}}
+            center={{ lat: location[0], lng: location[1]}}
         >
             <Marker
                 position={{lat: location[0], lng: location[1]}}

@@ -25,7 +25,6 @@ export default function Search() {
     } = useCombobox({
         items: events,
         onInputValueChange() {
-            console.log('input changed')
             searchEventsButChill(inputValue)
         },
         onSelectedItemChange({selectedItem}) {
@@ -36,7 +35,6 @@ export default function Search() {
     const searchEventsButChill = debounce(searchHandler, 350);
 
     function searchHandler(search) {
-        console.log("inputValue", search)
         dispatch(searchEvents(search))
     }
 

@@ -48,7 +48,6 @@ export default function SingleProduct(props) {
     let product = <h2>Oops... Event not found</h2>;
 
     if (event) {
-        console.log('event is ', event)
         product = (
             <>
                 <ProductStyles>
@@ -67,7 +66,7 @@ export default function SingleProduct(props) {
                         </FloatContainer>
                     </div>
                 </ProductStyles>
-                <div style={{ position: 'relative', width: '100vw', height: '95vh' }}>
+                <div style={{ position: 'relative', width: '85vw', height: '95vh' }}>
                     <Map location={event.location.coordinates}/>
                 </div>
                 <NewComment id={props.match.params.id}/>

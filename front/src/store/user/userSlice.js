@@ -22,7 +22,6 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUserInfo: (state, action) => {
-            console.log("get user data", action.payload)
             state.user = action.payload
         },
         setMessage: (state, action) => {

@@ -19,7 +19,6 @@ export default function UpdateEvent(props) {
     return (
         <Form onSubmit={async (e) => {
             e.preventDefault();
-            console.log("inputs", inputs)
             dispatch(updateEvent(inputs))
             // clearForm();
             // history.push('/event/' + 3) //TODO: redirect to the event page

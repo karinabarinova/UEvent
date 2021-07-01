@@ -175,7 +175,6 @@ class JwtService extends Emitter {
 	}
 
 	createCompany = data => {
-		console.log("data2", data)
 		return new Promise((resolve, reject) => {
 			axios
 				.post('/company/add', data)

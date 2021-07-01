@@ -12,7 +12,7 @@ export default function CreateProduct() {
     const { t } = useTranslation('common');
     const history = useHistory();
     const dispatch = useDispatch();
-    const [location, setLocation] = useState([[67, -118]])
+    const [location, setLocation] = useState([])
     const event = useSelector(({product}) => product.newEvent, shallowEqual);
 
     
@@ -21,7 +21,6 @@ export default function CreateProduct() {
         name: 'Python Meetup',
         price: 120,
         description: 'Best',
-        // location: [67, -118],
         startDate: '',
         theme: "JS",
         format: "Conference"
@@ -35,7 +34,7 @@ export default function CreateProduct() {
                 name: inputs.name,
                 price: inputs.price,
                 description: inputs.description,
-                location: location,
+                location,
                 startDate: inputs.startDate,
                 theme: inputs.theme,
                 format: inputs.format

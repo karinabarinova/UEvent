@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux'
 import { useEffect } from 'react';
 import { getCompanyById } from '../store/company/companySlice';
+import Map from './MapComponent'
 
 const ProductStyles = styled.div`
     display: grid;  
@@ -33,17 +34,21 @@ export default function SingleCompany(props) {
 
     if (data.id) {
         company = (
-            <ProductStyles>
-                <title>Uevent | {data.name}</title>
-                <ImageContainer>
-                    <img src={data?.image ? data.image : '/defaultCompanyPhoto.jpg'} alt={data.name} />
-                </ImageContainer>
-                <div className="details">
-                    <h2>{data.name}</h2>
-                    <p>{data.description || "Some description"}</p>
+            <>
+                <ProductStyles>
+                    <title>Uevent | {data.name}</title>
+                    <ImageContainer>
+                        <img src={data?.image ? data.image : '/defaultCompanyPhoto.jpg'} alt={data.name} />
+                    </ImageContainer>
+                    <div className="details">
+                        <h2>{data.name}</h2>
+                        <p>{data.description || "Some description"}</p>
+                    </div>
+                </ProductStyles>
+                <div style={{ position: 'relative', width: '85vw', height: '95vh' }}>
+                    <Map location={data.location.coordinates}/>
                 </div>
-                
-            </ProductStyles>
+            </>
         )
     }
     return (
