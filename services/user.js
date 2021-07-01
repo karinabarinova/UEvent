@@ -83,7 +83,6 @@ async function purchase(userId, items, token) {
         await user.addSubscription(sub);
     })
     await sendSubscriptionEmail(user);
-    // await sendQR(user)
 }
 
 //helpers
@@ -100,22 +99,6 @@ async function sendSubscriptionEmail(user) {
         ${message} <br/> your QR code for event<br/> <img src= '${QR}'/>`)
     });
 }
-
-// async function sendQR (user) {
-//    try {
-//
-//        await sendEmail({
-//            to: user.email,
-//            subject: `QR code for event`,
-//            html: makeANiceEmail(`<p><b>Hello</b> your QR code <br/> </p> `)
-//        });
-//    } catch (e) {
-//        console.log(e)
-//    }
-//
-// }
-
-
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
