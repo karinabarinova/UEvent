@@ -1,9 +1,11 @@
+const QRCode = require('qrcode')
 const {User, Event, Subscription} = require('../sequelize/models');
 const sendEmail = require('../helpers/sendMail');
 const makeANiceEmail = require('../helpers/makeANiceEmail');
 const stripeConfig = require('../helpers/stripe');
 // const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 // const stripe = require('stripe')(stripeSecretKey);
+
 
 module.exports = {
     getUserInfo,
@@ -81,6 +83,7 @@ async function purchase(userId, items, token) {
         await user.addSubscription(sub);
     })
     await sendSubscriptionEmail(user);
+    // await sendQR(user)
 }
 
 //helpers
@@ -88,14 +91,31 @@ async function purchase(userId, items, token) {
 async function sendSubscriptionEmail(user) {
     let message = `<p>Hey ${capitalizeFirstLetter(user.fullName)}, you've subscribed to a new event(s)</p>
                    <p></p>`;
+    const QR = await QRCode.toDataURL(  "https://community.nodemailer.com/using-embedded-images/",  { errorCorrectionLevel: 'H' })
 
     await sendEmail({
         to: user.email,
-        subject: `Successful Payment for an event`,
+        subject: `Successful Payment for an event `,
         html: makeANiceEmail(`<h4>Successful Payment for events: ==events==</h4>
-        ${message}`)
+        ${message} <br/> your QR code for event<br/> <img src= '${QR}'/>`)
     });
 }
+
+// async function sendQR (user) {
+//    try {
+//
+//        await sendEmail({
+//            to: user.email,
+//            subject: `QR code for event`,
+//            html: makeANiceEmail(`<p><b>Hello</b> your QR code <br/> </p> `)
+//        });
+//    } catch (e) {
+//        console.log(e)
+//    }
+//
+// }
+
+
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -103,7 +123,7 @@ function capitalizeFirstLetter(string) {
 
 function basicDetails(user) {
     const { id, email, role, createdAt, updatedAt, fullName } = user;
-    const fullNameArr = fullName.slit(' ');
+    const fullNameArr = fullName.split(' ');
     const name = `${capitalizeFirstLetter(fullNameArr[0])} ${capitalizeFirstLetter(fullNameArr[1])}`
     return { id, email, role, createdAt, updatedAt, name };
 }
