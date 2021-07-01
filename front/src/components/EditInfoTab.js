@@ -14,7 +14,7 @@ function EditInfoTab({user}) {
                 padding: '1rem'
             }}
         >
-            <Button variant="contained" style={style}>Reset Password 🔐</Button>
+            <Button variant="contained" style={style}>Change Password 🔐</Button>
             <Button variant="contained" style={style}>Change Email 📧</Button>
             <Button variant="contained" style={style}>New Avatar 🤳</Button>
         </div>        
