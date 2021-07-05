@@ -26,6 +26,7 @@ export const getOrders = () => async (dispatch, getState) => {
 const initialState = {
     user: {},
     orders: {},
+    selectedOrder: {},
     message: ''
 }
 
@@ -41,11 +42,14 @@ export const userSlice = createSlice({
         },
         setOrders: (state, action) => {
             state.orders = action.payload
+        },
+        setSelectedOrder: (state, action) => {
+            state.selectedOrder = action.payload
         }
     },
     extraReducers: {}
 })
 
-export const { setUserInfo, setMessage, setOrders } = userSlice.actions
+export const { setUserInfo, setMessage, setOrders, setSelectedOrder } = userSlice.actions
 
 export default userSlice.reducer

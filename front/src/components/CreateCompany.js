@@ -5,8 +5,10 @@ import {useDispatch } from 'react-redux'
 import { createCompany } from "../store/company/companySlice";
 import LocationSearch from './LocationSearch';
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function CreateCompany() {
+    const history = useHistory();
     const { t } = useTranslation('common');
     const dispatch = useDispatch();
     const [location, setLocation] = useState([[67, -118]])
@@ -27,7 +29,7 @@ export default function CreateCompany() {
                 location
             }))
             clearForm();
-            // history.push('/company/' + 3) //TODO: add id of the newly created event
+            history.push('/companies')
 
         }}>
             <h1>{t("NEW_COMPANY")}</h1>

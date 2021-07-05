@@ -1,7 +1,12 @@
-export default function Order({ item }) {
+import { useSelector } from "react-redux"
+import OrderStyles from "./styles/OrderStyles"
+
+export default function Order() {
+    const {selectedOrder: item} = useSelector(({user}) => user);
+    if (!item?.items) return <h2>Order not found</h2>
     const items = JSON.parse(item.items)
     return (
-        <div>
+        <OrderStyles>
             <p>
                 <span>Order Id: </span>
                 <span>{item.id}</span>
@@ -31,6 +36,6 @@ export default function Order({ item }) {
                     </div>
               ))}
             </div>
-        </div>
+        </OrderStyles>
     )
 }

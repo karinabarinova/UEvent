@@ -40,7 +40,7 @@ export default function CreateProduct() {
                 format: inputs.format
             }))
             clearForm();
-            history.push('/event/' + (event.id + 1)) //TODO: add id of the newly created event
+            history.push('/events')
 
         }}>
             <h1>{t("NEW_EVENT")}</h1>

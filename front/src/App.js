@@ -19,6 +19,7 @@ import CompaniesPage from './pages/companies';
 import ResetPage from './pages/reset';
 import Auth from './store/auth/auth';
 import { CartStateProvider } from "./lib/cartState";
+import Order from "./components/Order";
 
 class App extends Component {
 
@@ -31,6 +32,7 @@ class App extends Component {
     		<Route path='/new-company' exact component={CreateCompany}/>
     		<Route path='/account' exact component={Account} />
         <Route path='/orders' exact component={Orders} />
+        <Route path='/order/:id' exact component={Order} />
     		<Route path='/' exact component={ProductsPage}/>
     		<Route path='/:page' exact component={ProductsPage}/>
     		<Route path='/companies/:page' exact component={CompaniesPage}/>

@@ -9,6 +9,7 @@ import { useUser } from './User'
 import { useDispatch, useSelector } from "react-redux";
 import { checkout, clearCart } from '../store/cart/cartSlice'
 import { useCart } from "../lib/cartState";
+import { useHistory } from "react-router";
 
 const CheckoutFormStyles = styled.form`
     box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
@@ -22,6 +23,7 @@ const CheckoutFormStyles = styled.form`
 const stripeLib = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 function CheckoutForm() {
+    const history = useHistory();
     const { closeCart } = useCart();
     const dispatch = useDispatch();
     const {cart} = useSelector(({cart}) => cart)
@@ -57,6 +59,7 @@ function CheckoutForm() {
         nProgress.done();
         dispatch(clearCart())
         closeCart();
+        history.push('/orders')
     }
 
     return (
