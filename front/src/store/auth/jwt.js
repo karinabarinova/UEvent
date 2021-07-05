@@ -39,6 +39,7 @@ class JwtService extends Emitter {
 			this.setSession(access_token);
 			this.emit('onAutoLogin', true);
 		} else {
+			console.log('not valid token')
 			this.setSession(null);
 			this.emit('onAutoLogout', 'access_token expired');
 		}
@@ -204,6 +205,19 @@ class JwtService extends Emitter {
 		return new Promise((resolve, reject) => {
 			axios
 				.post(`/event/${data.id}/comment/add`, {body: data.comment})
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				});
+		});
+	}
+
+	getOrders = () => {
+		return new Promise((resolve, reject) => {
+			axios
+				.get(`/user/orders`)
 				.then(response => {
 					resolve(response.data);
 				})

@@ -7,12 +7,19 @@ const stripePublicKey = process.env.STRIPE_PUBLISHABLE_KEY;
 router.get('/',  authJwt.verifyToken, getUserInfo);
 router.get('/cart', authJwt.verifyToken, getCart);
 router.post('/purchase', authJwt.verifyToken, purchase);
+router.get('/orders', authJwt.verifyToken, getOrders);
 //TODO: edit/getByID subscriptions
 
 module.exports = router;
 
 function getUserInfo(req, res, next) {
     service.getUserInfo(req.userId)
+        .then((data) => res.json(data))
+        .catch(next);
+}
+
+function getOrders(req, res, next) {
+    service.getOrders(req.userId)
         .then((data) => res.json(data))
         .catch(next);
 }

@@ -1,5 +1,5 @@
 const QRCode = require('qrcode')
-const {User, Event, Subscription} = require('../sequelize/models');
+const {User, Event, Subscription, Order} = require('../sequelize/models');
 const sendEmail = require('../helpers/sendMail');
 const makeANiceEmail = require('../helpers/makeANiceEmail');
 const stripeConfig = require('../helpers/stripe');
@@ -9,7 +9,8 @@ const stripeConfig = require('../helpers/stripe');
 
 module.exports = {
     getUserInfo,
-    purchase
+    purchase,
+    getOrders
 }
 
 //TODO: edit subscription - change send_notification status
@@ -26,6 +27,12 @@ async function getUserInfo(userId) {
             }
         })
     };
+}
+
+async function getOrders(userId) {
+    const user = await User.findByPk(userId);
+    const orders = await user.getOrders();
+    return orders;
 }
 
 //TODO: allow company to create promocode with some discount, store the discount in database
@@ -78,10 +85,19 @@ async function purchase(userId, items, token) {
             orderId: charge.created,
             send_notification: true,
             email: user.email
-            //send_notifications
         })
+
         await user.addSubscription(sub);
     })
+
+    const order = await Order.create({ 
+        total: amount * 100,
+        userId: user.id,
+        charge: charge.id,
+        items: JSON.stringify(items)
+    })
+    await user.addOrder(order);
+
     await sendSubscriptionEmail(user);
 }
 

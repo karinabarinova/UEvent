@@ -12,8 +12,20 @@ export const getUserInfo = () => async (dispatch, getState) => {
         })
 }
 
+export const getOrders = () => async (dispatch, getState) => {
+    return jwt
+        .getOrders()
+        .then((data) => {
+            return dispatch(setOrders(data))
+        })
+        .catch(error => {
+            return dispatch(setMessage(error.message))
+        })
+}
+
 const initialState = {
     user: {},
+    orders: {},
     message: ''
 }
 
@@ -26,11 +38,14 @@ export const userSlice = createSlice({
         },
         setMessage: (state, action) => {
             state.message = action.payload
+        },
+        setOrders: (state, action) => {
+            state.orders = action.payload
         }
     },
     extraReducers: {}
 })
 
-export const { setUserInfo, setMessage } = userSlice.actions
+export const { setUserInfo, setMessage, setOrders } = userSlice.actions
 
 export default userSlice.reducer
