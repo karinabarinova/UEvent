@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import jwt from './jwt';
+import { showMessage } from '../message/messageSlice'
 
 export const register = (data) => async dispatch => {
 	return jwt
 		.register(data)
 		.then((data) => {
+			dispatch(showMessage(data.message))
 			return dispatch(registerSuccess(data));
 		})
 		.catch(error => {
-			return dispatch(registerError(error));
+			return dispatch(showMessage(error.message))
 		});
 };
 
@@ -16,10 +18,11 @@ export const verifyToken = (data) => async dispatch => {
 	return jwt
 		.verifyToken(data)
 		.then((data) => {
+			dispatch(showMessage(data.message));
 			return dispatch(verifySuccess(data));
 		})
 		.catch(error => {
-			return dispatch(verifyError(error));
+			return dispatch(showMessage(error.message))
 		});
 };
 
@@ -27,10 +30,11 @@ export const requestReset = (data) => async dispatch => {
 	return jwt
 		.requestReset(data)
 		.then((data) => {
+			dispatch(showMessage(data.message));
 			return dispatch(requestSuccess(data));
 		})
 		.catch(error => {
-			return dispatch(requestError(error));
+			return dispatch(showMessage(error.message))
 		});
 };
 
@@ -38,22 +42,16 @@ export const resetPassword = (data) => async dispatch => {
 	return jwt
 		.resetPassword(data)
 		.then((data) => {
+			dispatch(showMessage(data.message));
 			return dispatch(resetSuccess(data));
 		})
 		.catch(error => {
-			return dispatch(resetError(error));
+			return dispatch(showMessage(error.message))
 		});
 };
 
 const initialState = {
 	success: false,
-	message: '',
-	verificationMessage: '',
-	verificationError: '',
-	requestMessage: '',
-	requestError: '',
-	resetMessage: '',
-	resetError: ''
 };
 
 const registerSlice = createSlice({
@@ -62,48 +60,27 @@ const registerSlice = createSlice({
 	reducers: {
 		resetState: (state, action) => {
 			state.success = initialState.success;
-			state.message = initialState.message;
 		},
 		registerSuccess: (state, action) => {
 			state.success = true;
-            state.message = action.payload.message;
-		},
-		registerError: (state, action) => {
-			state.success = false;
-			state.message = action.payload.message;
 		},
 		verifySuccess: (state, action) => {
 			state.success = false;
-			state.verificationMessage = action.payload.message;
-		},
-		verifyError: (state, action) => {
-			state.success = false;
-			state.verificationError = action.payload.message;
 		},
 		requestSuccess: (state, action) => {
 			state.success = false;
-			state.requestMessage = action.payload.message;
-		},
-		requestError: (state, action) => {
-			state.success = false;
-			state.requestError = action.payload.message;
 		},
 		resetSuccess: (state, action) => {
 			state.success = false;
-			state.resetMessage = action.payload.message;
-		},
-		resetError: (state, action) => {
-			state.success = false;
-			state.resetError = action.payload.message;
 		},
 	},
 	extraReducers: {}
 });
 
-export const { registerSuccess, registerError, resetState, 
-	verifySuccess, verifyError, 
-	requestSuccess, requestError,
-	resetSuccess, resetError 
+export const { registerSuccess, resetState, 
+	verifySuccess, 
+	requestSuccess,
+	resetSuccess 
 } = registerSlice.actions;
 
 export default registerSlice.reducer;

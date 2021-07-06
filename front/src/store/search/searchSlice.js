@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from 'axios';
+import { showMessage } from "../message/messageSlice";
 
 export const searchEvents = (name) => async (dispatch, getState) => {
     return axios.get(`/event/search?name=${name}`)
@@ -7,7 +8,7 @@ export const searchEvents = (name) => async (dispatch, getState) => {
             return dispatch(setResult(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
