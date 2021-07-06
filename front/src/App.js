@@ -12,7 +12,7 @@ import CreateCompany from "./components/CreateCompany";
 import UpdateEvent from './components/UpdateEvent';
 import UpdateCompany from './components/UpdateCompany';
 import Orders from './pages/orders';
-import Account from './components/Account';
+import Account from './pages/account';
 import SingIn from './pages/signin';
 import ProductsPage from './pages/products';
 import CompaniesPage from './pages/companies';
