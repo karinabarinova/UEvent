@@ -14,7 +14,6 @@ export default function Nav() {
     const userData = useUser();
     const {cart} = useSelector(({cart}) => cart)
     const {openCart} = useCart()
-    console.log("user", userData)
     return (
         <NavStyles>
             <Link to='/1'>{t("EVENTS")}</Link>
@@ -32,7 +31,7 @@ export default function Nav() {
                     </button>
                 </>
             )}
-            { !userData.user.id && (
+            {(!userData || !userData?.user?.id) && (
                 <>
                     <Link to='/signin'>{t('SIGNIN')}</Link>
                 </>

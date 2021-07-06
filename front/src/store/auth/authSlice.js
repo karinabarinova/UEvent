@@ -34,6 +34,7 @@ export const authSlice = createSlice({
         setLogIn: (state, action) => {
             state.user = action.payload.data
             state.message = action.payload.message
+            localStorage.setItem('user', JSON.stringify(state))
         },
         setLogout: (state, action) => initialState,
         setMessage: (state, action) => {

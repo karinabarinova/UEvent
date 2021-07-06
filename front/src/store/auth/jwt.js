@@ -31,7 +31,6 @@ class JwtService extends Emitter {
 
 		if (!access_token) {
 			this.emit('onNoAccessToken');
-
 			return;
 		}
 

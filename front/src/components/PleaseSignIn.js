@@ -3,6 +3,6 @@ import SignIn from './SignIn';
 
 export default function PleaseSignIn({ children }) {
     const me = useUser();
-    if (!me.user?.id) return <SignIn />;
+    if (!me?.user?.id) return <SignIn />;
     return children;
 }
