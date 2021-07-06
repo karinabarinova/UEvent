@@ -12,10 +12,8 @@ export default function AccountPage(props) {
 	}, [])
 
     return(
-        <div>
-            <PleaseSignIn>
-                <Account />
-            </PleaseSignIn>
-        </div>
+        <PleaseSignIn>
+            <Account />
+        </PleaseSignIn>
     )
 }

@@ -12,10 +12,8 @@ export default function OrdersPage(props) {
     }, []);
 
     return(
-        <div>
-            <PleaseSignIn>
-                <Orders />
-            </PleaseSignIn>
-        </div>
+        <PleaseSignIn>
+            <Orders />
+        </PleaseSignIn>
     )
 }
