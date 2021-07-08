@@ -6,6 +6,13 @@ import DeleteCompany from './DeleteCompany';
 
 export default function Company({account, company}) {
     const authUser = useSelector(({auth}) => auth.user)
+    console.log("authUser", authUser)
+    console.log('company', company)
+
+    let isOwner = false;
+    if (!account && Object.keys(authUser).length !== 0 && authUser?.id === company.owner) {
+        isOwner = true;
+    }
 
     return (
         <ItemStyles>
@@ -14,7 +21,7 @@ export default function Company({account, company}) {
                 <Link to={'/company/' + company.id}>{company.name}</Link>
             </Title>
             <p>{company.description}</p>
-            {Object.keys(authUser).length !== 0  && (
+            {isOwner  && (
                 <div className="buttonList">
                     {!account && (
                     <>
