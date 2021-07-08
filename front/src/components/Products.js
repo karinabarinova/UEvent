@@ -10,11 +10,12 @@ const ProductListStyles = styled.div`
 
 export default function Products() {
     const data = useSelector(({product}) => product.products)
+    const {user} = useSelector(({user}) => user);
 
     return (
         <ProductListStyles>
             {data?.rows && data.rows.map(product => {
-                return <Product key={product.id} product={product}/>
+                return <Product key={product.id} product={product} userCompanies={user?.companies}/>
             })}
         </ProductListStyles>
     )
