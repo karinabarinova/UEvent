@@ -84,7 +84,8 @@ async function purchase(userId, items, token) {
             userId: user.id,
             orderId: charge.created,
             send_notification: true,
-            email: user.email
+            email: user.email,
+            startDate: event.startDate
         })
 
         await user.addSubscription(sub);

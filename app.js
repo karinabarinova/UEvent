@@ -6,6 +6,8 @@ const app = express();
 const port = process.env.PORT;
 const errorHandler = require('./middleware/errorHandler');
 const public = require('path').join(__dirname, 'resources');
+const cron = require('node-cron');
+const notificationCron = require('./helpers/cron');
 
 const corsOptions = {
     origin: "http://localhost:3006"
@@ -47,6 +49,10 @@ app.use('/api/user', require('./controllers/user'));
 
 
 app.use(errorHandler);
+
+cron.schedule('* * * * *', async function() {
+    await notificationCron();
+});
 
 app.listen(port, () => {
     console.log("App is listening on port " + port);
