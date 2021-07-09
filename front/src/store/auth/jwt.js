@@ -88,7 +88,7 @@ class JwtService extends Emitter {
 					}
 				})
 				.catch(error => {
-					reject(error.response.data.data);
+					reject(error.response.data);
 				});
 		});
 	};
