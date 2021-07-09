@@ -11,6 +11,7 @@ const ProductListStyles = styled.div`
 export default function Products() {
     const data = useSelector(({product}) => product.products)
     const {user} = useSelector(({user}) => user);
+    console.log("USER", user)
 
     return (
         <ProductListStyles>

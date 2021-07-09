@@ -24,6 +24,9 @@ export default function Product({account, product, userCompanies}) {
     if (!account && userCompanies) {
         isOwner = checkOwner();
     }
+    console.log('isOwner', isOwner)
+    console.log('product.organizer', product.organizer)
+    console.log('userCompanies', userCompanies)
     
     const {openCart } = useCart();
     return (
