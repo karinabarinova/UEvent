@@ -63,7 +63,7 @@ export const userSlice = createSlice({
 })
 
 
-export const { setUserInfo, setOrders, setSelectedOrder } = userSlice.actions
+export const { setUserInfo, setOrders, setSelectedOrder, setUserInfoPassword, setMessage } = userSlice.actions
 
 
 export default userSlice.reducer
