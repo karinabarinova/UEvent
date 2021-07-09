@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
 import jwt from '../auth/index';
+import { showMessage } from '../message/messageSlice'
 
 export const checkout = (data) => (dispatch, getState) => {
     return jwt
         .checkout(data)
         .then((data) => {
-            return dispatch(setMessage(data.message))
+            return dispatch(showMessage(data.message))
         })
         .catch(error => {
-            return dispatch(setError(error.message))
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -55,12 +56,6 @@ export const cartSlice = createSlice({
             state.cart = copy;
 
         },
-        setMessage: (state, action) => {
-            state.message = action.payload
-        },
-        setError: (state, action) => {
-            state.error = action.payload
-        },
         clearCart: (state, action) => {
             state.cart = []
         }
@@ -68,6 +63,6 @@ export const cartSlice = createSlice({
     extraReducers: {}
 })
 
-export const { addItemToCartState, removeFromCartState, setError, setMessage, clearCart } = cartSlice.actions
+export const { addItemToCartState, removeFromCartState, clearCart } = cartSlice.actions
 
 export default cartSlice.reducer

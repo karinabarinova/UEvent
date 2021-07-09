@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     eventId: DataTypes.INTEGER,
     email: DataTypes.STRING,
     send_notification: DataTypes.BOOLEAN,
-    promoCode: DataTypes.STRING
+    promoCode: DataTypes.STRING,
+    startDate: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Subscription',

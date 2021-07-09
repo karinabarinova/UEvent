@@ -8,6 +8,7 @@ import register from './auth/registerSlice'
 import cart from './cart/cartSlice'
 import i18n from './i18n/i18nSlice'
 import user from './user/userSlice'
+import message from './message/messageSlice'
 
 const createReducer = asyncReducers => 
     combineReducers({
@@ -18,7 +19,8 @@ const createReducer = asyncReducers =>
         cart,
         search,
         i18n,
-        user
+        user,
+        message
     })
 
 export default createReducer;

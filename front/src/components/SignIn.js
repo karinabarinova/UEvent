@@ -1,10 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import useForm from "../lib/useForm";
 import {login} from '../store/auth/authSlice'
 import Form from "./styles/Form";
 
 export default function SignIn() {
+    const history = useHistory();
     const { t } = useTranslation('common');
     const dispatch = useDispatch()
     const { inputs, handleChange, resetForm } = useForm({
@@ -16,6 +18,7 @@ export default function SignIn() {
         e.preventDefault();
         dispatch(login(inputs));
         resetForm();
+        history.push('/account')
     }
 
     return (

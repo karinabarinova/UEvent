@@ -1,14 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import jwt from './index';
+import { showMessage } from '../message/messageSlice'
 
 export const login = (data) => async (dispatch, getState) => {
     return jwt
         .login(data)
         .then(data => {
+            dispatch(showMessage(data.message))
             return dispatch(setLogIn(data))
         })
         .catch(error => {
-            return dispatch(setMessage("Error"))
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -23,8 +25,7 @@ export const logout = () => async (dispatch, getState) => {
 
 const initialState = {
     user: {},
-    cart: {},
-    message: ''
+    cart: {}
 }
 
 export const authSlice = createSlice({
@@ -34,15 +35,13 @@ export const authSlice = createSlice({
         setLogIn: (state, action) => {
             state.user = action.payload.data
             state.message = action.payload.message
+            localStorage.setItem('user', JSON.stringify(state))
         },
-        setLogout: (state, action) => initialState,
-        setMessage: (state, action) => {
-            state.message = action.payload
-        }
+        setLogout: (state, action) => initialState
     },
     extraReducers: {}
 })
 
-export const { setLogIn, setMessage, setLogout } = authSlice.actions
+export const { setLogIn, setLogout } = authSlice.actions
 
 export default authSlice.reducer

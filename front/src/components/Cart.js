@@ -44,7 +44,7 @@ export default function Cart() {
     const me = useUser();
     const {cart} = useSelector(({cart}) => cart)
     const {cartOpen, closeCart } = useCart();
-    if (!me.user.email) return null;
+    if (!me?.user?.email) return null;
     return <CartStyles open={cartOpen}>
         <header>
             <Supreme>{me.user.fullName.split(' ')[0]}'s Cart</Supreme>

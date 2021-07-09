@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from 'axios';
 import jwt from '../auth/index';
+import { showMessage } from '../message/messageSlice';
 
 export const createCompany = data => async (dispatch, getState) => {
     return jwt
         .createCompany(data)
         .then((data) => {
-            return dispatch(setMessage(data.message))
+            return dispatch(showMessage(data.message))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -19,7 +20,7 @@ export const getAllCompanies = (page) => async (dispatch, getState) => {
             return dispatch(getAll(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -29,7 +30,7 @@ export const getCompanyById = id => async (dispatch, getState) => {
             return dispatch(getById(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -39,7 +40,7 @@ export const deleteCompany = id => async (dispatch, getState) => {
             return dispatch(setDeletedCompany(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -49,7 +50,7 @@ export const updateCompany = company => async (dispatch, getState) => {
             return dispatch(setUpdatedCompany(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -58,7 +59,6 @@ export const companySlice = createSlice({
     initialState: {
         companies: [],
         company: {},
-        message: ''
     },
     reducers: {
         getAll: (state, action) => {
@@ -72,14 +72,11 @@ export const companySlice = createSlice({
         },
         setDeletedCompany: (state, action) => {
             state.company.message = action.payload
-        },
-        setMessage: (state, action) => {
-            state.message = action.payload
         }
     },
     extraReducers: {}
 })
 
-export const { getAll, getById, setUpdatedCompany, setDeletedCompany, setMessage } = companySlice.actions
+export const { getAll, getById, setUpdatedCompany, setDeletedCompany } = companySlice.actions
 
 export default companySlice.reducer

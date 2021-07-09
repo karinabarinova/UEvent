@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from 'axios';
 import jwt from '../auth/index';
+import { showMessage } from '../message/messageSlice';
 
 export const addComment = data => async (dispatch, getState) => {
     return jwt
@@ -9,7 +10,7 @@ export const addComment = data => async (dispatch, getState) => {
             return dispatch(getById(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -20,7 +21,7 @@ export const createEvent = data => async (dispatch, getState) => {
             return dispatch(newEvent(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -30,7 +31,7 @@ export const getAllProducts = (page) => async (dispatch, getState) => {
             return dispatch(getAll(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -40,7 +41,7 @@ export const getProductById = id => async (dispatch, getState) => {
             return dispatch(getById(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -51,7 +52,7 @@ export const deleteEvent = id => async (dispatch, getState) => {
             return dispatch(setDeletedEvent(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -61,7 +62,7 @@ export const updateEvent = event => async (dispatch, getState) => {
             return dispatch(setUpdatedEvent(data))
         })
         .catch(error => {
-            console.log("error", error.message)
+            return dispatch(showMessage(error.message))
         })
 }
 

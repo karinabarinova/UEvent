@@ -10,6 +10,7 @@ const ProductListStyles = styled.div`
 
 export default function Companies() {
     const data = useSelector(({company}) => company.companies)
+    const {user} = useSelector(({user}) => user);
 
     return (
         <ProductListStyles>

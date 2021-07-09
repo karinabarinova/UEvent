@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import jwt from '../auth/index';
+import { showMessage } from "../message/messageSlice";
 
 export const getUserInfo = () => async (dispatch, getState) => {
     return jwt
@@ -8,7 +9,7 @@ export const getUserInfo = () => async (dispatch, getState) => {
             return dispatch(setUserInfo(data))
         })
         .catch(error => {
-            return dispatch(setMessage(error.message))
+            return dispatch(showMessage(error.message))
         })
 }
 export const setUserPassword = () => async (dispatch, getState) => {
@@ -29,7 +30,7 @@ export const getOrders = () => async (dispatch, getState) => {
             return dispatch(setOrders(data))
         })
         .catch(error => {
-            return dispatch(setMessage(error.message))
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -37,8 +38,8 @@ const initialState = {
     user: {},
     orders: {},
     selectedOrder: {},
-    message: '',
     changePassword: ''
+
 }
 
 export const userSlice = createSlice({
@@ -47,9 +48,6 @@ export const userSlice = createSlice({
     reducers: {
         setUserInfo: (state, action) => {
             state.user = action.payload
-        },
-        setMessage: (state, action) => {
-            state.message = action.payload
         },
         setOrders: (state, action) => {
             state.orders = action.payload
@@ -64,6 +62,8 @@ export const userSlice = createSlice({
     extraReducers: {}
 })
 
-export const { setUserInfo, setMessage, setOrders, setSelectedOrder, setUserInfoPassword } = userSlice.actions
+
+export const { setUserInfo, setOrders, setSelectedOrder } = userSlice.actions
+
 
 export default userSlice.reducer

@@ -8,8 +8,26 @@ import DeleteEvent from './DeleteEvent'
 import AddToCart from './AddToCart';
 import { useCart } from '../lib/cartState';
 
-export default function Product({account, product}) {
+export default function Product({account, product, userCompanies}) {
     const authUser = useSelector(({auth}) => auth.user)
+
+    function checkOwner() {
+        for(let i = 0; i < userCompanies.length; i++) {
+            if (userCompanies[i].id === product.organizer) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    let isOwner = false;
+    if (!account && userCompanies) {
+        isOwner = checkOwner();
+    }
+    console.log('isOwner', isOwner)
+    console.log('product.organizer', product.organizer)
+    console.log('userCompanies', userCompanies)
+    
     const {openCart } = useCart();
     return (
         <ItemStyles>
@@ -23,11 +41,11 @@ export default function Product({account, product}) {
             {/* TODO: add check if owner of event is the authUser.id */}
             {Object.keys(authUser).length !== 0  && (
                 <div className="buttonList"> 
-                    {!account && <Link to={{
+                    {!account && isOwner && <Link to={{
                         pathname: "/update-event/" + product.id,
                     }}>Edit</Link>}
                     {!account && <AddToCart product={product} openCart={openCart}/>}
-                    {!account && <DeleteEvent id={product.id}>Delete</DeleteEvent>}
+                    {!account && isOwner && <DeleteEvent id={product.id}>Delete</DeleteEvent>}
                 </div>
             )}
         </ItemStyles>

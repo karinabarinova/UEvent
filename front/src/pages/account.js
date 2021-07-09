@@ -1,19 +1,19 @@
 import {useDispatch } from 'react-redux'
-import Orders from '../components/Orders';
-import { getOrders } from '../store/user/userSlice'
+import Account from '../components/Account';
 import { useEffect } from 'react';
+import { getUserInfo } from '../store/user/userSlice';
 import PleaseSignIn from '../components/PleaseSignIn';
 
-export default function OrdersPage(props) {
+export default function AccountPage(props) {
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getOrders())
-    }, []);
+	useEffect(() => {
+		dispatch(getUserInfo());
+	}, [])
 
     return(
         <PleaseSignIn>
-            <Orders />
+            <Account />
         </PleaseSignIn>
     )
 }
