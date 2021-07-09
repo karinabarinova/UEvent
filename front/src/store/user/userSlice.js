@@ -11,6 +11,16 @@ export const getUserInfo = () => async (dispatch, getState) => {
             return dispatch(setMessage(error.message))
         })
 }
+export const setUserPassword = () => async (dispatch, getState) => {
+    return jwt
+        .resetPassword()
+        .then((data) => {
+            return dispatch(setUserInfoPassword(data))
+        })
+        .catch(error => {
+            return dispatch(setMessage(error.message))
+        })
+}
 
 export const getOrders = () => async (dispatch, getState) => {
     return jwt
@@ -27,7 +37,8 @@ const initialState = {
     user: {},
     orders: {},
     selectedOrder: {},
-    message: ''
+    message: '',
+    changePassword: ''
 }
 
 export const userSlice = createSlice({
@@ -45,11 +56,14 @@ export const userSlice = createSlice({
         },
         setSelectedOrder: (state, action) => {
             state.selectedOrder = action.payload
+        },
+        setUserInfoPassword: (state, action) => {
+            state.user.password = action.payload
         }
     },
     extraReducers: {}
 })
 
-export const { setUserInfo, setMessage, setOrders, setSelectedOrder } = userSlice.actions
+export const { setUserInfo, setMessage, setOrders, setSelectedOrder, setUserInfoPassword } = userSlice.actions
 
 export default userSlice.reducer
