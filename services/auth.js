@@ -7,36 +7,35 @@ const Role = db.ROLES;
 const Op = db.Sequelize.Op;
 const sendEmail = require('../helpers/sendMail');
 const makeANiceEmail = require('../helpers/makeANiceEmail');
-const { User } = require('../sequelize/models');
+const {User} = require('../sequelize/models');
 
 
 module.exports = {
     login,
     register,
     verifyEmail,
-    forgotPassword,
-    resetPassword
+    forgotPassword
 }
 
 //TODO:  add forgotPassword,resetPassword,
 
 async function register(params) {
-    if (await User.findOne({ where: { email: params.email } })) {
+    if (await User.findOne({where: {email: params.email}})) {
         // send already registered error in email to prevent account enumeration
         // await sendAlreadyRegisteredEmail(params.email, origin);
         throw "Email is already taken";
     }
 
     const role = Role.includes(params.role) ? params.role : "user";
-    
+
     // create account object
     const user = await User.create({
-            email: params.email,
-            password: bcrypt.hashSync(params.password, 8),
-            fullName: `${params.firstName} ${params.lastName}`,
-            role,
-            validation_str: randomTokenString()
-        })
+        email: params.email,
+        password: bcrypt.hashSync(params.password, 8),
+        fullName: `${params.firstName} ${params.lastName}`,
+        role,
+        validation_str: randomTokenString()
+    })
 
     await sendVerificationEmail(user);
 }
@@ -65,7 +64,7 @@ async function login({email, password}) {
     }
 }
 
-async function verifyEmail({ token }) {
+async function verifyEmail({token}) {
     const user = await User.findOne({
         where: {
             validation_str: token
@@ -78,26 +77,26 @@ async function verifyEmail({ token }) {
     await user.save();
 }
 
-async function forgotPassword({ email }) {
-    const user = await db.User.findOne({ where: { email } });
+async function forgotPassword({email}) {
+    const user = await db.User.findOne({where: {email}});
 
     // always return ok response to prevent email enumeration
     if (!user) return;
 
     // create reset token that expires after 24 hours
     user.resetToken = randomTokenString();
-    user.resetTokenExpires = new Date(Date.now() + 24*60*60*1000);
+    user.resetTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
     await user.save();
 
     // send email
     await sendPasswordResetEmail(user);
 }
 
-async function validateResetToken({ token }) {
+async function validateResetToken({token}) {
     const user = await db.User.findOne({
         where: {
             resetToken: token,
-            resetTokenExpires: { [Op.gt]: Date.now() }
+            resetTokenExpires: {[Op.gt]: Date.now()}
         }
     });
 
@@ -106,9 +105,10 @@ async function validateResetToken({ token }) {
     return user;
 }
 
-async function resetPassword({ password, token }) {
+
+async function resetPassword({password, token}) {
     console.log(password, token);
-    const user = await validateResetToken({ token });
+    const user = await validateResetToken({token});
 
     // update password and remove reset token
     user.password = await hash(password);
@@ -116,6 +116,7 @@ async function resetPassword({ password, token }) {
     user.resetToken = null;
     await user.save();
 }
+
 
 //helpers
 
@@ -153,8 +154,8 @@ function randomTokenString() {
 }
 
 function basicDetails(user) {
-    const { id, email, role, createdAt, updatedAt, fullName } = user;
-    return { id, email, role, createdAt, updatedAt, fullName };
+    const {id, email, role, createdAt, updatedAt, fullName} = user;
+    return {id, email, role, createdAt, updatedAt, fullName};
 }
 
 async function hash(password) {

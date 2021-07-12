@@ -12,14 +12,27 @@ export const getUserInfo = () => async (dispatch, getState) => {
             return dispatch(showMessage(error.message))
         })
 }
-export const setUserPassword = () => async (dispatch, getState) => {
+
+
+export const addPassword = password => async (dispatch) => {
     return jwt
-        .resetPassword()
+        .addPassword(password)
         .then((data) => {
-            return dispatch(setUserInfoPassword(data))
+            return dispatch(showMessage(data.message))
         })
         .catch(error => {
-            return dispatch(setMessage(error.message))
+            return dispatch(showMessage(error.message))
+        })
+}
+
+export const addEmail = email => async (dispatch) => {
+    return jwt
+        .addEmail(email)
+        .then((data) => {
+            return dispatch(showMessage(data.message))
+        })
+        .catch(error => {
+            return dispatch(showMessage(error.message))
         })
 }
 
@@ -38,8 +51,6 @@ const initialState = {
     user: {},
     orders: {},
     selectedOrder: {},
-    changePassword: ''
-
 }
 
 export const userSlice = createSlice({
@@ -58,12 +69,13 @@ export const userSlice = createSlice({
         setUserInfoPassword: (state, action) => {
             state.user.password = action.payload
         }
+
     },
     extraReducers: {}
 })
 
 
-export const { setUserInfo, setOrders, setSelectedOrder, setUserInfoPassword, setMessage } = userSlice.actions
+export const { setUserInfo, setOrders, setSelectedOrder, setUserInfoPassword} = userSlice.actions
 
 
 export default userSlice.reducer

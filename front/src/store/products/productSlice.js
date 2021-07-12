@@ -14,6 +14,7 @@ export const addComment = data => async (dispatch, getState) => {
         })
 }
 
+
 export const createEvent = data => async (dispatch, getState) => {
     return jwt
         .createEvent(data)
@@ -93,6 +94,7 @@ export const productSlice = createSlice({
         clearNewEvent: (state, action) => {
             state.newEvent = {}
         }
+
     },
     extraReducers: {}
 })

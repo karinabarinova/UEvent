@@ -1,5 +1,6 @@
 const QRCode = require('qrcode')
 const {User, Event, Subscription, Order} = require('../sequelize/models');
+const bcrypt = require('bcryptjs');
 const sendEmail = require('../helpers/sendMail');
 const makeANiceEmail = require('../helpers/makeANiceEmail');
 const stripeConfig = require('../helpers/stripe');
@@ -10,7 +11,9 @@ const stripeConfig = require('../helpers/stripe');
 module.exports = {
     getUserInfo,
     purchase,
-    getOrders
+    getOrders,
+    changePassword,
+    changeMail
 }
 
 //TODO: edit subscription - change send_notification status
@@ -70,7 +73,7 @@ async function purchase(userId, items, token) {
     // [ { name: 'UFC Live', price: 120, quantity: 1 } ]
 
     if (charge.status !== 'succeeded') {
-        console.log("Payment details", paymentDetails);
+         console.log("Payment details", paymentDetails);
         throw 'Failed payment';
     }
 
@@ -127,3 +130,52 @@ function basicDetails(user) {
     const name = `${capitalizeFirstLetter(fullNameArr[0])} ${capitalizeFirstLetter(fullNameArr[1])}`
     return { id, email, role, createdAt, updatedAt, name };
 }
+
+async function changePassword(id, password) {
+    let dataToUpdate = {}
+
+    const user = await User.findOne({
+        where: {
+            id: id
+        }
+    })
+    if (user !== undefined && password !== undefined) {
+        dataToUpdate['password'] = await hash(password.password)
+        await User.update(dataToUpdate, {
+            where: {
+                id: id
+            }
+        })
+    }
+    if (!user) throw 'Oops something wrong'
+
+    return user;
+
+}
+async function changeMail(id, email) {
+    let dataToUpdate = {}
+
+    const user = await User.findOne({
+        where: {
+            id: id
+        }
+    })
+    if (user !== undefined && email !== undefined) {
+        dataToUpdate['email'] = email.email
+        await User.update(dataToUpdate, {
+            where: {
+                id: id
+            }
+        })
+    }
+    if (!user) throw 'Oops something wrong'
+
+    return user;
+
+}
+
+async function hash(password) {
+    return await bcrypt.hash(password, 10);
+}
+
+

@@ -2,6 +2,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import Emitter from './eventEmmiter'
 
+
 class JwtService extends Emitter {
     init() {
         this.setInterceptors();
@@ -212,6 +213,35 @@ class JwtService extends Emitter {
 				});
 		});
 	}
+
+	addEmail = email => {
+		return new Promise((resolve, reject) => {
+			axios
+				.post('user/change-email', {email: email.email})
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				})
+		});
+
+	};
+
+	addPassword = password => {
+		return new Promise((resolve, reject) => {
+			axios
+				.post('user/change-password', {password: password.password})
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				});
+
+		});
+
+	};
 
 	getOrders = () => {
 		return new Promise((resolve, reject) => {

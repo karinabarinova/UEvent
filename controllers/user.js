@@ -7,6 +7,8 @@ const stripePublicKey = process.env.STRIPE_PUBLISHABLE_KEY;
 router.get('/',  authJwt.verifyToken, getUserInfo);
 router.get('/cart', authJwt.verifyToken, getCart);
 router.post('/purchase', authJwt.verifyToken, purchase);
+router.post('/change-password', authJwt.verifyToken, changePasswordInAccount)
+router.post('/change-email', authJwt.verifyToken, changeEmailInAccount)
 router.get('/orders', authJwt.verifyToken, getOrders);
 //TODO: edit/getByID subscriptions
 
@@ -37,5 +39,17 @@ function purchase(req, res, next) {
     // service.purchase(req.userId, items, token)
     service.purchase(userId, items, token)
         .then(() => res.json({message: 'Successfully purchased event(s)'}))
+        .catch(next);
+}
+
+function changePasswordInAccount (req, res, next) {
+    service.changePassword(req.userId,  req.body)
+        .then(() => res.json({ message: 'Password updated successfully' }))
+        .catch(next);
+}
+
+function changeEmailInAccount (req, res, next) {
+    service.changeMail(req.userId,  req.body)
+        .then(() => res.json({ message: 'Email updated successfully' }))
         .catch(next);
 }
