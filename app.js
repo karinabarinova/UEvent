@@ -10,7 +10,7 @@ const cron = require('node-cron');
 const notificationCron = require('./helpers/cron');
 
 const corsOptions = {
-    origin: "http://localhost:3000"
+    origin: "http://localhost:3006"
 };
 
 app.use(cors(corsOptions));

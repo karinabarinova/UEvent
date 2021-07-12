@@ -6,8 +6,6 @@ import DeleteCompany from './DeleteCompany';
 
 export default function Company({account, company}) {
     const authUser = useSelector(({auth}) => auth.user)
-    console.log("authUser", authUser)
-    console.log('company', company)
 
     let isOwner = false;
     if (!account && Object.keys(authUser).length !== 0 && authUser?.id === company.owner) {

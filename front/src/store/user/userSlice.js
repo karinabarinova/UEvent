@@ -29,7 +29,8 @@ export const addEmail = email => async (dispatch) => {
     return jwt
         .addEmail(email)
         .then((data) => {
-            return dispatch(showMessage(data.message))
+            dispatch(showMessage(data.message))
+            return dispatch(getUserInfo());
         })
         .catch(error => {
             return dispatch(showMessage(error.message))

@@ -217,7 +217,7 @@ class JwtService extends Emitter {
 	addEmail = email => {
 		return new Promise((resolve, reject) => {
 			axios
-				.post('user/change-email', {email: email.email})
+				.post('/user/change-email', {email})
 				.then(response => {
 					resolve(response.data);
 				})
@@ -231,7 +231,7 @@ class JwtService extends Emitter {
 	addPassword = password => {
 		return new Promise((resolve, reject) => {
 			axios
-				.post('user/change-password', {password: password.password})
+				.post('/user/change-password', {password})
 				.then(response => {
 					resolve(response.data);
 				})

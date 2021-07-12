@@ -4,9 +4,6 @@ const bcrypt = require('bcryptjs');
 const sendEmail = require('../helpers/sendMail');
 const makeANiceEmail = require('../helpers/makeANiceEmail');
 const stripeConfig = require('../helpers/stripe');
-// const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-// const stripe = require('stripe')(stripeSecretKey);
-
 
 module.exports = {
     getUserInfo,
@@ -132,50 +129,36 @@ function basicDetails(user) {
 }
 
 async function changePassword(id, password) {
-    let dataToUpdate = {}
-
     const user = await User.findOne({
         where: {
             id: id
         }
     })
-    if (user !== undefined && password !== undefined) {
-        dataToUpdate['password'] = await hash(password.password)
-        await User.update(dataToUpdate, {
-            where: {
-                id: id
-            }
-        })
-    }
+
     if (!user) throw 'Oops something wrong'
 
-    return user;
-
+    if (password) {
+        user.password = await hash(password)
+        user.save()
+    }
 }
 async function changeMail(id, email) {
-    let dataToUpdate = {}
-
     const user = await User.findOne({
         where: {
             id: id
         }
     })
-    if (user !== undefined && email !== undefined) {
-        dataToUpdate['email'] = email.email
-        await User.update(dataToUpdate, {
-            where: {
-                id: id
-            }
-        })
-    }
+
     if (!user) throw 'Oops something wrong'
 
-    return user;
-
+    if (email) {
+        user.email = email;
+        user.save()
+    }
 }
 
 async function hash(password) {
-    return await bcrypt.hash(password, 10);
+    return await bcrypt.hash(password, 8);
 }
 
 

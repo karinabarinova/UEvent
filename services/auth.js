@@ -14,7 +14,8 @@ module.exports = {
     login,
     register,
     verifyEmail,
-    forgotPassword
+    forgotPassword,
+    resetPassword
 }
 
 //TODO:  add forgotPassword,resetPassword,
@@ -107,7 +108,6 @@ async function validateResetToken({token}) {
 
 
 async function resetPassword({password, token}) {
-    console.log(password, token);
     const user = await validateResetToken({token});
 
     // update password and remove reset token
@@ -159,5 +159,5 @@ function basicDetails(user) {
 }
 
 async function hash(password) {
-    return await bcrypt.hash(password, 10);
+    return await bcrypt.hash(password, 8);
 }

@@ -43,13 +43,13 @@ function purchase(req, res, next) {
 }
 
 function changePasswordInAccount (req, res, next) {
-    service.changePassword(req.userId,  req.body)
+    service.changePassword(req.userId,  req.body.password)
         .then(() => res.json({ message: 'Password updated successfully' }))
         .catch(next);
 }
 
 function changeEmailInAccount (req, res, next) {
-    service.changeMail(req.userId,  req.body)
+    service.changeMail(req.userId,  req.body.email)
         .then(() => res.json({ message: 'Email updated successfully' }))
         .catch(next);
 }

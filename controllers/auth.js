@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const service = require('../services/auth');
-const authJwt = require('../middleware/authJwt');
 //logout should be done on client side
 
 router.post('/login', login);
@@ -9,7 +8,6 @@ router.post('/register', register);
 router.post('/verify-email', verifyEmail);
 router.post('/password-reset', forgotPassword);
 router.post('/reset-password', resetPassword);
-
 
 module.exports = router;
 

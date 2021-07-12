@@ -1,48 +1,29 @@
 import Button from '@material-ui/core/Button';
-
 import { addPassword, addEmail } from "../store/user/userSlice";
 import { useDispatch } from "react-redux";
-
-
+import useForm from '../lib/useForm';
+import { useState } from 'react';
 
 export default function EditInfoTab({user}) {
-        const dispatch = useDispatch()
+    const dispatch = useDispatch()
+    const { inputs, handleChange } = useForm({
+        password: '',
+        email: user?.email,
+    });
+    const [emailStyle, setEmailStyle] = useState(false)
+    const [passwordStyle, setPasswordStyle] = useState(false)
 
-        const style = {
-            background: 'red', color: 'white', padding: '1rem', margin: '1rem', fontSize: 14
-        }
-        const style2 = {
-            background: 'indianred', color: 'white', padding: '1rem', margin: '1rem', fontSize: 14
-        }
-        function changePassword() {
-    document.getElementsByClassName('passwordItems' )[0].style.display = 'initial';
-    document.getElementsByClassName('passwordItems' )[1].style.display = 'initial';
-}
-    function changeEmail() {
-        document.getElementsByClassName('emailItems' )[0].style.display = 'initial';
-        document.getElementsByClassName('emailItems' )[1].style.display = 'initial';
+    const style = {
+        background: 'red', color: 'white', padding: '1rem', margin: '1rem', fontSize: 14
     }
 
-    function submitEmailChange() {
-        let email = document.getElementById('email').value
-
-        if (email) {
-            dispatch(addEmail({email: email}));
-        }
+    const style2 = {
+        background: 'indianred', color: 'white', padding: '1rem', margin: '1rem', fontSize: 14
     }
 
-function changeAvatar() {
-    alert('ca')
-}
-
-function submitPasswordChange() {
-    let password = document.getElementById('password').value
-
-    if (password) {
-       dispatch(addPassword({password: password}));
+    function changeAvatar() {
+        alert('ca')
     }
-
-}
 
     return (
         <div id="input" style={{
@@ -52,30 +33,66 @@ function submitPasswordChange() {
                 padding: '1rem'
             }}
         >
-            <div >
+            <fieldset>
                 <div>
-                    <Button variant="contained" onClick={changePassword}  style={style}> Change Password 🔐</Button>
-                    <input variant="contained" style={{...style2, display: "none"}} id={"password"} className={"passwordItems"}
-                            type="password" placeholder="NEW PASSWORD" />
-                    <button variant="contained" className={"passwordItems"} variant="contained" onClick={submitPasswordChange} style={{...style2, display: "none"}}>ADD</button>
+                    <Button 
+                        variant="contained" 
+                        onClick={() => setPasswordStyle(!passwordStyle)}  
+                        style={style}
+                    > Change Password 🔐
+                    </Button>
+                    {passwordStyle && (
+                        <>
+                            <input 
+                                variant="contained" 
+                                style={{...style2 }} 
+                                id="password" 
+                                name="password"
+                                type="password" 
+                                placeholder="NEW PASSWORD" 
+                                onChange={handleChange}
+                            />
+                            <button 
+                                variant="contained" 
+                                onClick={() => dispatch(addPassword( inputs.password))} 
+                                style={{...style2}}
+                                >ADD
+                            </button>
+                        </>
+                    )}
                 <div>
-                    <Button variant="contained" onClick={changeEmail}  style={style}>Change Email 📧</Button>
-                    <input variant="contained" style={{...style2, display: "none"}} id={"email"} className={"emailItems"}
-                           type="email" placeholder="NEW EMAIL" />
-                    <button variant="contained" className={"emailItems"} variant="contained" onClick={submitEmailChange} style={{...style2, display: "none"}}>ADD</button>
+                    <Button 
+                        variant="contained" 
+                        onClick={() => setEmailStyle(!emailStyle)}  
+                        style={style}
+                    >Change Email 📧
+                    </Button>
+                    {emailStyle && (
+                        <>
+                            <input 
+                                variant="contained" 
+                                style={{...style2}} 
+                                name="email"
+                                id="email" 
+                                type="email" 
+                                placeholder="NEW EMAIL" 
+                                onChange={handleChange}
+                            />
+                            <button 
+                                variant="contained" 
+                                variant="contained" 
+                                onClick={() => dispatch(addEmail( inputs.email ))} 
+                                style={{...style2}}
+                            >ADD</button>
+                        </>
+                    )}
+                    
                 </div>
                     <div>
                         <Button variant="contained" onClick={changeAvatar}  style={style}>New Avatar 🤳</Button>
-
                     </div>
                 </div>
-
-
-
-
-            </div>
-
-
+            </fieldset>
         </div>        
         )
 } 
