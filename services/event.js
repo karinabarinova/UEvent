@@ -81,8 +81,7 @@ async function getById(id) {
     }
 }
 
-async function add({name, description, startDate, location, price, promoCodes, theme, format}, id) { //format is null??
-    //startDate time format  "2021-06-11T14:00Z",
+async function add({name, description, startDate, location, price, promoCodes, theme, format}, id) {
     const user = await User.findByPk(id);
     if (user.hasCompanies === false) {
         throw 'Create a company to be able to create events';
@@ -159,7 +158,7 @@ async function update(params, id) {
     const event = await getEvent(id);
     Object.assign(event, params);
     await event.save();
-    return event.get(); //do I really need it?
+    return event.get();
 }
 
 async function updateComment(params, eventId, commentId) {

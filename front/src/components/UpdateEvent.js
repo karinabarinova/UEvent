@@ -10,16 +10,19 @@ export default function UpdateEvent(props) {
     const data = useSelector(({product}) => product.product)
     const dispatch = useDispatch();
 
-    const { inputs, handleChange, clearForm, resetForm } = useForm(data?.event);
+    const { inputs, handleChange, clearForm, resetForm } = useForm({
+        price: data?.event?.price,
+        description: data?.event?.description,
+        name: data?.event?.name
+    });
 
     useEffect(() => {
         dispatch(getProductById(props.match.params.id))
     }, []);
-
     return (
         <Form onSubmit={async (e) => {
             e.preventDefault();
-            dispatch(updateEvent(inputs))
+            dispatch(updateEvent(inputs, data?.event?.id))
             // clearForm();
             // history.push('/event/' + 3) //TODO: redirect to the event page
 

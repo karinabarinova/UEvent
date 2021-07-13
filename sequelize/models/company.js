@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   Company.init({
     name: DataTypes.STRING,
     location: DataTypes.GEOMETRY('POINT'),
-    description: DataTypes.STRING,
+    description: DataTypes.STRING(1234),
     owner: DataTypes.INTEGER
   }, {
     sequelize,

@@ -57,9 +57,10 @@ export const deleteEvent = id => async (dispatch, getState) => {
         })
 }
 
-export const updateEvent = event => async (dispatch, getState) => {
-    return axios.patch(`/event/${event.id}`)
+export const updateEvent = (event, id) => async (dispatch, getState) => {
+    return axios.patch(`/event/${id}`, event)
         .then(({data}) => {
+            dispatch(showMessage(data.message))
             return dispatch(setUpdatedEvent(data))
         })
         .catch(error => {

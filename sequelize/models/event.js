@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Event.init({
     name: DataTypes.STRING,
-    description: DataTypes.STRING,
+    description: DataTypes.STRING(1234),
     startDate: DataTypes.DATE,
     location: DataTypes.GEOMETRY('POINT'),
     price: DataTypes.INTEGER,

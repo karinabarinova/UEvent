@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.GEOMETRY('POINT')
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1234)
       },
       owner: {
         type: Sequelize.INTEGER
