@@ -1,16 +1,17 @@
 import {useSelector, useDispatch} from 'react-redux'
 import { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
 import { getCompanyById, updateCompany } from '../store/company/companySlice';
 import Form from './styles/Form';
 import useForm from '../lib/useForm';
 
 export default function UpdateCompany(props) {
-    const history = useHistory();
-    const data = useSelector(({company}) => company.company)
+    const company = useSelector(({company}) => company.company)
     const dispatch = useDispatch();
 
-    const { inputs, handleChange, clearForm, resetForm } = useForm(data);
+    const { inputs, handleChange, clearForm, resetForm } = useForm({
+        name: company?.name,
+        description: company?.description
+    });
 
     useEffect(() => {
         dispatch(getCompanyById(props.match.params.id))
@@ -19,7 +20,7 @@ export default function UpdateCompany(props) {
     return (
         <Form onSubmit={async (e) => {
             e.preventDefault();
-            dispatch(updateCompany(inputs))
+            dispatch(updateCompany(inputs, company?.id))
         }}>
             <h1>Update Company</h1>
             <fieldset>

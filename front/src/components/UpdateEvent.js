@@ -1,12 +1,10 @@
 import {useSelector, useDispatch} from 'react-redux'
 import { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
 import { getProductById, updateEvent } from '../store/products/productSlice';
 import Form from './styles/Form';
 import useForm from '../lib/useForm';
 
 export default function UpdateEvent(props) {
-    const history = useHistory();
     const data = useSelector(({product}) => product.product)
     const dispatch = useDispatch();
 

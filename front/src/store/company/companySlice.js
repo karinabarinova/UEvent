@@ -44,9 +44,10 @@ export const deleteCompany = id => async (dispatch, getState) => {
         })
 }
 
-export const updateCompany = company => async (dispatch, getState) => {
-    return axios.patch(`/company/${company.id}`)
+export const updateCompany = (company, id) => async (dispatch, getState) => {
+    return axios.patch(`/company/${id}`, company)
         .then(({data}) => {
+            dispatch(showMessage(data.message))
             return dispatch(setUpdatedCompany(data))
         })
         .catch(error => {
