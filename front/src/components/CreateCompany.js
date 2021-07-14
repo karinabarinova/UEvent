@@ -33,7 +33,6 @@ export default function CreateCompany() {
 
         }}>
             <h1>{t("NEW_COMPANY")}</h1>
-            {/* <DisplayError error={error} /> */}
             <fieldset>
                 <label htmlFor="image">
                     {t("IMAGE")}
@@ -47,6 +46,7 @@ export default function CreateCompany() {
                 <label htmlFor="name">
                     {t("NAME")}
                     <input
+                        required
                         type="text"
                         id="name"
                         name="name"
@@ -58,6 +58,7 @@ export default function CreateCompany() {
                 <label htmlFor="description">
                     {t("DESCRIPTION")}
                     <textarea
+                        required
                         id="description"
                         name="description"
                         placeholder={t("DESCRIPTION")}

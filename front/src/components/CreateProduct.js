@@ -4,7 +4,6 @@ import Form from './styles/Form';
 import { useHistory } from "react-router-dom";
 import {useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { createEvent } from "../store/products/productSlice";
-// import LocationSearchInput from './LocationSearch'
 import LocationSearch from './LocationSearch';
 import { useState } from "react";
 
@@ -44,7 +43,6 @@ export default function CreateProduct() {
 
         }}>
             <h1>{t("NEW_EVENT")}</h1>
-            {/* <DisplayError error={error} /> */}
             <fieldset>
                 <label htmlFor="image">
                     {t("IMAGE")}
@@ -58,6 +56,7 @@ export default function CreateProduct() {
                 <label htmlFor="name">
                     {t("NAME")}
                     <input
+                        required
                         type="text"
                         id="name"
                         name="name"
@@ -69,6 +68,7 @@ export default function CreateProduct() {
                 <label htmlFor="price">
                     {t("PRICE")}
                     <input
+                        required
                         type="number"
                         id="price"
                         name="price"
@@ -80,6 +80,7 @@ export default function CreateProduct() {
                 <label htmlFor="description">
                     {t("DESCRIPTION")}
                     <textarea
+                        required
                         id="description"
                         name="description"
                         placeholder={t("DESCRIPTION")}

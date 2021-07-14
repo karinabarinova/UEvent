@@ -21,12 +21,10 @@ export default function UpdateEvent(props) {
         <Form onSubmit={async (e) => {
             e.preventDefault();
             dispatch(updateEvent(inputs, data?.event?.id))
-            // clearForm();
-            // history.push('/event/' + 3) //TODO: redirect to the event page
+            clearForm();
 
         }}>
             <h1>Update Event</h1>
-            {/* <DisplayError error={error} /> */}
             <fieldset>
                 {/* <label htmlFor="image"> //TODO: will I change the image?
                     Image

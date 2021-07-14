@@ -21,6 +21,7 @@ export default function UpdateCompany(props) {
         <Form onSubmit={async (e) => {
             e.preventDefault();
             dispatch(updateCompany(inputs, company?.id))
+            clearForm()
         }}>
             <h1>Update Company</h1>
             <fieldset>
