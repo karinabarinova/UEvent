@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import jwt from './index';
 import { showMessage } from '../message/messageSlice'
+import { getUserInfo } from "../user/userSlice";
 
 export const login = (data) => async (dispatch, getState) => {
     return jwt
         .login(data)
         .then(data => {
-            dispatch(showMessage(data.message))
-            return dispatch(setLogIn(data))
+            dispatch(getUserInfo())
+            dispatch(setLogIn(data))
+            return dispatch(showMessage(data.message))
         })
         .catch(error => {
             return dispatch(showMessage(error.message))
@@ -16,12 +18,16 @@ export const login = (data) => async (dispatch, getState) => {
 
 export const logout = () => async (dispatch, getState) => {
     const {user} = getState().auth;
-    if (!user.email)
+    if (!user.email) {
+        localStorage.removeItem('user')
         return null;
+    }
     localStorage.removeItem('user')
 
     jwt.logout();
+
     dispatch(setLogout());
+
 }
 
 const initialState = {

@@ -9,10 +9,12 @@ export default function Account() {
 
     return (
         <>
-            <AboutTab user={user.user}/>
-            <EditInfoTab user={user.user} />
-            <EventsList events={user.events}/>
-            <CompaniesList companies={user.companies} />
+            {Object.keys(user).length !== 0 && (<>
+                <AboutTab user={user.user}/>
+                <EditInfoTab user={user.user} />
+                <EventsList events={user.events}/>
+                <CompaniesList companies={user.companies} />
+            </>)}
         </>
     )
 }
