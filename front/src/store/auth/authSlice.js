@@ -16,8 +16,9 @@ export const login = (data) => async (dispatch, getState) => {
 
 export const logout = () => async (dispatch, getState) => {
     const {user} = getState().auth;
-    if (!user.role || !user.role.length)
+    if (!user.email)
         return null;
+    localStorage.removeItem('user')
 
     jwt.logout();
     dispatch(setLogout());

@@ -10,7 +10,6 @@ export default function SignOut() {
     
     return (
         <button type="button" onClick={() => {
-            localStorage.removeItem('user')
             dispatch(logout());
             history.push("/")
         }}>
