@@ -7,9 +7,10 @@ import PriceTag from './styles/PriceTag'
 import DeleteEvent from './DeleteEvent'
 import AddToCart from './AddToCart';
 import { useCart } from '../lib/cartState';
+import { useUser } from './User';
 
 export default function Product({account, product, userCompanies}) {
-    const authUser = useSelector(({auth}) => auth.user)
+    const {user} = useUser()
 
     function checkOwner() {
         for(let i = 0; i < userCompanies.length; i++) {
@@ -36,7 +37,7 @@ export default function Product({account, product, userCompanies}) {
             <p>{product.description}</p>
             <Tags><b>{product.theme} / {product.format}</b></Tags>
             {/* TODO: add check if owner of event is the authUser.id */}
-            {Object.keys(authUser).length !== 0  && (
+            {Object.keys(user).length !== 0  && (
                 <div className="buttonList"> 
                     {!account && isOwner && <Link to={{
                         pathname: "/update-event/" + product.id,
