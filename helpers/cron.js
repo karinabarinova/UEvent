@@ -27,7 +27,6 @@ const notificationCron = async () => {
     const subs = await Subscription.findAll( {where: {send_notification: true}} ) //all subscription where send notification = true, once email sent we need to set it to false
     if (subs) {
         subs.forEach(async sub => {
-            console.log('sub', sub)
             const diff = findDifference(sub.startDate)
             if (diff <= 1440) { //if event is in less than 24 hours
                 const event = await Event.findOne({where: { id: sub.eventId}})

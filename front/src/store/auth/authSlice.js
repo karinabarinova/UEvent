@@ -16,6 +16,19 @@ export const login = (data) => async (dispatch, getState) => {
         })
 }
 
+export const loginGoogle = (payload) => async (dispatch, getState) => {
+    return jwt
+        .loginGoogle(payload)
+        .then(data => {
+            dispatch(getUserInfo())
+            dispatch(setLogIn(data))
+            return dispatch(showMessage(data.message))
+        })
+        .catch(error => {
+            return dispatch(showMessage(error.message))
+        })
+}
+
 export const logout = () => async (dispatch, getState) => {
     const {user} = getState().auth;
     if (!user.email) {

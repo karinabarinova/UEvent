@@ -12,7 +12,8 @@ import './i18n';
 import {I18nextProvider} from "react-i18next";
 
 
-axios.defaults.baseURL = 'http://localhost:3000/api'
+// axios.defaults.baseURL = 'http://localhost:3006/api'
+ axios.defaults.baseURL = 'http://localhost:3000/api'
 
 ReactDOM.render(
   <React.StrictMode>

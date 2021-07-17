@@ -93,6 +93,19 @@ class JwtService extends Emitter {
 				});
 		});
 	};
+	loginGoogle = (payload) => {
+		return new Promise ((resolve, reject) => {
+			axios
+				.post('/google', payload)
+				.then(response => {
+
+					resolve(response.data)
+				})
+				.catch(error => {
+					reject(error);
+				});
+		});
+	}
 
 	register = data => {
 		return new Promise((resolve, reject) => {

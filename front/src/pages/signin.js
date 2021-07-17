@@ -3,6 +3,7 @@ import RequestReset from "../components/RequestReset";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import VerifyToken from "../components/VerifyToken";
+import GoogleAuth from "../components/GoogleAuth"
 
 const GridStyles = styled.div`
     display: grid;
@@ -16,6 +17,7 @@ export default function SingInPage() {
         <div>
             <GridStyles>
                 <SignIn />
+                <GoogleAuth />
                 <SignUp />
                 <VerifyToken />
                 <RequestReset />

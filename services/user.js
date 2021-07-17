@@ -63,14 +63,14 @@ async function purchase(userId, items, token) {
         confirm: true,
         payment_method: token,
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         throw new Error(err.message);
     })
 
     // [ { name: 'UFC Live', price: 120, quantity: 1 } ]
 
     if (charge.status !== 'succeeded') {
-         console.log("Payment details", paymentDetails);
+         //console.log("Payment details", paymentDetails);
         throw 'Failed payment';
     }
 
