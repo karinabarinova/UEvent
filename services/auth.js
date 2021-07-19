@@ -15,7 +15,8 @@ module.exports = {
     register,
     verifyEmail,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    socialLogin
 }
 
 //TODO:  add forgotPassword,resetPassword,
@@ -64,6 +65,32 @@ async function login({email, password}) {
         expiresIn: 86400
     }
 }
+
+
+async function socialLogin(email) {
+    const user = await User.findOne({
+        where: {
+            email: email.toLowerCase()
+        }
+    })
+
+    if (!user || !user.email_validated) {
+        throw 'Email is incorrect'
+    }
+
+    const accessToken = jwt.sign({id: user.id}, config.secret, {
+        expiresIn: 86400 //24 hours
+    });
+
+    // await user.getSubscription();
+    return {
+        ...basicDetails(user),
+        subscriptions: await user.getSubscriptions(),
+        accessToken,
+        expiresIn: 86400
+    }
+}
+
 
 async function verifyEmail({token}) {
     const user = await User.findOne({
