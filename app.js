@@ -58,8 +58,9 @@ app.post('/api/google', async (req, res) => {
         audience: process.env.GOOGLE_CLIENT_ID
     });
     const {name, email, picture} = ticket.getPayload();
-    const user = await socialLogin(email)
-    res.status(200).json({data: user, message: "Logged in successfully"})
+    socialLogin(email)
+        .then((data) => res.status(200).json({data, message: "Logged in successfully"}))
+        .catch(next);
 })
 
 const Role = db.role;
