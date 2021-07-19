@@ -25,8 +25,8 @@ export default function Product({account, product, userCompanies}) {
     if (!account && userCompanies) {
         isOwner = checkOwner();
     }
-    
     const {openCart } = useCart();
+
     if (!product) return null;
     return (
         <ItemStyles>

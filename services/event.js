@@ -148,15 +148,19 @@ async function addComment({ body }, userId, eventId) {
 }
 
 async function update(params, id) {
-    const exists = await Event.findOne({
-        where: {
-            name: params.name
-        }
-    })
-    if (exists)
-        throw 'Event already exists';
+    
     const event = await getEvent(id);
+
+    if (params.location) {
+        const point = {
+            type: 'Point',
+            coordinates: params.location
+        }
+        params.location = point;
+
+    }
     Object.assign(event, params);
+
     await event.save();
     return event.get();
 }

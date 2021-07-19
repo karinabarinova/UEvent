@@ -67,7 +67,7 @@ export default function UpdateCompany(props) {
                     {t("COMPANY_LOCATION")}
                     <LocationSearch setLocation={setLocation}/>
                 </label>
-                <button type="submit">Update Company</button>
+                <button type="submit">{t("UPDATE_COMPANY")}</button>
             </fieldset>
         </Form>
     )

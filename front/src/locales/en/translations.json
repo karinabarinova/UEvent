@@ -42,5 +42,6 @@
     "COMMENTS": "Comments",
     "ADD_COMMENT": "Add a comment",
     "SIMILAR_EVENTS": "Similar events",
-    "UPDATE_COMPANY": "Update company"
+    "UPDATE_COMPANY": "Update company",
+    "UPDATE_EVENT": "Update event"
 }

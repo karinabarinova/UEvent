@@ -1,11 +1,15 @@
 import {useSelector, useDispatch} from 'react-redux'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getProductById, updateEvent } from '../store/products/productSlice';
+import { useTranslation } from "react-i18next";
+import LocationSearch from './LocationSearch';
 import Form from './styles/Form';
 import useForm from '../lib/useForm';
 
 export default function UpdateEvent(props) {
+    const { t } = useTranslation('common');
     const data = useSelector(({product}) => product.product)
+    const [location, setLocation] = useState([[]])
     const dispatch = useDispatch();
 
     const { inputs, handleChange, clearForm, resetForm } = useForm({
@@ -20,11 +24,16 @@ export default function UpdateEvent(props) {
     return (
         <Form onSubmit={async (e) => {
             e.preventDefault();
-            dispatch(updateEvent(inputs, data?.event?.id))
+            dispatch(updateEvent({
+                price: inputs.price,
+                name: inputs.name,
+                description: inputs.description,
+                location
+            }, data?.event?.id))
             clearForm();
 
         }}>
-            <h1>Update Event</h1>
+            <h1>{t("UPDATE_EVENT")}</h1>
             <fieldset>
                 {/* <label htmlFor="image"> //TODO: will I change the image?
                     Image
@@ -37,7 +46,7 @@ export default function UpdateEvent(props) {
                     />
                 </label> */}
                 <label htmlFor="name">
-                    Name
+                    {t("NAME")}
                     <input
                         type="text"
                         id="name"
@@ -48,7 +57,7 @@ export default function UpdateEvent(props) {
                     />
                 </label>
                 <label htmlFor="price">
-                    Price
+                    {t("PRICE")}
                     <input
                         type="number"
                         id="price"
@@ -59,7 +68,7 @@ export default function UpdateEvent(props) {
                     />
                 </label>
                 <label htmlFor="description">
-                    Description
+                    {t("DESCRIPTION")}
                     <textarea
                         id="description"
                         name="description"
@@ -68,7 +77,11 @@ export default function UpdateEvent(props) {
                         value={inputs.description}
                     />
                 </label>
-                <button type="submit">Update Event</button>
+                <label htmlFor="location">
+                    {t("LOCATION")}
+                    <LocationSearch setLocation={setLocation}/>
+                </label>
+                <button type="submit">{t("UPDATE_EVENT")}</button>
             </fieldset>
         </Form>
     )

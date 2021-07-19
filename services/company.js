@@ -53,13 +53,6 @@ async function add(params, id) {
 }
 
 async function update(params, id) {
-    const exists = await Company.findOne({
-        where: {
-            name: params.name
-        }
-    })
-    if (exists)
-        throw 'Company already exists';
     const company = await getCompany(id);
     if (params.location) {
         const point = {
@@ -68,7 +61,7 @@ async function update(params, id) {
         }
         params.location = point;
     }
-        Object.assign(company, params);
+    Object.assign(company, params);
     await company.save();
     return company.get(); //do I really need it?
 }
