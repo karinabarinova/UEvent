@@ -5,12 +5,14 @@ import DeleteCompany from './DeleteCompany';
 import { useUser } from './User';
 
 export default function Company({account, company}) {
-    const {user} = useUser()
+    const user = useUser()
 
     let isOwner = false;
-    if (!account && Object.keys(user).length !== 0 && user?.id === company.owner) {
+    if (!account && user && Object.keys(user.user).length !== 0 && user?.id === company.owner) {
         isOwner = true;
     }
+
+    if (!company) return null;
 
     return (
         <ItemStyles>

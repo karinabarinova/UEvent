@@ -20,7 +20,8 @@ export const loginGoogle = (payload) => async (dispatch, getState) => {
     return jwt
         .loginGoogle(payload)
         .then(data => {
-            dispatch(setLogIn({data: data}))
+            dispatch(getUserInfo())
+            dispatch(setLogIn(data))
             return dispatch(showMessage(data.message))
         })
         .catch(error => {

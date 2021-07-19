@@ -5,7 +5,7 @@ const makeANiceEmail = require('./makeANiceEmail');
 async function sendNotificationEmail({name, id}, email) {
     let message =  `<p>Don't forget you have subscribed to the event: ${name}
                     <p>It will start in less than 24 hours</p>
-                    <p>Link to the event: http://localhost:3006/event/${id}</p>`
+                    <p>Link to the event: http://localhost:3000/event/${id}</p>`
 
     await sendEmail({
         to: email,

@@ -9,7 +9,8 @@ const errorHandler = require('./middleware/errorHandler');
 const public = require('path').join(__dirname, 'resources');
 const cron = require('node-cron');
 const notificationCron = require('./helpers/cron');
-
+const db = require('./sequelize/models');
+const {socialLogin} = require("./services/auth");
 const {OAuth2Client} = require('google-auth-library')
 const client = new OAuth2Client(process.env.CLIENT_ID)
 
@@ -37,7 +38,7 @@ passport.deserializeUser((user, cb) => {
 })
 
 passport.use(new GoogleStrategy({
-        clientID: process.env.GOOGLE_CLIENT_ID,
+    clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         callbackURL: "http://localhost:3000/login/google-auth"
     },
@@ -51,21 +52,16 @@ passport.use(new GoogleStrategy({
 
 
 app.post('/api/google', async (req, res) => {
-        const {tokenId} = req.body
-        const ticket = await client.verifyIdToken({
-            idToken: tokenId,
-            audience: process.env.GOOGLE_CLIENT_ID
-        });
-        const {name, email, picture} = ticket.getPayload();
-        res.status(201)
-        const user = await socialLogin(email)
-        res.json(user)
-    }
-)
+    const {tokenId} = req.body
+    const ticket = await client.verifyIdToken({
+        idToken: tokenId,
+        audience: process.env.GOOGLE_CLIENT_ID
+    });
+    const {name, email, picture} = ticket.getPayload();
+    const user = await socialLogin(email)
+    res.status(200).json({data: user, message: "Logged in successfully"})
+})
 
-
-const db = require('./sequelize/models');
-const {socialLogin} = require("./services/auth");
 const Role = db.role;
 
 // db.sequelize.sync({force: true}).then(() => {

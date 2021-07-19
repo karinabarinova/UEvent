@@ -70,7 +70,7 @@ async function login({email, password}) {
 async function socialLogin(email) {
     const user = await User.findOne({
         where: {
-            email: email.toLowerCase()
+            email
         }
     })
 

@@ -10,7 +10,7 @@ import { useCart } from '../lib/cartState';
 import { useUser } from './User';
 
 export default function Product({account, product, userCompanies}) {
-    const {user} = useUser()
+    const user = useUser()
 
     function checkOwner() {
         for(let i = 0; i < userCompanies.length; i++) {
@@ -27,6 +27,7 @@ export default function Product({account, product, userCompanies}) {
     }
     
     const {openCart } = useCart();
+    if (!product) return null;
     return (
         <ItemStyles>
             <img src={product?.image ? product.image : '/defaultEventPage.jfif'} alt={product.name}/>
@@ -36,8 +37,7 @@ export default function Product({account, product, userCompanies}) {
             <PriceTag>{product.price}$</PriceTag>
             <p>{product.description}</p>
             <Tags><b>{product.theme} / {product.format}</b></Tags>
-            {/* TODO: add check if owner of event is the authUser.id */}
-            {Object.keys(user).length !== 0  && (
+            {user && Object.keys(user.user).length !== 0  && (
                 <div className="buttonList"> 
                     {!account && isOwner && <Link to={{
                         pathname: "/update-event/" + product.id,

@@ -98,11 +98,13 @@ class JwtService extends Emitter {
 			axios
 				.post('/google', payload)
 				.then(response => {
-
-					resolve(response.data)
+					if (response.data.data.accessToken) {
+						this.setSession(response.data.data.accessToken);
+						resolve(response.data);
+					}
 				})
 				.catch(error => {
-					reject(error);
+					reject(error.response.data);
 				});
 		});
 	}

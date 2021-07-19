@@ -9,8 +9,6 @@ export default function GoogleAuth() {
     const dispatch = useDispatch()
 
     function handleLogin(e) {
-        console.log("google user")
-        console.log(e)
         dispatch(loginGoogle(e))
     }
 
