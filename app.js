@@ -14,7 +14,6 @@ const {socialLogin} = require("./services/auth");
 const {OAuth2Client} = require('google-auth-library')
 const client = new OAuth2Client(process.env.CLIENT_ID)
 
-
 const corsOptions = {
     origin: "*",
     credentials: true,
@@ -24,10 +23,8 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
-
-
+app.use(errorHandler);
 app.use(passport.initialize())
-
 
 passport.serializeUser((user, cb) => {
     return cb(null, user.id)
@@ -49,9 +46,7 @@ passport.use(new GoogleStrategy({
     }
 ))
 
-
-
-app.post('/api/google', async (req, res) => {
+app.post('/api/google', async (req, res, next) => {
     const {tokenId} = req.body
     const ticket = await client.verifyIdToken({
         idToken: tokenId,
@@ -64,11 +59,6 @@ app.post('/api/google', async (req, res) => {
 })
 
 const Role = db.role;
-
-// db.sequelize.sync({force: true}).then(() => {
-//     console.log("Drop and Resync Database");
-//     initial();
-// })
 
 function initial() {
     Role.create({
@@ -90,9 +80,6 @@ app.use('/api/auth', require('./controllers/auth'));
 app.use('/api/company', require('./controllers/company'));
 app.use('/api/event', require('./controllers/event'));
 app.use('/api/user', require('./controllers/user'));
-
-
-app.use(errorHandler);
 
 cron.schedule('* * * * *', async function () {
     await notificationCron();
