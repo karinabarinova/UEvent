@@ -10,7 +10,8 @@ module.exports = {
     purchase,
     getOrders,
     changePassword,
-    changeMail
+    changeMail,
+    updateUserAvatar
 }
 
 //TODO: edit subscription - change send_notification status
@@ -142,6 +143,22 @@ async function changePassword(id, password) {
         user.save()
     }
 }
+
+async function updateUserAvatar(user_id, profile_picture) {
+
+        const user =  await User.findOne( {
+            where: {
+                id: user_id
+            }
+        })
+    if (!user) throw 'Oops something wrong'
+
+    if (profile_picture) {
+        user.profile_picture = profile_picture;
+        user.save()
+    }
+}
+
 async function changeMail(id, email) {
     const user = await User.findOne({
         where: {

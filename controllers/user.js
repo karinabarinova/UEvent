@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const service = require('../services/user');
+const upload = require('../helpers/upload')
 const authJwt = require('../middleware/authJwt');
 const stripePublicKey = process.env.STRIPE_PUBLISHABLE_KEY;
 
@@ -9,6 +10,7 @@ router.get('/cart', authJwt.verifyToken, getCart);
 router.post('/purchase', authJwt.verifyToken, purchase);
 router.post('/change-password', authJwt.verifyToken, changePasswordInAccount)
 router.post('/change-email', authJwt.verifyToken, changeEmailInAccount)
+router.post('/:id/upload-avatar', authJwt.verifyToken, uploadUserAvatar, upload.single('image'))
 router.get('/orders', authJwt.verifyToken, getOrders);
 //TODO: edit/getByID subscriptions
 
@@ -40,6 +42,15 @@ function purchase(req, res, next) {
     service.purchase(userId, items, token)
         .then(() => res.json({message: 'Successfully purchased event(s)'}))
         .catch(next);
+}
+
+function uploadUserAvatar (req, res, next) {
+
+    console.log("user id")
+    console.log(req.userId)
+    service.updateUserAvatar(req.userId, req.file.filename)
+        .then(() => res.json({ message: 'Successfully upload avatar'}))
+        .catch((next))
 }
 
 function changePasswordInAccount (req, res, next) {
