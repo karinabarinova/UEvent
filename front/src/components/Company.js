@@ -8,7 +8,7 @@ export default function Company({account, company}) {
     const user = useUser()
 
     let isOwner = false;
-    if (!account && user && Object.keys(user.user).length !== 0 && user?.id === company.owner) {
+    if (!account && user && Object.keys(user.user).length !== 0 && user?.user?.id === company.owner) {
         isOwner = true;
     }
 

@@ -41,5 +41,6 @@
     "COMPANY_LOCATION": "Где находится компания",
     "COMMENTS": "Комментарии",
     "ADD_COMMENT": "Добавить комментарий",
-    "SIMILAR_EVENTS": "Похожие события"
+    "SIMILAR_EVENTS": "Похожие события",
+    "UPDATE_COMPANY": "Изменить настройки компании"
 }

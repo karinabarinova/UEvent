@@ -1,13 +1,16 @@
 import {useSelector, useDispatch} from 'react-redux'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCompanyById, updateCompany } from '../store/company/companySlice';
+import { useTranslation } from "react-i18next";
+import LocationSearch from './LocationSearch';
 import Form from './styles/Form';
 import useForm from '../lib/useForm';
 
 export default function UpdateCompany(props) {
+    const { t } = useTranslation('common');
     const company = useSelector(({company}) => company.company)
     const dispatch = useDispatch();
-
+    const [location, setLocation] = useState([[]])
     const { inputs, handleChange, clearForm, resetForm } = useForm({
         name: company?.name,
         description: company?.description
@@ -20,10 +23,14 @@ export default function UpdateCompany(props) {
     return (
         <Form onSubmit={async (e) => {
             e.preventDefault();
-            dispatch(updateCompany(inputs, company?.id))
+            dispatch(updateCompany({
+                name: inputs.name,
+                description: inputs.description,
+                location
+            }, company?.id))
             clearForm()
         }}>
-            <h1>Update Company</h1>
+            <h1>{t("UPDATE_COMPANY")}</h1>
             <fieldset>
                 {/* <label htmlFor="image"> //TODO: will I change the image?
                     Image
@@ -36,7 +43,7 @@ export default function UpdateCompany(props) {
                     />
                 </label> */}
                 <label htmlFor="name">
-                    Name
+                    {t("NAME")}
                     <input
                         type="text"
                         id="name"
@@ -47,7 +54,7 @@ export default function UpdateCompany(props) {
                     />
                 </label>
                 <label htmlFor="description">
-                    Description
+                    {t("DESCRIPTION")}
                     <textarea
                         id="description"
                         name="description"
@@ -55,6 +62,10 @@ export default function UpdateCompany(props) {
                         onChange={handleChange}
                         value={inputs.description}
                     />
+                </label>
+                <label htmlFor="location">
+                    {t("COMPANY_LOCATION")}
+                    <LocationSearch setLocation={setLocation}/>
                 </label>
                 <button type="submit">Update Company</button>
             </fieldset>

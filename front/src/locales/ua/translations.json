@@ -41,5 +41,6 @@
     "COMPANY_LOCATION": "Де розташована компанія",
     "COMMENTS": "Коментарі",
     "ADD_COMMENT": "Додати коментар",
-    "SIMILAR_EVENTS": "Схожі події"
+    "SIMILAR_EVENTS": "Схожі події",
+    "UPDATE_COMPANY": "Змінити налаштування компанії"
 }

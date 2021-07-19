@@ -41,5 +41,6 @@
     "COMPANY_LOCATION": "Company location",
     "COMMENTS": "Comments",
     "ADD_COMMENT": "Add a comment",
-    "SIMILAR_EVENTS": "Similar events"
+    "SIMILAR_EVENTS": "Similar events",
+    "UPDATE_COMPANY": "Update company"
 }

@@ -61,7 +61,14 @@ async function update(params, id) {
     if (exists)
         throw 'Company already exists';
     const company = await getCompany(id);
-    Object.assign(company, params);
+    if (params.location) {
+        const point = {
+            type: 'Point',
+            coordinates: params.location
+        }
+        params.location = point;
+    }
+        Object.assign(company, params);
     await company.save();
     return company.get(); //do I really need it?
 }
