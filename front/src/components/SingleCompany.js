@@ -5,7 +5,6 @@ import {useSelector, useDispatch} from 'react-redux'
 import { useEffect, useState } from 'react';
 import { getCompanyById, updateCompanyImage } from '../store/company/companySlice';
 import Map from './MapComponent'
-import { useHistory } from 'react-router-dom';
 import { useUser } from './User';
 
 const ProductStyles = styled.div`
@@ -30,7 +29,6 @@ export default function SingleCompany(props) {
     const data = useSelector(({company}) => company.company)
     const dispatch = useDispatch();
     const [image, setImage] = useState('');
-    const history = useHistory();
     const user = useUser()
 
     let isOwner = false;
@@ -65,7 +63,6 @@ export default function SingleCompany(props) {
                             const formData = new FormData();
                             formData.append("image", image);
                             dispatch(updateCompanyImage(formData, data.id))
-                            history.push('/companies/1')
                         }}>
                             <input
                                 type="file"

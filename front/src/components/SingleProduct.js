@@ -12,8 +12,6 @@ import NewComment from './NewComment'
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import Form from './styles/Form';
-import { useHistory } from 'react-router-dom';
-import { useUser } from './User';
 
 const ProductStyles = styled.div`
     display: grid;  
@@ -44,8 +42,7 @@ export default function SingleProduct(props) {
     const data = useSelector(({product}) => product)
     const dispatch = useDispatch();
     const [image, setImage] = useState('');
-    const history = useHistory();
-    const user = useUser()
+    const {user} = useSelector(({user}) => user);
 
     useEffect(() => {
         dispatch(getProductById(props.match.params.id))
@@ -93,7 +90,6 @@ export default function SingleProduct(props) {
                             const formData = new FormData();
                             formData.append("image", image);
                             dispatch(updateEventImage(formData, event.id))
-                            history.push('/events/1')
                         }}>
                             <input
                                 type="file"

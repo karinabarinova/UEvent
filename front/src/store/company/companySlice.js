@@ -59,7 +59,8 @@ export const updateCompanyImage = (image, id) => async (dispatch, getState) => {
     return jwt
         .updateCompanyImage(image, id)
         .then((data) => {
-            return dispatch(showMessage(data.message))
+            dispatch(showMessage(data.message))
+            return dispatch(getCompanyById(id))
         })
         .catch(error => {
             return dispatch(showMessage(error.message))
