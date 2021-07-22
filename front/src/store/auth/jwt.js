@@ -284,6 +284,20 @@ class JwtService extends Emitter {
 				});
 		});
 	}
+
+	updateEventImage = (image, id) => {
+		const config = { headers: { 'Content-Type': 'multipart/form-data' } }
+		return new Promise((resolve, reject) => {
+			axios
+				.post(`/event/${id}/image`, image, config)
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data);
+				});
+		});
+	}
 }
 
 const instance = new JwtService();

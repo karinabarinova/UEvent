@@ -30,7 +30,7 @@ export default function Product({account, product, userCompanies}) {
     if (!product) return null;
     return (
         <ItemStyles>
-            <img src={product?.image ? product.image : '/defaultEventPage.jfif'} alt={product.name}/>
+            <img src={product?.image ? "http://localhost:3006/" + product.image.replace('resources', '') : '/defaultEventPage.jfif'} alt={product.name} />
             <Title>
                 <Link to={'/event/' + product.id}>{product.name}</Link>
             </Title>

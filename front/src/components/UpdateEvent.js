@@ -9,7 +9,7 @@ import useForm from '../lib/useForm';
 export default function UpdateEvent(props) {
     const { t } = useTranslation('common');
     const data = useSelector(({product}) => product.product)
-    const [location, setLocation] = useState([[]])
+    const [location, setLocation] = useState('')
     const dispatch = useDispatch();
 
     const { inputs, handleChange, clearForm, resetForm } = useForm({
@@ -35,16 +35,6 @@ export default function UpdateEvent(props) {
         }}>
             <h1>{t("UPDATE_EVENT")}</h1>
             <fieldset>
-                {/* <label htmlFor="image"> //TODO: will I change the image?
-                    Image
-                    <input
-                        required
-                        type="file"
-                        id="image"
-                        name="image"
-                        onChange={handleChange}
-                    />
-                </label> */}
                 <label htmlFor="name">
                     {t("NAME")}
                     <input

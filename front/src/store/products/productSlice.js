@@ -57,6 +57,17 @@ export const deleteEvent = id => async (dispatch, getState) => {
         })
 }
 
+export const updateEventImage = (image, id) => async (dispatch, getState) => {
+    return jwt
+        .updateEventImage(image, id)
+        .then((data) => {
+            return dispatch(showMessage(data.message))
+        })
+        .catch(error => {
+            return dispatch(showMessage(error.message))
+        })
+}
+
 export const updateEvent = (event, id) => async (dispatch, getState) => {
     return axios.patch(`/event/${id}`, event)
         .then(({data}) => {
