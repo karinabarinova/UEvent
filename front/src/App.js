@@ -20,6 +20,7 @@ import ResetPage from './pages/reset';
 import Auth from './store/auth/auth';
 import { CartStateProvider } from "./lib/cartState";
 import Order from "./components/Order";
+import FeedbackWidget from "./components/Feedback";
 
 class App extends Component {
 
@@ -48,6 +49,7 @@ class App extends Component {
           <CartStateProvider>
             <Page>
                 {routes}
+                <FeedbackWidget />
             </Page>  
           </CartStateProvider>                   
         </Auth>
