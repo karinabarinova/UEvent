@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../store/products/productSlice';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -62,6 +63,7 @@ function CalendarApp(props) {
     const classes = useStyles(props);
     const dispatch = useDispatch();
     const events = useSelector(({product}) => product.products.rows)
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(getAllProducts(1))
@@ -71,6 +73,7 @@ function CalendarApp(props) {
         const eventsArr = [];
         for (let e in events) {
             let event = {
+                id: events[e].id,
                 start: events[e].startDate,
                 title: events[e].name
             }
@@ -78,6 +81,14 @@ function CalendarApp(props) {
         }
         return eventsArr;
     }
+
+    const handleEventClick = clickInfo => {
+		const { id } = clickInfo.event;
+		if (id) {
+            history.push(`/event/${id}`)
+        }
+	};
+
 
     const renderEvents = prepareEvents()
     return (
@@ -108,6 +119,7 @@ function CalendarApp(props) {
 		            	}}
                         eventContent={renderEventContent}
 		            	events={renderEvents}
+                        eventClick={handleEventClick}
 		            />
                 </div>
             </div>
