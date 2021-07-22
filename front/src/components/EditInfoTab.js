@@ -1,15 +1,18 @@
 import Button from '@material-ui/core/Button';
-import { addPassword, addEmail } from "../store/user/userSlice";
+import { addPassword, addEmail, addAvatar } from "../store/user/userSlice";
 import { useDispatch } from "react-redux";
 import useForm from '../lib/useForm';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export default function EditInfoTab({user}) {
+
     const dispatch = useDispatch()
     const { inputs, handleChange } = useForm({
         password: '',
         email: user?.email,
+        profile_picture: user?.profile_picture
     });
+
     const [emailStyle, setEmailStyle] = useState(false)
     const [passwordStyle, setPasswordStyle] = useState(false)
 
@@ -21,9 +24,6 @@ export default function EditInfoTab({user}) {
         background: 'indianred', color: 'white', padding: '1rem', margin: '1rem', fontSize: 14
     }
 
-    function changeAvatar() {
-        alert('ca')
-    }
 
     return (
         <div id="input" style={{
@@ -88,7 +88,21 @@ export default function EditInfoTab({user}) {
                 
             </div>
                 <div>
-                    <Button variant="contained" onClick={changeAvatar}  style={style}>New Avatar 🤳</Button>
+                    <>
+
+                    <Button
+                        variant="contained"
+                        onClick={() => dispatch(addAvatar( inputs.profile_picture ))}
+                        style={{...style}}>New Avatar 🤳</Button>
+
+
+                    </>
+                    <input
+                        variant="contained"
+                        id="avatar"
+                        type="file"
+                        onChange={handleChange}
+                    />
                 </div>
             </div>
         </div>        

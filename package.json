@@ -32,6 +32,7 @@
     "gapi": "^0.0.3",
     "google-auth-library": "^7.3.0",
     "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
     "node-cron": "^3.0.0",
     "nodemailer": "^6.5.0",
     "passport": "^0.4.1",

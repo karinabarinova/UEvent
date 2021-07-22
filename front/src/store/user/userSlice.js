@@ -25,6 +25,17 @@ export const addPassword = password => async (dispatch) => {
         })
 }
 
+
+export const addAvatar = avatar => async (dispatch) => {
+    return jwt
+        .addAvatar(avatar)
+        .then((data) => {
+            return dispatch(showMessage(data.message))
+        })
+        .catch(error => {
+            return dispatch(showMessage(error.message))
+        })
+}
 export const addEmail = email => async (dispatch) => {
     return jwt
         .addEmail(email)

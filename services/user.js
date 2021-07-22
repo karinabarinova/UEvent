@@ -10,7 +10,8 @@ module.exports = {
     purchase,
     getOrders,
     changePassword,
-    changeMail
+    changeMail,
+    uploadAvatar
 }
 
 //TODO: edit subscription - change send_notification status
@@ -122,10 +123,10 @@ function capitalizeFirstLetter(string) {
 }
 
 function basicDetails(user) {
-    const { id, email, role, createdAt, updatedAt, fullName } = user;
+    const { id, email, role, createdAt, updatedAt, fullName, profile_picture } = user;
     const fullNameArr = fullName.split(' ');
     const name = `${capitalizeFirstLetter(fullNameArr[0])} ${capitalizeFirstLetter(fullNameArr[1])}`
-    return { id, email, role, createdAt, updatedAt, name };
+    return { id, email, role, createdAt, updatedAt, name,  profile_picture};
 }
 
 async function changePassword(id, password) {
@@ -142,6 +143,22 @@ async function changePassword(id, password) {
         user.save()
     }
 }
+
+async function uploadAvatar (id, avatar) {
+    const user = await User.findOne({
+        where: {
+            id: id
+        }
+    })
+    console.log(user)
+    if (!user) throw 'Oops something wrong'
+
+    if (avatar) {
+        user.profile_picture = avatar
+        user.save()
+    }
+}
+
 async function changeMail(id, email) {
     const user = await User.findOne({
         where: {

@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode';
 import Emitter from './eventEmmiter'
 
 
+
 class JwtService extends Emitter {
     init() {
         this.setInterceptors();
@@ -244,6 +245,7 @@ class JwtService extends Emitter {
 	};
 
 	addPassword = password => {
+
 		return new Promise((resolve, reject) => {
 			axios
 				.post('/user/change-password', {password})
@@ -257,6 +259,20 @@ class JwtService extends Emitter {
 		});
 
 	};
+
+	addAvatar = data => {
+
+		return new Promise((resolve, reject) => {
+			axios
+				.post('/user/upload-avatar', {profile_picture: data})
+				.then(response => {
+					resolve(response.data);
+				})
+				.catch(error => {
+					reject(error.response.data)
+				})
+		})
+	}
 
 	getOrders = () => {
 		return new Promise((resolve, reject) => {

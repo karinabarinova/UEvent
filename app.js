@@ -24,7 +24,7 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
-
+app.use('/avatarImages', express.static('avatarImages'))
 
 app.use(passport.initialize())
 
@@ -51,7 +51,7 @@ passport.use(new GoogleStrategy({
 
 
 
-app.post('/api/google', async (req, res) => {
+app.post('/api/google', async (req, res, next) => {
     const {tokenId} = req.body
     const ticket = await client.verifyIdToken({
         idToken: tokenId,
@@ -60,7 +60,8 @@ app.post('/api/google', async (req, res) => {
     const {name, email, picture} = ticket.getPayload();
     socialLogin(email)
         .then((data) => res.status(200).json({data, message: "Logged in successfully"}))
-        .catch(next);
+        .catch(next)
+    ;
 })
 
 const Role = db.role;
