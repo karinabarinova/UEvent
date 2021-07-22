@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     location: DataTypes.GEOMETRY('POINT'),
     description: DataTypes.STRING(1234),
-    owner: DataTypes.INTEGER
+    owner: DataTypes.INTEGER,
+    image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Company',

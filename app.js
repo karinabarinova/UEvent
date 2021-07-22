@@ -22,7 +22,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({
+    extended: true,
+    parameterLimit: 100000,
+    limit: '50mb',}))
 app.use(errorHandler);
 app.use(passport.initialize())
 
@@ -40,8 +43,6 @@ passport.use(new GoogleStrategy({
         callbackURL: "http://localhost:3000/login/google-auth"
     },
     (accessToken, refreshToken, profile, cb) => {
-        console.log("========================")
-        console.log(profile)
         return cb(null, profile)
     }
 ))
