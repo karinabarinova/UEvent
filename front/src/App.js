@@ -21,6 +21,7 @@ import Auth from './store/auth/auth';
 import { CartStateProvider } from "./lib/cartState";
 import Order from "./components/Order";
 import FeedbackWidget from "./components/Feedback";
+import CookieConsentWidget from "./components/CookieConsentWidget";
 
 class App extends Component {
 
@@ -50,6 +51,7 @@ class App extends Component {
             <Page>
                 {routes}
                 <FeedbackWidget />
+                <CookieConsentWidget />
             </Page>  
           </CartStateProvider>                   
         </Auth>
