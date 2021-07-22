@@ -94,8 +94,7 @@ function CalendarApp(props) {
                         allDaySlot={false}
 		            	nowIndicator={true}
 		            	fixedWeekCount={false}
-		            	weekNumbers={true}
-		            	weekText="Week #"
+		            	weekNumbers={false}
 		            	dayHeaders={true}
 		            	dayHeaderFormat={{ month: 'short', day: 'numeric', omitCommas: true }
 		            	}
