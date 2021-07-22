@@ -27,7 +27,7 @@ function CartItem({cartItem}) {
     return <CartItemStyles>
         <img 
             width="100" 
-            src={cartItem?.image ? cartItem.image : '/defaultEventPage.jfif'} 
+            src={cartItem?.image ? "http://localhost:3006/" + cartItem.image.replace('resources', '') : '/defaultEventPage.jfif'} 
             alt={cartItem.name}
         />
         <div>
