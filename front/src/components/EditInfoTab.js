@@ -3,10 +3,12 @@ import { addPassword, addEmail, addAvatar } from "../store/user/userSlice";
 import { useDispatch } from "react-redux";
 import useForm from '../lib/useForm';
 import React, { useState } from 'react';
+import Form from "./styles/Form";
 
 export default function EditInfoTab({user}) {
 
     const dispatch = useDispatch()
+    const [image, setImage] = useState('');
     const { inputs, handleChange } = useForm({
         password: '',
         email: user?.email,
@@ -22,6 +24,11 @@ export default function EditInfoTab({user}) {
 
     const style2 = {
         background: 'indianred', color: 'white', padding: '1rem', margin: '1rem', fontSize: 14
+    }
+
+    function handleImageChange(e) {
+        e.preventDefault();
+        setImage(e.target.files[0]);
     }
 
 
@@ -42,7 +49,7 @@ export default function EditInfoTab({user}) {
                 </Button>
                 {passwordStyle && (
                     <>
-                        <input 
+                        <input
                             variant="contained" 
                             style={{...style2 }} 
                             id="password" 
@@ -87,22 +94,30 @@ export default function EditInfoTab({user}) {
                 )}
                 
             </div>
+
                 <div>
-                    <>
-
-                    <Button
-                        variant="contained"
-                        onClick={() => dispatch(addAvatar( inputs.profile_picture ))}
-                        style={{...style}}>New Avatar 🤳</Button>
-
-
-                    </>
-                    <input
-                        variant="contained"
-                        id="avatar"
-                        type="file"
-                        onChange={handleChange}
-                    />
+                    <Form onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData();
+                        formData.append("image", image.name);
+                        dispatch(addAvatar(formData))
+                        // history.push('/events/1')
+                    }}>
+                        <input
+                            type="file"
+                            id="image"
+                            name="image"
+                            onChange={handleImageChange}
+                        />
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            style={{
+                                background: 'red', color: 'white', padding: '1rem', margin: '1rem', fontSize: 14
+                            }}
+                        > Upload 🖼️
+                        </Button>
+                    </Form>
                 </div>
             </div>
         </div>        

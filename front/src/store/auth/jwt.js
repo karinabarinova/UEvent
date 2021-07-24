@@ -260,19 +260,19 @@ class JwtService extends Emitter {
 
 	};
 
-	addAvatar = data => {
-
-		return new Promise((resolve, reject) => {
-			axios
-				.post('/user/upload-avatar', {profile_picture: data})
-				.then(response => {
-					resolve(response.data);
-				})
-				.catch(error => {
-					reject(error.response.data)
-				})
-		})
-	}
+	addAvatar = avatar => {
+         const config = { headers: { 'Content-Type': 'multipart/form-data' } }
+        return new Promise((resolve, reject) => {
+            axios
+                .post(`/user/upload-avatar`, avatar, config )
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error.response.data);
+                });
+        });
+    }
 
 	getOrders = () => {
 		return new Promise((resolve, reject) => {

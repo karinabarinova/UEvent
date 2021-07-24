@@ -12,6 +12,7 @@ module.exports = {
     changePassword,
     changeMail,
     uploadAvatar
+
 }
 
 //TODO: edit subscription - change send_notification status

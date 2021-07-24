@@ -44,6 +44,7 @@ function purchase(req, res, next) {
         .catch(next);
 }
 
+
 function changePasswordInAccount (req, res, next) {
     service.changePassword(req.userId,  req.body.password)
         .then(() => res.json({ message: 'Password updated successfully' }))

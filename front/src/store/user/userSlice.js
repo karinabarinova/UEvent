@@ -27,10 +27,12 @@ export const addPassword = password => async (dispatch) => {
 
 
 export const addAvatar = avatar => async (dispatch) => {
+    console.log(avatar.get('image'))
     return jwt
         .addAvatar(avatar)
         .then((data) => {
-            return dispatch(showMessage(data.message))
+            dispatch(showMessage(data.message))
+            return dispatch(getUserInfo());
         })
         .catch(error => {
             return dispatch(showMessage(error.message))
