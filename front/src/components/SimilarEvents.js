@@ -32,7 +32,7 @@ export default function SimilarEvents({similarEvents}) {
                         <Grid container wrap="nowrap" spacing={10}>
                             <Grid item>
                                 <ImageContainer>
-                                    <img width="300px" src={el?.image ? el.image : '/defaultEventPage.jfif'} alt={el.name} />
+                                    <img width="300px" src={el?.image ? "http://localhost:3006/" + el.image.replace('resources', '') : '/defaultEventPage.jfif'} alt={el.name} />
                                     <PriceTag>{el.price}$</PriceTag>
                                 </ImageContainer>
                             </Grid>

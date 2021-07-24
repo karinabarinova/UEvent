@@ -16,7 +16,7 @@ export default function Company({account, company}) {
 
     return (
         <ItemStyles>
-            <img src={company?.image ? company.image : '/defaultCompanyPhoto.jpg'} alt={company.name}/>
+            <img src={company?.image ? "http://localhost:3006/" + company.image.replace('resources', '') : '/defaultCompanyPhoto.jpg'} alt={company.name}/>
             <Title>
                 <Link to={'/company/' + company.id}>{company.name}</Link>
             </Title>

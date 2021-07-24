@@ -14,7 +14,6 @@ export default function CreateCompany() {
     const [location, setLocation] = useState([[67, -118]])
     
     const { inputs, handleChange, clearForm } = useForm({
-        image: '',
         name: 'Google',
         description: 'Best'
     });
@@ -23,7 +22,6 @@ export default function CreateCompany() {
         <Form onSubmit={async (e) => {
             e.preventDefault();
             dispatch(createCompany({
-                image: inputs.image,
                 name: inputs.name,
                 description: inputs.description,
                 location
@@ -34,15 +32,6 @@ export default function CreateCompany() {
         }}>
             <h1>{t("NEW_COMPANY")}</h1>
             <fieldset>
-                <label htmlFor="image">
-                    {t("IMAGE")}
-                    <input
-                        type="file"
-                        id="image"
-                        name="image"
-                        onChange={handleChange}
-                    />
-                </label>
                 <label htmlFor="name">
                     {t("NAME")}
                     <input

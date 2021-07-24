@@ -19,7 +19,8 @@ export const createEvent = data => async (dispatch, getState) => {
     return jwt
         .createEvent(data)
         .then(({data}) => {
-            return dispatch(newEvent(data))
+            dispatch(newEvent(data))
+            return dispatch(getAllProducts(1))
         })
         .catch(error => {
             return dispatch(showMessage(error.message))
@@ -51,6 +52,18 @@ export const deleteEvent = id => async (dispatch, getState) => {
         .removeEvent(id)
         .then(({data}) => {
             return dispatch(setDeletedEvent(data))
+        })
+        .catch(error => {
+            return dispatch(showMessage(error.message))
+        })
+}
+
+export const updateEventImage = (image, id) => async (dispatch, getState) => {
+    return jwt
+        .updateEventImage(image, id)
+        .then((data) => {
+            dispatch(showMessage(data.message))
+            return dispatch(getProductById(id))
         })
         .catch(error => {
             return dispatch(showMessage(error.message))

@@ -7,7 +7,8 @@ module.exports = {
     getEvents,
     add,
     update,
-    delete: _delete
+    delete: _delete,
+    newImage
 }
 
 async function getAll(query) {
@@ -69,6 +70,15 @@ async function update(params, id) {
 async function _delete(id) {
     const company = await getCompany(id);
     await company.destroy();
+}
+
+async function newImage(file, id) {
+    const company = await getCompany(id);
+    if (!file) {
+        throw 'No image provided'
+    }
+    company.image = file.path
+    return await company.save();
 }
 
 async function getCompany(id) {

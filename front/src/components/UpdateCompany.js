@@ -10,7 +10,7 @@ export default function UpdateCompany(props) {
     const { t } = useTranslation('common');
     const company = useSelector(({company}) => company.company)
     const dispatch = useDispatch();
-    const [location, setLocation] = useState([[]])
+    const [location, setLocation] = useState('')
     const { inputs, handleChange, clearForm, resetForm } = useForm({
         name: company?.name,
         description: company?.description
@@ -32,16 +32,6 @@ export default function UpdateCompany(props) {
         }}>
             <h1>{t("UPDATE_COMPANY")}</h1>
             <fieldset>
-                {/* <label htmlFor="image"> //TODO: will I change the image?
-                    Image
-                    <input
-                        required
-                        type="file"
-                        id="image"
-                        name="image"
-                        onChange={handleChange}
-                    />
-                </label> */}
                 <label htmlFor="name">
                     {t("NAME")}
                     <input

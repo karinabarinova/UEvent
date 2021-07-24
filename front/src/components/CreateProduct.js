@@ -16,7 +16,6 @@ export default function CreateProduct() {
 
     
     const { inputs, handleChange, clearForm } = useForm({
-        image: '',
         name: 'Python Meetup',
         price: 120,
         description: 'Best',
@@ -29,7 +28,6 @@ export default function CreateProduct() {
         <Form onSubmit={async (e) => {
             e.preventDefault();
             dispatch(createEvent({
-                image: inputs.image,
                 name: inputs.name,
                 price: inputs.price,
                 description: inputs.description,
@@ -44,15 +42,6 @@ export default function CreateProduct() {
         }}>
             <h1>{t("NEW_EVENT")}</h1>
             <fieldset>
-                <label htmlFor="image">
-                    {t("IMAGE")}
-                    <input
-                        type="file"
-                        id="image"
-                        name="image"
-                        onChange={handleChange}
-                    />
-                </label>
                 <label htmlFor="name">
                     {t("NAME")}
                     <input

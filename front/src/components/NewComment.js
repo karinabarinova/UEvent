@@ -28,7 +28,7 @@ export default function NewComment({id}) {
 
     return (
       <>
-        {me.user.email && (
+        {me?.user?.email && (
           <div>
             <FormControl style={{width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', 
 justifyContent: "space-between"}}>

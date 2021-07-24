@@ -16,6 +16,7 @@ export default function Nav() {
     const {openCart} = useCart()
     return (
         <NavStyles>
+            <Link to="/calendar"><span style={{fontSize: '3rem'}}>📅</span></Link>
             <Link to='/1'>{t("EVENTS")}</Link>
             <Link to='/companies/1'>{t("COMPANIES")}</Link>
             { userData?.user?.id && (

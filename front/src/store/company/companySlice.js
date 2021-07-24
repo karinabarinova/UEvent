@@ -55,6 +55,18 @@ export const updateCompany = (company, id) => async (dispatch, getState) => {
         })
 }
 
+export const updateCompanyImage = (image, id) => async (dispatch, getState) => {
+    return jwt
+        .updateCompanyImage(image, id)
+        .then((data) => {
+            dispatch(showMessage(data.message))
+            return dispatch(getCompanyById(id))
+        })
+        .catch(error => {
+            return dispatch(showMessage(error.message))
+        })
+}
+
 export const companySlice = createSlice({
     name: "companies",
     initialState: {
