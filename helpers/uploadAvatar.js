@@ -1,33 +1,27 @@
 const multer = require('multer');
+const path = require('path');
 // const moment = require('moment')
 
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'avatarImages/');
+        cb(null, 'resources/uploads');
     },
     filename: (req, file, cb) => {
-        cb(null,  file.fieldname + '-' + Date.now() + '.png');
+        cb(null,  file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
 
 const upload = multer ({
     storage: storage,
-    destination: '../avatarImages',
+    destination: 'resources/uploads',
     limits: {
         fileSize: 1000000
     },
-    filename: (req, file, cb) => {
-
-        cb(null,  file.fieldname + '-' + Date.now()) + '.png';
-    },
     fileFilter (req, file, cb) {
-
-        if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg') {
-            cb(null, true)
-        } else (
-            cb(null, false)
-        )
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/))
+            return cb(new Error('Please upload an image'))
+        cb(undefined, true)
     }
 });
 

@@ -12,7 +12,6 @@ export default function EditInfoTab({user}) {
     const { inputs, handleChange } = useForm({
         password: '',
         email: user?.email,
-        profile_picture: user?.profile_picture
     });
 
     const [emailStyle, setEmailStyle] = useState(false)
@@ -99,9 +98,8 @@ export default function EditInfoTab({user}) {
                     <Form onSubmit={async (e) => {
                         e.preventDefault();
                         const formData = new FormData();
-                        formData.append("image", image.name);
+                        formData.append("image", image);
                         dispatch(addAvatar(formData))
-                        // history.push('/events/1')
                     }}>
                         <input
                             type="file"
