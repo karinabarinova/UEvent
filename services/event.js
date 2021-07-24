@@ -12,7 +12,8 @@ module.exports = {
     delete: _delete,
     addComment,
     updateComment,
-    deleteComment
+    deleteComment,
+    newImage
 }
 
 async function getAll(query) { //currently show only upcoming events
@@ -194,6 +195,15 @@ async function deleteComment(eventId, commentId) {
         throw 'Event not found';
     const comment = await getComment(commentId);
     await comment.destroy();
+}
+
+async function newImage(file, id) {
+    const event = await getEvent(id);
+    if (!file) {
+        throw 'No image provided'
+    }
+    event.image = file.path
+    return await event.save();
 }
 
 async function findOrCreateTheme(name) {

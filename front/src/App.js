@@ -20,6 +20,9 @@ import ResetPage from './pages/reset';
 import Auth from './store/auth/auth';
 import { CartStateProvider } from "./lib/cartState";
 import Order from "./components/Order";
+import Calendar from "./components/Calendar";
+import FeedbackWidget from "./components/Feedback";
+import CookieConsentWidget from "./components/CookieConsentWidget";
 
 class App extends Component {
 
@@ -27,6 +30,7 @@ class App extends Component {
     let routes = (
     	<Switch>
     		<Route path='/signin' exact component={SingIn}/>
+        <Route path='/calendar' exact component={Calendar}/>
     		<Route path='/reset' exact component={ResetPage} />
     		<Route path='/new-event' exact component={CreateProduct}/>
     		<Route path='/new-company' exact component={CreateCompany}/>
@@ -48,6 +52,8 @@ class App extends Component {
           <CartStateProvider>
             <Page>
                 {routes}
+                <FeedbackWidget />
+                <CookieConsentWidget />
             </Page>  
           </CartStateProvider>                   
         </Auth>
