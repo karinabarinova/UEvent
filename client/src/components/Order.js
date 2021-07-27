@@ -26,7 +26,7 @@ export default function Order() {
             <div className="items">
                 {items.map((order) => (
                     <div className="order-item" key={order.id}>
-                        <img src={'/defaultEventPage.jfif'} alt={order.name} />
+                        <img src={order?.image ? "http://localhost:3006/" + order.image.replace('resources', '') : '/defaultEventPage.jfif'} alt={order.name} />
                         <div className="item-details">
                             <h2>{order.name}</h2>
                             <p>Qty: {order.quantity}</p>

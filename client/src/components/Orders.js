@@ -19,6 +19,7 @@ export default function Orders() {
     const {orders: data} = useSelector(({user}) => user);
     if (!data.length) return <p>No orders found</p>;
 
+    console.log('order', data)
     return (
         <div>
             <h2>You have {data.length} orders!</h2>
@@ -41,7 +42,7 @@ export default function Orders() {
                           {items.map((item) => (
                             <img
                               key={`image-${item.id}`}
-                              src={'/defaultEventPage.jfif'}
+                              src={item?.image ? "http://localhost:3006/" + item.image.replace('resources', '') : '/defaultEventPage.jfif'}
                               alt={item.name}
                             />
                           ))}
