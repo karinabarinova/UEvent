@@ -19,7 +19,6 @@ export default function Orders() {
     const {orders: data} = useSelector(({user}) => user);
     if (!data.length) return <p>No orders found</p>;
 
-    console.log('order', data)
     return (
         <div>
             <h2>You have {data.length} orders!</h2>
