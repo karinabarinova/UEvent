@@ -1,15 +1,19 @@
 import Button from '@material-ui/core/Button';
-import { addPassword, addEmail } from "../store/user/userSlice";
+import { addPassword, addEmail, addAvatar } from "../store/user/userSlice";
 import { useDispatch } from "react-redux";
 import useForm from '../lib/useForm';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Form from "./styles/Form";
 
 export default function EditInfoTab({user}) {
+
     const dispatch = useDispatch()
+    const [image, setImage] = useState('');
     const { inputs, handleChange } = useForm({
         password: '',
         email: user?.email,
     });
+
     const [emailStyle, setEmailStyle] = useState(false)
     const [passwordStyle, setPasswordStyle] = useState(false)
 
@@ -21,9 +25,11 @@ export default function EditInfoTab({user}) {
         background: 'indianred', color: 'white', padding: '1rem', margin: '1rem', fontSize: 14
     }
 
-    function changeAvatar() {
-        alert('ca')
+    function handleImageChange(e) {
+        e.preventDefault();
+        setImage(e.target.files[0]);
     }
+
 
     return (
         <div id="input" style={{
@@ -42,7 +48,7 @@ export default function EditInfoTab({user}) {
                 </Button>
                 {passwordStyle && (
                     <>
-                        <input 
+                        <input
                             variant="contained" 
                             style={{...style2 }} 
                             id="password" 
@@ -87,8 +93,29 @@ export default function EditInfoTab({user}) {
                 )}
                 
             </div>
+
                 <div>
-                    <Button variant="contained" onClick={changeAvatar}  style={style}>New Avatar 🤳</Button>
+                    <Form onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData();
+                        formData.append("image", image);
+                        dispatch(addAvatar(formData))
+                    }}>
+                        <input
+                            type="file"
+                            id="image"
+                            name="image"
+                            onChange={handleImageChange}
+                        />
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            style={{
+                                background: 'red', color: 'white', padding: '1rem', margin: '1rem', fontSize: 14
+                            }}
+                        > Upload 🖼️
+                        </Button>
+                    </Form>
                 </div>
             </div>
         </div>        

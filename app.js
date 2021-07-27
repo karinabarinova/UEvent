@@ -22,6 +22,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
+app.use('/avatarImages', express.static('avatarImages'))
 app.use(bodyParser.urlencoded({
     extended: true,
     parameterLimit: 100000,
@@ -56,7 +57,8 @@ app.post('/api/google', async (req, res, next) => {
     const {name, email, picture} = ticket.getPayload();
     socialLogin(email)
         .then((data) => res.status(200).json({data, message: "Logged in successfully"}))
-        .catch(next);
+        .catch(next)
+    ;
 })
 
 const Role = db.role;

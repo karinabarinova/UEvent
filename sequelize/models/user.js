@@ -56,6 +56,10 @@ module.exports = (sequelize, DataTypes) => {
     hasCompany: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+    },
+    profile_picture: {
+      type: DataTypes.STRING,
+      defaultValue: false
     }
   }, {
     sequelize,

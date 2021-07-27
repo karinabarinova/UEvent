@@ -38,6 +38,9 @@ module.exports = {
       hasCompany: {
         type: Sequelize.BOOLEAN,
       },
+      profile_picture: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

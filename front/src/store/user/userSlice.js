@@ -25,6 +25,19 @@ export const addPassword = password => async (dispatch) => {
         })
 }
 
+
+export const addAvatar = avatar => async (dispatch) => {
+    console.log(avatar.get('image'))
+    return jwt
+        .addAvatar(avatar)
+        .then((data) => {
+            dispatch(showMessage(data.message))
+            return dispatch(getUserInfo());
+        })
+        .catch(error => {
+            return dispatch(showMessage(error.message))
+        })
+}
 export const addEmail = email => async (dispatch) => {
     return jwt
         .addEmail(email)
