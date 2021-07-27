@@ -24,7 +24,6 @@ Our challenge was to create the service called uevent that helps organize/buy ti
 #installation:
 ```md
 > npm install
-> mysql -u root
 > CREATE USER kbarinova@localhost IDENTIFIED BY 'swagswag69-69';
 > GRANT ALL PRIVILEGES ON * . * TO kbarinova@localhost;
 
