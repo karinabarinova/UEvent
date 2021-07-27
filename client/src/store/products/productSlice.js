@@ -51,6 +51,8 @@ export const deleteEvent = id => async (dispatch, getState) => {
     return jwt
         .removeEvent(id)
         .then(({data}) => {
+            dispatch(showMessage(data.message))
+            dispatch(getAllProducts(1))
             return dispatch(setDeletedEvent(data))
         })
         .catch(error => {

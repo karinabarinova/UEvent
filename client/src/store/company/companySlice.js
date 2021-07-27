@@ -37,6 +37,8 @@ export const getCompanyById = id => async (dispatch, getState) => {
 export const deleteCompany = id => async (dispatch, getState) => {
     return axios.delete(`/company/${id}`)
         .then(({data}) => {
+            dispatch(showMessage(data.message))
+            dispatch(getAllCompanies(1));
             return dispatch(setDeletedCompany(data))
         })
         .catch(error => {

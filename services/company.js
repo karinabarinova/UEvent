@@ -49,7 +49,6 @@ async function add(params, id) {
         description: params.description,
         owner: id
     });
-    
     await user.addCompany(company);
 }
 
@@ -69,6 +68,8 @@ async function update(params, id) {
 
 async function _delete(id) {
     const company = await getCompany(id);
+    const user = await User.findByPk(company.dataValues.owner);
+    await user.removeCompany(company);
     await company.destroy();
 }
 
