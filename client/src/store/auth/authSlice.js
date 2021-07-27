@@ -7,9 +7,9 @@ export const login = (data) => async (dispatch, getState) => {
     return jwt
         .login(data)
         .then(data => {
-            dispatch(getUserInfo())
+            dispatch(showMessage(data.message))
             dispatch(setLogIn(data))
-            return dispatch(showMessage(data.message))
+            return dispatch(getUserInfo())
         })
         .catch(error => {
             return dispatch(showMessage(error.message))

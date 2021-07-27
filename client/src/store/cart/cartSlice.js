@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 import jwt from '../auth/index';
 import { showMessage } from '../message/messageSlice'
+import { getUserInfo } from "../user/userSlice";
 
 export const checkout = (data) => (dispatch, getState) => {
     return jwt
         .checkout(data)
         .then((data) => {
-            return dispatch(showMessage(data.message))
+            dispatch(showMessage(data.message))
+            return dispatch(getUserInfo());
         })
         .catch(error => {
             return dispatch(showMessage(error.message))

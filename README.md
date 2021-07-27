@@ -32,7 +32,7 @@ Our challenge was to create the service called uevent that helps organize/buy ti
 #usage:
 ```md
 > npm start
-> cd front
+> cd client
 > npm start
 ```
 
